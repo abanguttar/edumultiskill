@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     /**
      * Route untuk kelas dan kelas kategori
      */
-    Route::prefix('kelas')->group(function () {});
+    Route::prefix('kelas')->group(function () {
+
+
+        Route::controller(KelasController::class)->group(function () {
+            Route::get('', 'index')->name('list-kelas');
+        });
+    });
 });

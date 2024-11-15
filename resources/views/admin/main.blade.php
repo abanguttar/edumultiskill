@@ -17,6 +17,10 @@
     body {
         min-height: 100vh;
     }
+
+    .nav-link.active {
+        background-color: aqua !important;
+    }
 </style>
 
 <body>
@@ -94,8 +98,8 @@
             $('#' + sectionSideBar).addClass('show')
             $('#' + sectionSideBar).closest('.accordion-item').find('.accordion-button').attr('aria-expanded',
                 'true').toggleClass('collapsed')
-            $('#' + sectionSideBar + ' [data-nav="' + elementSideBar + '"]').removeClass('text-dark').toggleClass(
-                'active text-danger')
+            $('#' + sectionSideBar + ' [data-nav="' + elementSideBar + '"]').toggleClass(
+                'active')
         </script>
     @endif
 

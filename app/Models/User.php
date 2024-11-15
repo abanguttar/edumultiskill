@@ -63,6 +63,6 @@ class User extends Authenticatable
      */
     public function updated_name()
     {
-        return $this->belongsTo(User::class, 'id', 'id');
+        return $this->belongsToMany(User::class, 'user_update', 'id');
     }
 }

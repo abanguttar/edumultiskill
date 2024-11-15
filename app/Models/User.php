@@ -54,4 +54,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Get the update that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function updated_name()
+    {
+        return $this->belongsToMany(User::class, 'user_update', 'id');
+    }
 }

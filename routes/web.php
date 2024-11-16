@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KelasKategoriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,17 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
         Route::controller(KelasController::class)->group(function () {
             Route::get('', 'index')->name('list-kelas');
+        });
+
+        Route::controller(KelasKategoriController::class)->group(function () {
+            Route::prefix('kategori')->group(function () {
+                Route::get('', 'index')->name('list-kategori');
+                Route::get('/create', 'create');
+                Route::post('/create', 'store');
+                Route::get('/{id}/edit', 'edit');
+                Route::put('/{id}/edit', 'update');
+                Route::delete('/{id}', 'destroy');
+            });
         });
     });
 });

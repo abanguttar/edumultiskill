@@ -10,6 +10,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     private function flashSuccess()
     {
         session()->flash('success-status', 'Task was successful!');

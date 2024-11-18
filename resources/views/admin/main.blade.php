@@ -77,14 +77,24 @@
                 $(this).toggleClass('table-primary')
             }
         })
+        $(document).on('click', '#edit-kelas', function() {
+
+            if (id === '') {
+                showAlertError()
+                return
+            }
+            window.location.href = `${id}/informasi`
+        })
+
         $(document).on('click', '#btn-edit', function() {
             if (id === '') {
                 showAlertError()
                 return
             }
-
             window.location.href = `${id}/edit`
         })
+
+
         const title = @json($title)
     </script>
 

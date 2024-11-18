@@ -53,6 +53,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
         Route::controller(KelasController::class)->group(function () {
             Route::get('', 'index')->name('list-kelas');
+            Route::get('/create', 'create')->name('create-kelas');
+            Route::post('/create', 'store')->name('store-kelas');
+            Route::get('/{id}/informasi', 'informasiView')->name('view-informasi');
+            Route::put('/{id}/informasi', 'informasiUpdate');
         });
 
         Route::controller(KelasKategoriController::class)->group(function () {

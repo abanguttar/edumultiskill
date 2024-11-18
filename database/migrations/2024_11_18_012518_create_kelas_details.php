@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_kelas_details', function (Blueprint $table) {
+        Schema::create('kelas_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('kelas_id');
             $table->string('judul_keterangan')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('sertifikat_tenaga_pelatih')->nullable();
             $table->string('sertifikat_metode_satu')->nullable();
             $table->string('sertifikat_metode_dua')->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_kelas_details');
+        Schema::dropIfExists('kelas_details');
     }
 };

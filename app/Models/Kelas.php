@@ -52,4 +52,10 @@ class Kelas extends Model
     {
         return $this->belongsTo(KelasKategori::class, 'kelas_kategori_id', 'id');
     }
+
+
+    public function deskripsi()
+    {
+        return $this->hasOne(KelasDetail::class, 'kelas_id', 'id');
+    }
 }

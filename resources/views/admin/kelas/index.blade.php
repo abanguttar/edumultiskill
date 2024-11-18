@@ -4,7 +4,7 @@
     <div class="mt-3">
         <a href="/admin/kelas/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
             Tambah</a>
-        <button type="button" class="btn btn-primary btn-sm" id="btn-edit"><i data-feather="edit"></i>
+        <button type="button" class="btn btn-primary btn-sm" id="edit-kelas"><i data-feather="edit"></i>
             Edit</button>
         @if (Auth::user()->tipe_user === 99)
             <button type="button" class="btn btn-danger btn-sm" id="btn-delete"><i data-feather="trash-2"></i>
@@ -33,13 +33,13 @@
             </thead>
             <tbody id="table-body">
                 @foreach ($kelas as $key => $d)
-                    <tr class="table-row text-center" data-id='/kelas/{{ $d->id }}'>
+                    <tr class="table-row text-center" data-id='/admin/kelas/{{ $d->id }}'>
                         <td>{{ ++$key }}</td>
                         <td>{{ $d->course_code }}</td>
                         <td>{{ $d->judul_kelas }}</td>
                         <td>{{ ucfirst($d->jenis) }}</td>
                         @php
-                            $program = ['General', 'Indonesia Skill Week', 'Magang'];
+                            $program = ['General', 'Indonesia Skill Week', 'Program 2'];
                         @endphp
                         <td class="text-center">{{ $program[$d->program] }}</td>
                         <td>{{ $d->nama_kategori }}</td>
@@ -55,3 +55,6 @@
         </table>
     </div>
 @endsection
+@push('script')
+    <script></script>
+@endpush

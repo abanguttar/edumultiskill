@@ -1,6 +1,9 @@
 /.phpunit.cache
 /node_modules
 /public/build
+/public/kelas-image
+/public/kelas-video
+/public/icons
 /public/hot
 /public/storage
 /storage/*.key

@@ -21,7 +21,7 @@ class KelasController extends Controller
     {
         $title = 'List Kelas';
         $data_nav  = ['lms', 'kelas'];
-        $kelas = $this->kelas->with('user')->get();
+        $kelas = $this->kelas->with('user')->with('kategori')->get();
         return view("$this->path/index", compact('title', 'kelas', 'data_nav'));
     }
 }

@@ -47,4 +47,9 @@ class Kelas extends Model
     {
         return $this->belongsTo(User::class, 'user_update', 'id');
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(KelasKategori::class, 'kelas_kategori_id', 'id');
+    }
 }

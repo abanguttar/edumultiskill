@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="mt-3">
-        <a href="/admin/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
+        <a href="/admin/kelas/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
             Tambah</a>
         <button type="button" class="btn btn-primary btn-sm" id="btn-edit"><i data-feather="edit"></i>
             Edit</button>
@@ -42,7 +42,7 @@
                             $program = ['General', 'Indonesia Skill Week', 'Magang'];
                         @endphp
                         <td class="text-center">{{ $program[$d->program] }}</td>
-                        <td>{{ $d->kelas_kategori_id }}</td>
+                        <td>{{ $d->nama_kategori }}</td>
                         <td>{{ $d->status_kelas > 3 ? ($d->status_kelas == 4 ? 'Aktif Belajar' : 'Tutup Pendaftaran') : ($d->status_kelas == 3 ? 'Aktif Pendaftaran' : ($d->status_kelas == 2 ? 'Kurasi' : 'Rencana')) }}
                         </td>
                         <td class="text-center">{{ number_format($d->harga_reguler) }}</td>

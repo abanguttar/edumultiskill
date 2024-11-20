@@ -37,7 +37,7 @@ class StoreKelasRequest extends FormRequest
             'best_seller' => 'required',
             'is_discount' => 'required',
             'harga_reguler' => 'required|numeric',
-            'harga_discount' => 'sometimes|nullable|numeric',
+            'harga_discount' => 'sometimes|nullable|numeric|lt:harga_reguler',
             'approval_free' => 'required',
             'old_image' => 'nullable|string',
             'old_video' => 'nullable|string',

@@ -43,6 +43,17 @@ class Kelas extends Model
         'user_update',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($kelas) {
+            $kelas->deskripsi()->create([
+                'kelas_id' => $kelas->id
+            ]);
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_update', 'id');

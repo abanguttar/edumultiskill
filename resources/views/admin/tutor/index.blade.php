@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="mt-3">
-        <a href="/admin/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
+        <a href="/admin/tutor/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
             Tambah</a>
         <button type="button" class="btn btn-primary btn-sm" id="btn-access"><i data-feather="user-plus"></i>
             Akses</button>
@@ -19,6 +19,8 @@
                     <th>No</th>
                     <th>Username</th>
                     <th>Nama</th>
+                    <th>No HP</th>
+                    <th>Alamat</th>
                     <th>Status</th>
                     <th>Update By</th>
                     <th>Update Date</th>
@@ -26,10 +28,12 @@
             </thead>
             <tbody id="table-body">
                 @foreach ($users as $key => $d)
-                    <tr class="table-row text-center" data-id='/admin/{{ $d->id }}'>
+                    <tr class="table-row text-center" data-id='/admin/tutor/{{ $d->id }}'>
                         <td>{{ ++$key }}</td>
                         <td>{{ $d->username }}</td>
                         <td>{{ $d->name }}</td>
+                        <td>{{ $d->phone }}</td>
+                        <td>{{ $d->address }}</td>
                         <td>{{ $d->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                         <td class="updated">{{ $d->updated_name[0]->name }}</td>
                         <td>{{ $d->updated_at }}</td>

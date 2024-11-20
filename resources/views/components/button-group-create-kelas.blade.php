@@ -1,8 +1,8 @@
 <div class="btn-group mb-1 " role="group" aria-label="Basic example">
-    <a @if ($kelas_id != null) href="/admin/kelas/informasi/{{ $kelas_id }}"
+    <a @if ($kelas_id != null) href="/admin/kelas/{{ $kelas_id }}/informasi"
     @else
     href="/admin/kelas/create" @endif
-        class="btn btn-danger text-white" id="btn-group-kelas">Informasi</a>
+        class="btn btn-outline-danger" id="btn-group-kelas">Informasi</a>
     @if ($kelas_id != null)
         <a href="/admin/kelas/{{ $kelas_id }}/deskripsi" class="btn btn-outline-danger"
             id="btn-group-kelas-deskripsi">Deskripsi</a>

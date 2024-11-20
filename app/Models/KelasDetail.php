@@ -24,4 +24,6 @@ class KelasDetail extends Model
         'sertifikat_metode_satu',
         'sertifikat_metode_dua',
     ];
+
+    public $timestamps = false;
 }

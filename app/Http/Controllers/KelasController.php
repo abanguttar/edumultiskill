@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\KelasDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\KelasKategori;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreKelasRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\StoreKelasRequest;
+use App\Http\Requests\UpdateDeskripsiRequest;
+use Illuminate\Validation\ValidationException;
 
 class KelasController extends Controller
 {
@@ -179,5 +181,33 @@ class KelasController extends Controller
         $kelas->update($datas);
         $this->flashSuccessUpdate($request);
         return redirect()->route('view-informasi', ['id' => $id]);
+    }
+
+    public function deskripsiView($id)
+    {
+        $title = 'Kelas Informasi';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'kelas-deskripsi';
+        $kelas = $this->kelas->with('deskripsi')->findOrFail($id);
+        return view("$this->path/deskripsi", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas',));
+    }
+
+
+
+    public function deskripsiUpdate(UpdateDeskripsiRequest $request, $id)
+    {
+        $data = $request->validated();
+        if (!empty($data['sertifikat_tenaga_pelatih'][0])) {
+            $tenaga_pelatih = implode(',', $data['sertifikat_tenaga_pelatih']);
+            $data['sertifikat_tenaga_pelatih'] = $tenaga_pelatih;
+        } else {
+            $data['sertifikat_tenaga_pelatih'] = null;
+        }
+
+        KelasDetail::where('kelas_id', $id)->update($data);
+        $this->flashSuccessUpdate($request);
+
+        return redirect()->route('view-deskripsi', ['id' => $id]);
     }
 }

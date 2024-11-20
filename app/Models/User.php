@@ -56,13 +56,19 @@ class User extends Authenticatable
     ];
 
 
+
+    // public function updated_name()
+    // {
+    //     return $this->(User::class, 'users', 'user_update');
+    // }
+
     /**
-     * Get the update that owns the User
+     * Get all of the updated_name for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function updated_name()
     {
-        return $this->belongsToMany(User::class, 'user_update', 'id');
+        return $this->hasMany(User::class, 'id', 'user_update');
     }
 }

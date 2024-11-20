@@ -54,23 +54,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
         Route::controller(KelasController::class)->group(function () {
-            Route::get('', 'index')->name('list-kelas');
-            Route::get('/create', 'create')->name('create-kelas');
-            Route::post('/create', 'store')->name('store-kelas');
-            Route::get('/{id}/informasi', 'informasiView')->name('view-informasi');
-            Route::put('/{id}/informasi', 'informasiUpdate');
-            Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi');
-            Route::put('/{id}/deskripsi', 'deskripsiUpdate');
+            Route::get('', 'index')->name('list-kelas')->middleware('permission:10');
+            Route::get('/create', 'create')->name('create-kelas')->middleware('permission:11');
+            Route::post('/create', 'store')->name('store-kelas')->middleware('permission:11');
+            Route::get('/{id}/informasi', 'informasiView')->name('view-informasi')->middleware('permission:15');
+            Route::put('/{id}/informasi', 'informasiUpdate')->middleware('permission:15');
+            Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi')->middleware('permission:16');
+            Route::put('/{id}/deskripsi', 'deskripsiUpdate')->middleware('permission:16');
         });
 
         Route::controller(KelasKategoriController::class)->group(function () {
             Route::prefix('kategori')->group(function () {
-                Route::get('', 'index')->name('list-kategori');
-                Route::get('/create', 'create');
-                Route::post('/create', 'store');
-                Route::get('/{id}/edit', 'edit');
-                Route::put('/{id}/edit', 'update');
-                Route::delete('/{id}', 'destroy');
+                Route::get('', 'index')->name('list-kategori')->middleware('permission:6');
+                Route::get('/create', 'create')->middleware('permission:7');
+                Route::post('/create', 'store')->middleware('permission:7');
+                Route::get('/{id}/edit', 'edit')->middleware('permission:8');
+                Route::put('/{id}/edit', 'update')->middleware('permission:8');
+                Route::delete('/{id}', 'destroy')->middleware('permission:9');
             });
         });
     });

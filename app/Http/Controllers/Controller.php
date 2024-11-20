@@ -15,7 +15,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth');
+
         $this->middleware(function ($request, $next) {
             if (Auth::check() === true) {
                 $this->userCreateUpdate = [
@@ -30,6 +30,7 @@ class Controller extends BaseController
             return $next($request);
         });
     }
+
 
 
     public function flashSuccessCreate($request, $message = 'Berhasil membuat data!')

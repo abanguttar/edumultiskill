@@ -125,7 +125,7 @@
     @if (session('error-permission'))
         <script>
             Swal.fire({
-                icon: "success",
+                icon: "error",
                 title: "Anda tidak memiliki akses membuka halaman ini!",
             });
         </script>

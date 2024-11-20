@@ -42,6 +42,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/create', 'store');
         Route::get('/{id}/edit', 'edit');
         Route::put('/{id}/edit', 'update');
+        Route::get('/{id}/permissions',  'permissionView')->name('view-permission');
+        Route::put('/{id}/permissions',  'permissionUpdate');
     });
 
 

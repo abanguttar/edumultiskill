@@ -122,6 +122,14 @@
             });
         </script>
     @endif
+    @if (session('error-permission'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Anda tidak memiliki akses membuka halaman ini!",
+            });
+        </script>
+    @endif
 
 
 

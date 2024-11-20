@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
-use App\Models\KelasDetail;
+use App\Models\KelasDetail
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\KelasKategori;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateDeskripsiRequest;

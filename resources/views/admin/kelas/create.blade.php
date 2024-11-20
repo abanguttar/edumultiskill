@@ -15,6 +15,7 @@
 
             @include('components/button-group-create-kelas')
 
+
             <div>
                 <div class="row">
                     <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Judul Kelas <span
@@ -237,7 +238,7 @@
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Aktifkan Discount? </label></div>
                     <div class="col-md-9 col-sm-12">
-                        <select class="form-select" name="approval_free" id="approval_free">
+                        <select class="form-select" name="is_discount" id="is_discount">
                             <option value="0">Tidak</option>
                             <option value="1">Ya</option>
                         </select>

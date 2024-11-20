@@ -25,6 +25,7 @@ class UserController extends Controller
         $title = 'List Admin';
         $data_nav  = ['data-master', 'list-admin'];
         $users = $this->user->with('updated_name')->get();
+        // dd($users[0]->updated_name[0]->name);
         return view("$this->path/view", compact('title', 'users', 'data_nav'));
     }
 

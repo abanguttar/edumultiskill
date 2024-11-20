@@ -57,6 +57,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::post('/create', 'store')->name('store-kelas');
             Route::get('/{id}/informasi', 'informasiView')->name('view-informasi');
             Route::put('/{id}/informasi', 'informasiUpdate');
+            Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi');
+            Route::put('/{id}/deskripsi', 'deskripsiUpdate');
         });
 
         Route::controller(KelasKategoriController::class)->group(function () {

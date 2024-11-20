@@ -31,7 +31,7 @@
                         <td>{{ $d->username }}</td>
                         <td>{{ $d->name }}</td>
                         <td>{{ $d->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
-                        <td class="updated">{{ $d->updated_name->name }}</td>
+                        <td class="updated">{{ $d->updated_name[0]->name }}</td>
                         <td>{{ $d->updated_at }}</td>
                     </tr>
                 @endforeach

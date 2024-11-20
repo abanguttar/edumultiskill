@@ -32,10 +32,7 @@
                     <tr class="table-row text-center" data-id="{{ $k->id }}">
                         <td>{{ ++$key }}</td>
                         <td>{{ $k->nama_kategori }}</td>
-                        <td>
-                            <img src="{{ asset($k->icon_kategori) }}" alt="Icon {{ $k->nama_kategori }}" 
-                                class="img-thumbnail" style="max-width: 50px;">
-                        </td>
+                        <td>{{ $k->icon_kategori }}</td>
                         <td>{{ $k->updatedBy->name }}</td>
                         <td>{{ $k->updated_date }}</td>
                     </tr>

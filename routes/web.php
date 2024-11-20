@@ -73,6 +73,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::put('/{id}/informasi', 'informasiUpdate')->middleware('permission:15');
             Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi')->middleware('permission:16');
             Route::put('/{id}/deskripsi', 'deskripsiUpdate')->middleware('permission:16');
+            Route::get('/{id}/skkni', 'skkniView')->name('view-skkni')->middleware('permission:16');
+            Route::put('/{id}/skkni', 'skkniUpdate')->middleware('permission:16');
         });
 
         Route::controller(KelasKategoriController::class)->group(function () {
@@ -83,17 +85,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
                 Route::get('/{id}/edit', 'edit')->middleware('permission:8');
                 Route::put('/{id}/edit', 'update')->middleware('permission:8');
                 Route::delete('/{id}', 'destroy')->middleware('permission:9');
-            });
-        });
-
-        Route::controller(KelasKategoriController::class)->group(function () {
-            Route::prefix('kategori')->group(function () {
-                Route::get('', 'index')->name('list-kategori');
-                Route::get('/create', 'create');
-                Route::post('/create', 'store');
-                Route::get('/{id}/edit', 'edit');
-                Route::put('/{id}/edit', 'update');
-                Route::delete('/{id}', 'destroy');
             });
         });
     });

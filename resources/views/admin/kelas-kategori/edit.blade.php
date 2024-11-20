@@ -31,29 +31,12 @@
 
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12">
-                        <label class="fw-bold">Icon Kategori</label>
+                        <label class="fw-bold">Icon Kategori <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-12">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="icon_kategori" name="icon_kategori" accept="image/*">
-                        </div>
-                        <small class="text-muted">Format: PNG, JPG, JPEG. Maksimal 2MB. Kosongkan jika tidak ingin mengubah icon.</small>
-                        
-                        <div class="mt-2">
-                            <label class="fw-bold">Icon Saat Ini:</label>
-                            @if($kategori->icon_kategori)
-                                <img src="{{ asset($kategori->icon_kategori) }}" alt="Current Icon" 
-                                    class="mt-2 img-thumbnail" style="max-width: 100px;">
-                            @else
-                                <p class="text-muted">Tidak ada icon</p>
-                            @endif
-                        </div>
-
-                        <div class="mt-2">
-                            <label class="fw-bold">Preview Icon Baru:</label>
-                            <img id="preview_icon" src="#" alt="Preview Icon" 
-                                class="mt-2 img-thumbnail" style="max-width: 100px; display: none;">
-                        </div>
+                        <input type="text" class="form-control" name="icon_kategori" 
+                            value="{{ old('icon_kategori', $kategori->icon_kategori) }}" maxlength="25">
+                        <small class="text-muted">Maksimal 25 karakter</small>
                     </div>
                 </div>
 

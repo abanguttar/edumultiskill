@@ -51,11 +51,6 @@ class Controller extends BaseController
         return $request->session()->flash('success-status', $message);
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     private function flashSuccess()
     {
         session()->flash('success-status', 'Task was successful!');

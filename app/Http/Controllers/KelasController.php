@@ -7,6 +7,8 @@ use App\Models\KelasDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\KelasKategori;
+use App\Models\Skkni;
+use App\Models\KodeUnit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateDeskripsiRequest;
+use App\Http\Requests\UpdateSKKNIRequest;
 use Illuminate\Validation\ValidationException;
 
 class KelasController extends Controller
@@ -27,6 +30,8 @@ class KelasController extends Controller
         parent::__construct();
         $this->kelas = new Kelas();
         $this->kelas_kategori = KelasKategori::get();
+        $this->skkni = new Skkni();
+        $this->kode_unit = new KodeUnit();
         $this->metode_pelatihan = DB::table('metode_pelatihans')->get();
     }
 
@@ -194,8 +199,6 @@ class KelasController extends Controller
         return view("$this->path/deskripsi", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas',));
     }
 
-
-
     public function deskripsiUpdate(UpdateDeskripsiRequest $request, $id)
     {
         $data = $request->validated();
@@ -210,5 +213,95 @@ class KelasController extends Controller
         $this->flashSuccessUpdate($request);
 
         return redirect()->route('view-deskripsi', ['id' => $id]);
+    }
+
+    public function skkniView($id)
+    {
+        $title = 'SKKNI dan Kode Unit';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'kelas-skkni';
+        $kelas = $this->kelas->with('deskripsi')->findOrFail($id);
+        $skkni = $this->skkni->find($id);
+        $kode_unit = $this->kode_unit->find($id);
+        return view("$this->path/skkni", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas', 'skkni', 'kode_unit'));
+    }
+
+    public function skkniUpdate(UpdateSKKNIRequest $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // Update KelasDetail
+            KelasDetail::where('kelas_id', $id)->update([
+                'sertifikat_judul_skkni' => $request->sertifikat_judul_skkni,
+                'sertifikat_judul_kode_unit' => $request->sertifikat_judul_kode_unit,
+            ]);
+
+            // Update SKKNI
+            if ($request->has('skkni')) {
+                if ($request->has('skkni_ids')) {
+                    Skkni::where('kelas_id', $id)
+                        ->whereNotIn('id', $request->skkni_ids)
+                        ->delete();
+                } else {
+                    Skkni::where('kelas_id', $id)->delete();
+                }
+
+                foreach ($request->skkni as $index => $skkniValue) {
+                    if (!empty($skkniValue)) {
+                        if (isset($request->skkni_ids[$index])) {
+                            Skkni::where('id', $request->skkni_ids[$index])
+                                ->update(['skkni' => $skkniValue]);
+                        } else {
+                            Skkni::create([
+                                'kelas_id' => $id,
+                                'skkni' => $skkniValue
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Update Kode Unit
+            if ($request->has('kode_unit')) {
+                if ($request->has('kode_unit_ids')) {
+                    KodeUnit::where('kelas_id', $id)
+                        ->whereNotIn('id', $request->kode_unit_ids)
+                        ->delete();
+                } else {
+                    KodeUnit::where('kelas_id', $id)->delete();
+                }
+
+                foreach ($request->kode_unit as $index => $kodeUnitValue) {
+                    if (!empty($kodeUnitValue)) {
+                        $keteranganValue = $request->keterangan[$index] ?? null;
+                        
+                        if (isset($request->kode_unit_ids[$index])) {
+                            KodeUnit::where('id', $request->kode_unit_ids[$index])
+                                ->update([
+                                    'kode_unit' => $kodeUnitValue,
+                                    'keterangan' => $keteranganValue
+                                ]);
+                        } else {
+                            KodeUnit::create([
+                                'kelas_id' => $id,
+                                'kode_unit' => $kodeUnitValue,
+                                'keterangan' => $keteranganValue
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('view-skkni', ['id' => $id])
+                ->with('success', 'Data berhasil diperbarui');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan saat menyimpan data');
+        }
     }
 }

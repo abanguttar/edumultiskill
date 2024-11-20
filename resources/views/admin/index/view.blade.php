@@ -39,3 +39,15 @@
         </table>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).on('click', '#btn-access', function() {
+            if (id === '') {
+                showAlertError()
+                return
+            }
+            window.location.href = `${id}/permissions`
+        })
+    </script>
+@endpush

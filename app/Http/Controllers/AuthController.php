@@ -44,6 +44,13 @@ class AuthController extends Controller
             return back()->onlyInput('username');
         }
 
+
+        // Check is user active
+        if ((int) Auth::user()->is_active !== 1) {
+            throw ValidationException::withMessages(['username' => 'Akun tidak aktif!']);
+            return back()->onlyInput('username');
+        }
+
         /**
          * If success regenerate session
          */

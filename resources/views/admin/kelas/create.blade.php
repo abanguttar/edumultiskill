@@ -229,7 +229,7 @@
                     <div class="col-md-9 col-sm-12">
                         <input type="text" class="form-control" value="{{ old('harga_discount', 0) }}"
                             name="harga_discount">
-                        @error('harga_discount ')
+                        @error('harga_discount')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>

@@ -9,7 +9,7 @@ class Skkni extends Model
 {
     use HasFactory;
 
-    protected $table = 'skkni';
+    protected $table = 'skknis';
 
     protected $fillable = [
         'kelas_id',

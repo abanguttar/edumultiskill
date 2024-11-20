@@ -231,14 +231,15 @@ class KelasController extends Controller
     {
         DB::beginTransaction();
         try {
-            // Update KelasDetail
             KelasDetail::where('kelas_id', $id)->update([
                 'sertifikat_judul_skkni' => $request->sertifikat_judul_skkni,
                 'sertifikat_judul_kode_unit' => $request->sertifikat_judul_kode_unit,
             ]);
 
-            // Update SKKNI
-            if ($request->has('skkni')) {
+            // Handle SKKNI
+            if (!$request->has('skkni')) {
+                Skkni::where('kelas_id', $id)->delete();
+            } else {
                 if ($request->has('skkni_ids')) {
                     Skkni::where('kelas_id', $id)
                         ->whereNotIn('id', $request->skkni_ids)
@@ -262,8 +263,10 @@ class KelasController extends Controller
                 }
             }
 
-            // Update Kode Unit
-            if ($request->has('kode_unit')) {
+            // Handle Kode Unit
+            if (!$request->has('kode_unit')) {
+                KodeUnit::where('kelas_id', $id)->delete();
+            } else {
                 if ($request->has('kode_unit_ids')) {
                     KodeUnit::where('kelas_id', $id)
                         ->whereNotIn('id', $request->kode_unit_ids)

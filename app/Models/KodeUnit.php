@@ -9,7 +9,7 @@ class KodeUnit extends Model
 {
     use HasFactory;
 
-    protected $table = 'kode_unit';
+    protected $table = 'kode_units';
 
     protected $fillable = [
         'kelas_id',

@@ -2,14 +2,13 @@
 
 @push('link')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> --}}
     {{-- Tag input library --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> --}}
 @endpush
 @section('body')
-    <div class="container border p-4 mt-3 w-75 mb-5">
+    <div class="container border p-4 mt-3 w-100 w-md-75 mb-5">
         <form action="" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -360,8 +359,8 @@
                 $('#limit-judul-kelas').text(result);
             })
 
-            const fetchTutor = (mpid) => {
-                fetch(`/ajax/tutor?mp_id=${mpid}`, {
+            const fetchTutor = () => {
+                fetch(`/ajax/tutor`, {
                         method: 'GET',
                         headers: {
                             'content-type': 'application/json'
@@ -373,11 +372,10 @@
                         return res.json()
                     })
                     .then(d => {
-                        // console.log(d);
-                        const tutor_array = d.data.map(x => {
+                        const tutor_array = d.datas.map(x => {
                             return {
                                 id: x.id,
-                                text: x.nama
+                                text: x.name
                             }
                         })
                         $('#tutor_id').empty().append(
@@ -395,10 +393,10 @@
                         ).attr('disabled', false).select2({
                             data: tutor_array
                         })
-
                         if (VALUE_NT_CREATE_SELECT !== null) {
                             $('#tutor_id').val(VALUE_NT_CREATE_SELECT).trigger('change')
                         }
+
                         if (VALUE_TP1_CREATE_SELECT !== null) {
                             $('#tutor_penilai_satu').val(VALUE_TP1_CREATE_SELECT).trigger('change')
                         }
@@ -409,6 +407,7 @@
                     })
             }
 
+            fetchTutor();
             // session storage for kategori kelas, metode pelatihan, tutor penilai satu, dua
 
             $(document).on('change', '#kelas_kategori_id', function() {

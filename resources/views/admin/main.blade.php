@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
 
     @stack('link')
@@ -22,6 +21,12 @@
 
     .nav-link.active {
         background-color: aqua !important;
+    }
+
+    @media only screen and (max-width: 576px) {
+        .container.w-75 {
+            width: 100% !important;
+        }
     }
 </style>
 
@@ -37,9 +42,9 @@
 
             </aside>
         @endif
-        <div class="container-xl mt-5">
+        <div class="container-fluid mt-5">
             @if ($title !== 'Login' && $title !== 'Register')
-            <h3 class="text-center">{{ $title }}</h3>
+                <h3 class="text-center">{{ $title }}</h3>
             @endif
             @yield('body')
         </div>

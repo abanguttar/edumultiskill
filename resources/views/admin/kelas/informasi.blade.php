@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> --}}
 @endpush
 @section('body')
-    <div class="container border p-4 mt-3 w-75 mb-5">
+    <div class="container border p-4 mt-3 w-100 w-md-75  mb-5">
         <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -313,7 +313,7 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <input type="text" name="tutor_profesi" class="form-control"
-                            value="{{ old('tutor_profesi') }}">
+                            value="{{ old('tutor_profesi', $kelas->tutor_profesi) }}">
                     </div>
                 </div>
 
@@ -404,26 +404,26 @@
             let nama_kelas = $('#judul_kelas').val().length;
             var result = limit - nama_kelas;
             const KEY_MP_SELECT = 'MP-SELECT';
-            const KK_CREATE_SELECT = 'KK_CREATE_SELECT';
-            const MP_CREATE_SELECT = 'MP_CREATE_SELECT';
-            const L_CREATE_SELECT = 'L_CREATE_SELECT';
-            const U_CREATE_SELECT = 'U_CREATE_SELECT';
-            const BS_CREATE_SELECT = 'BS_CREATE_SELECT';
-            const NT_CREATE_SELECT = 'NT_CREATE_SELECT';
-            const AF_CREATE_SELECT = 'AF_CREATE_SELECT';
-            const TP1_CREATE_SELECT = 'TTP1_CREATE_SELECT';
-            const TP2_CREATE_SELECT = 'TTP2_CREATE_SELECT';
+            const KK_INF_SELECT = 'KK_INF_SELECT';
+            const MP_INF_SELECT = 'MP_INF_SELECT';
+            const L_INF_SELECT = 'L_INF_SELECT';
+            const U_INF_SELECT = 'U_INF_SELECT';
+            const BS_INF_SELECT = 'BS_INF_SELECT';
+            const NT_INF_SELECT = 'NT_INF_SELECT';
+            const AF_INF_SELECT = 'AF_INF_SELECT';
+            const TP1_INF_SELECT = 'TTP1_INF_SELECT';
+            const TP2_INF_SELECT = 'TTP2_INF_SELECT';
 
             const value_mp = sessionStorage.getItem(KEY_MP_SELECT);
-            const VALUE_KK_CREATE_SELECT = sessionStorage.getItem(KK_CREATE_SELECT);
-            const VALUE_MP_CREATE_SELECT = sessionStorage.getItem(MP_CREATE_SELECT);
-            const VALUE_L_CREATE_SELECT = sessionStorage.getItem(L_CREATE_SELECT);
-            const VALUE_U_CREATE_SELECT = sessionStorage.getItem(U_CREATE_SELECT);
-            const VALUE_BS_CREATE_SELECT = sessionStorage.getItem(BS_CREATE_SELECT);
-            const VALUE_AF_CREATE_SELECT = sessionStorage.getItem(AF_CREATE_SELECT);
-            const VALUE_NT_CREATE_SELECT = sessionStorage.getItem(NT_CREATE_SELECT);
-            const VALUE_TP1_CREATE_SELECT = sessionStorage.getItem(TP1_CREATE_SELECT);
-            const VALUE_TP2_CREATE_SELECT = sessionStorage.getItem(TP2_CREATE_SELECT);
+            const VALUE_KK_INF_SELECT = sessionStorage.getItem(KK_INF_SELECT);
+            const VALUE_MP_INF_SELECT = sessionStorage.getItem(MP_INF_SELECT);
+            const VALUE_L_INF_SELECT = sessionStorage.getItem(L_INF_SELECT);
+            const VALUE_U_INF_SELECT = sessionStorage.getItem(U_INF_SELECT);
+            const VALUE_BS_INF_SELECT = sessionStorage.getItem(BS_INF_SELECT);
+            const VALUE_AF_INF_SELECT = sessionStorage.getItem(AF_INF_SELECT);
+            const VALUE_NT_INF_SELECT = sessionStorage.getItem(NT_INF_SELECT);
+            const VALUE_TP1_INF_SELECT = sessionStorage.getItem(TP1_INF_SELECT);
+            const VALUE_TP2_INF_SELECT = sessionStorage.getItem(TP2_INF_SELECT);
 
 
             $('#limit-judul-kelas').text(result);
@@ -439,8 +439,9 @@
                 $('#limit-judul-kelas').text(result);
             })
 
-            const fetchTutor = (mpid) => {
-                fetch(`/ajax/tutor?mp_id=${mpid}`, {
+
+            const fetchTutor = () => {
+                fetch(`/ajax/tutor`, {
                         method: 'GET',
                         headers: {
                             'content-type': 'application/json'
@@ -452,11 +453,10 @@
                         return res.json()
                     })
                     .then(d => {
-                        // console.log(d);
-                        const tutor_array = d.data.map(x => {
+                        const tutor_array = d.datas.map(x => {
                             return {
                                 id: x.id,
-                                text: x.nama
+                                text: x.name
                             }
                         })
                         $('#tutor_id').empty().append(
@@ -475,63 +475,80 @@
                             data: tutor_array
                         })
 
-                        if (VALUE_NT_CREATE_SELECT !== null) {
-                            $('#tutor_id').val(VALUE_NT_CREATE_SELECT).trigger('change')
+                        const tutor_id = @json($kelas->tutor_id);
+                        const tutor_penilai_satu = @json($kelas->tutor_penilai_satu);
+                        const tutor_penilai_dua = @json($kelas->tutor_penilai_dua);
+
+                        if (tutor_id !== null) {
+                            $('#tutor_id').val(tutor_id).trigger('change')
+                        } else if (VALUE_NT_INF_SELECT !== null) {
+                            $('#tutor_id').val(VALUE_NT_INF_SELECT).trigger('change')
                         }
-                        if (VALUE_TP1_CREATE_SELECT !== null) {
-                            $('#tutor_penilai_satu').val(VALUE_TP1_CREATE_SELECT).trigger('change')
+                        if (tutor_penilai_satu !== null) {
+                            $('#tutor_penilai_satu').val(tutor_penilai_satu).trigger('change')
+                        }else
+                        if (VALUE_TP1_INF_SELECT !== null) {
+                            $('#tutor_penilai_satu').val(VALUE_TP1_INF_SELECT).trigger('change')
                         }
-                        if (VALUE_TP2_CREATE_SELECT !== null) {
-                            $('#tutor_penilai_dua').val(VALUE_TP2_CREATE_SELECT).trigger('change')
+
+                        if (tutor_penilai_dua !== null) {
+                            $('#tutor_penilai_dua').val(tutor_penilai_dua).trigger('change')
+                        }else
+                        if (VALUE_TP2_INF_SELECT !== null) {
+                            $('#tutor_penilai_dua').val(VALUE_TP2_INF_SELECT).trigger('change')
                         }
 
                     })
             }
 
+            fetchTutor();
+
+
+
             // session storage for kategori kelas, metode pelatihan, tutor penilai satu, dua
 
             $(document).on('change', '#kelas_kategori_id', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(KK_CREATE_SELECT, value);
+                sessionStorage.setItem(KK_INF_SELECT, value);
             })
 
             $(document).on('change', '#metode_pelatihan', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(MP_CREATE_SELECT, value);
+                sessionStorage.setItem(MP_INF_SELECT, value);
             })
 
             $(document).on('change', '#level', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(L_CREATE_SELECT, value);
+                sessionStorage.setItem(L_INF_SELECT, value);
             })
 
             $(document).on('change', '#unggulan', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(U_CREATE_SELECT, value);
+                sessionStorage.setItem(U_INF_SELECT, value);
             })
 
             $(document).on('change', '#best_seller', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(BS_CREATE_SELECT, value);
+                sessionStorage.setItem(BS_INF_SELECT, value);
             })
 
             $(document).on('change', '#tutor_id', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(NT_CREATE_SELECT, value);
+                sessionStorage.setItem(NT_INF_SELECT, value);
             })
 
             $(document).on('change', '#tutor_penilai_satu', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(TP1_CREATE_SELECT, value);
+                sessionStorage.setItem(TP1_INF_SELECT, value);
             })
 
             $(document).on('change', '#tutor_penilai_dua', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(TP2_CREATE_SELECT, value);
+                sessionStorage.setItem(TP2_INF_SELECT, value);
             })
             $(document).on('change', '#approval_free', function() {
                 const value = $(this).val()
-                sessionStorage.setItem(AF_CREATE_SELECT, value);
+                sessionStorage.setItem(AF_INF_SELECT, value);
             })
 
             if (value_mp !== null) {
@@ -539,25 +556,25 @@
                 fetchTutor(value_mp);
             }
 
-            if (VALUE_KK_CREATE_SELECT !== null) {
-                $('#kelas_kategori_id').val(VALUE_KK_CREATE_SELECT)
+            if (VALUE_KK_INF_SELECT !== null) {
+                $('#kelas_kategori_id').val(VALUE_KK_INF_SELECT)
             }
 
-            if (VALUE_MP_CREATE_SELECT !== null) {
-                $('#metode_pelatihan').val(VALUE_MP_CREATE_SELECT)
+            if (VALUE_MP_INF_SELECT !== null) {
+                $('#metode_pelatihan').val(VALUE_MP_INF_SELECT)
             }
-            if (VALUE_L_CREATE_SELECT !== null) {
-                $('#level').val(VALUE_L_CREATE_SELECT)
+            if (VALUE_L_INF_SELECT !== null) {
+                $('#level').val(VALUE_L_INF_SELECT)
             }
-            if (VALUE_U_CREATE_SELECT !== null) {
-                $('#unggulan').val(VALUE_U_CREATE_SELECT)
+            if (VALUE_U_INF_SELECT !== null) {
+                $('#unggulan').val(VALUE_U_INF_SELECT)
             }
 
-            if (VALUE_BS_CREATE_SELECT !== null) {
-                $('#best_seller').val(VALUE_BS_CREATE_SELECT)
+            if (VALUE_BS_INF_SELECT !== null) {
+                $('#best_seller').val(VALUE_BS_INF_SELECT)
             }
-            if (VALUE_AF_CREATE_SELECT !== null) {
-                $('#approval_free').val(VALUE_AF_CREATE_SELECT)
+            if (VALUE_AF_INF_SELECT !== null) {
+                $('#approval_free').val(VALUE_AF_INF_SELECT)
             }
 
 

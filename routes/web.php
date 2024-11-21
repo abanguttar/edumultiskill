@@ -74,6 +74,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::put('/{id}/informasi', 'informasiUpdate')->middleware('permission:15');
             Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi')->middleware('permission:16');
             Route::put('/{id}/deskripsi', 'deskripsiUpdate')->middleware('permission:16');
+            Route::get('/{id}/skkni', 'skkniView')->name('view-skkni')->middleware('permission:16');
+            Route::put('/{id}/skkni', 'skkniUpdate')->middleware('permission:16');
+            Route::get('/{id}/jadwal', 'jadwalView')->name('view-jadwal')->middleware('permission:16');
+            Route::get('/{id}/jadwal/create', 'jadwalCreate')->name('create-jadwal')->middleware('permission:16');
+            Route::post('/{id}/jadwal/create', 'jadwalStore')->middleware('permission:16');
+            Route::get('/{id}/jadwal/{jadwal_id}/edit', 'jadwalEdit')->name('edit-jadwal')->middleware('permission:16');
+            Route::put('/{id}/jadwal/{jadwal_id}/edit', 'jadwalUpdate')->middleware('permission:16');
+            Route::get('/{id}/jadwal/arsip', 'jadwalViewArsip')->name('view-arsip-jadwal')->middleware('permission:16');
+            Route::put('/{id}/jadwal/{jadwal_id}/arsip', 'jadwalArsip')->name('arsip-jadwal')->middleware('permission:16');
+            Route::delete('/{id}/jadwal/{jadwal_id}/destroy', 'jadwalDelete')->name('destroy-jadwal')->middleware('permission:16');
         });
 
         Route::controller(KelasKategoriController::class)->group(function () {

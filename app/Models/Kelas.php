@@ -64,6 +64,20 @@ class Kelas extends Model
         return $this->belongsTo(KelasKategori::class, 'kelas_kategori_id', 'id');
     }
 
+    public function skknis()
+    {
+        return $this->hasMany(Skkni::class);
+    }
+
+    public function kodeUnits()
+    {
+        return $this->hasMany(KodeUnit::class);
+    }
+
+    public function JadwalPelatihans()
+    {
+        return $this->hasMany(JadwalPelatihan::class);
+    }
 
     public function deskripsi()
     {

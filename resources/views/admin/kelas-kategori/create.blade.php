@@ -33,14 +33,7 @@
                         <label class="fw-bold">Icon Kategori <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-12">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="icon_kategori" name="icon_kategori" accept="image/*">
-                        </div>
-                        <small class="text-muted">Format: PNG, JPG, JPEG. Maksimal 2MB</small>
-                        
-                        <div class="mt-2">
-                            <img id="preview_icon" src="#" alt="Preview Icon" class="mt-2 img-thumbnail" style="max-width: 100px; display: none;">
-                        </div>
+                        <input type="text" class="form-control" name="icon_kategori" value="{{ old('icon_kategori') }}">
                     </div>
                 </div>
 

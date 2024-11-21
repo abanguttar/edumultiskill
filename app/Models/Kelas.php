@@ -74,6 +74,11 @@ class Kelas extends Model
         return $this->hasMany(KodeUnit::class);
     }
 
+    public function JadwalPelatihans()
+    {
+        return $this->hasMany(JadwalPelatihan::class);
+    }
+
     public function deskripsi()
     {
         return $this->hasOne(KelasDetail::class, 'kelas_id', 'id');

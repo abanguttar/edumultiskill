@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\KelasKategori;
 use App\Models\Skkni;
 use App\Models\KodeUnit;
+use App\Models\JadwalPelatihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateDeskripsiRequest;
+use App\Http\Requests\JadwalKelasRequest;
 use App\Http\Requests\UpdateSKKNIRequest;
 use Illuminate\Validation\ValidationException;
 
@@ -30,8 +32,7 @@ class KelasController extends Controller
         parent::__construct();
         $this->kelas = new Kelas();
         $this->kelas_kategori = KelasKategori::get();
-        $this->skkni = new Skkni();
-        $this->kode_unit = new KodeUnit();
+        $this->jadwal = new JadwalPelatihan();
         $this->metode_pelatihan = DB::table('metode_pelatihans')->get();
     }
 
@@ -222,9 +223,7 @@ class KelasController extends Controller
         $kelas_id = $id;
         $btn_group = 'kelas-skkni';
         $kelas = $this->kelas->with('deskripsi')->findOrFail($id);
-        $skkni = $this->skkni->find($id);
-        $kode_unit = $this->kode_unit->find($id);
-        return view("$this->path/skkni", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas', 'skkni', 'kode_unit'));
+        return view("$this->path/skkni", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas'));
     }
 
     public function skkniUpdate(UpdateSKKNIRequest $request, $id)
@@ -306,5 +305,99 @@ class KelasController extends Controller
                 ->withInput()
                 ->with('error', 'Terjadi kesalahan saat menyimpan data');
         }
+    }
+
+    public function jadwalView($id)
+    {
+        $title = 'Jadwal Pelatihan';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'jadwal';
+        $kelas = $this->kelas->with('JadwalPelatihans')->findOrFail($id);
+        return view("$this->path/jadwal/view", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas'));
+    }
+
+    public function jadwalViewArsip($id)
+    {
+        $title = 'Arsip Jadwal Pelatihan';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'jadwal';
+        $kelas = $this->kelas->with('JadwalPelatihans')->findOrFail($id);
+        return view("$this->path/jadwal/arsip", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas'));
+    }
+
+    public function jadwalCreate($id)
+    {
+        $title = 'Tambah Jadwal Pelatihan';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'jadwal';
+        return view("$this->path/jadwal/create", compact('title',  'btn_group', 'kelas_id', 'data_nav'));
+    }
+
+    public function jadwalStore(JadwalKelasRequest $request, $id)
+    {
+        JadwalPelatihan::create($request->validated());
+        
+        return redirect()
+            ->route('view-jadwal', $id)
+            ->with('success', 'Jadwal berhasil ditambahkan');
+    }
+
+    public function jadwalEdit($id, $jadwal_id)
+    {
+        $title = 'Edit Jadwal Pelatihan';
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'jadwal';
+        $jadwal = $this->jadwal->findOrFail($jadwal_id);
+        if ($jadwal->waktu_pelaksanaan) {
+            preg_match('/(\d{2}\.\d{2})\s*(WIB|WITA|WIT)\s*s\/d\s*(\d{2}\.\d{2})\s*(WIB|WITA|WIT)/', 
+                $jadwal->waktu_pelaksanaan, 
+                $matches
+            );
+            
+            if (count($matches) === 5) {
+                $jadwal->waktu_mulai = str_replace('.', ':', $matches[1]);
+                $jadwal->waktu_selesai = str_replace('.', ':', $matches[3]);
+                $jadwal->zona_waktu = $matches[2];
+            }
+        }
+        return view("$this->path/jadwal/edit", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'jadwal'));
+    }
+
+    public function jadwalUpdate(JadwalKelasRequest $request, $id, $jadwal_id)
+    {
+        $jadwal = $this->jadwal->findOrFail($jadwal_id);
+        $jadwal->update($request->validated());
+        
+        return redirect()
+            ->route('view-jadwal', $id)
+            ->with('success', 'Jadwal berhasil diperbarui');
+    }
+
+    public function jadwalDelete($id, $jadwal_id)
+    {
+        $jadwal = $this->jadwal->findOrFail($jadwal_id);
+        $jadwal->delete();
+        
+        return redirect()
+            ->route('view-jadwal', $id)
+            ->with('success', 'Jadwal berhasil dihapus');
+    }
+
+    public function jadwalArsip($id, $jadwal_id)
+    {
+        $jadwal = JadwalPelatihan::findOrFail($jadwal_id);
+        if($jadwal->diarsipkan == 0) {
+            $jadwal->update(['diarsipkan' => '1']);
+        } else {
+            $jadwal->update(['diarsipkan' => '0']);
+        }
+        
+        return redirect()
+            ->route('view-jadwal', $id)
+            ->with('success', 'Jadwal berhasil diarsipkan');
     }
 }

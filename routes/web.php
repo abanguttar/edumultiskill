@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
@@ -86,4 +87,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             });
         });
     });
+});
+
+
+
+
+Route::prefix('ajax')->controller(AjaxController::class)->group(function(){
+Route::get('tutor', 'fetchTutor');
 });

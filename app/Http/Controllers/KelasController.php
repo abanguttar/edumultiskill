@@ -32,6 +32,19 @@ class KelasController extends Controller
 
 
     /**
+     * Create function to validate if is dicount set to aktif verify harga discount must have value
+     */
+
+    private function verifyIsDiscount($is_dicount, $harga_discount)
+    {
+        if ($is_dicount === '1' && $harga_discount === 0) {
+            throw ValidationException::withMessages(['harga_discount' => "Jika diskon diaktifkan harga diskon tidak boleh 0!"]);
+        }
+
+    }
+
+
+    /**
      * This func is provide to move file
      */
     private function moveFile($path, $tipe, $file)
@@ -69,7 +82,7 @@ class KelasController extends Controller
     public function store(StoreKelasRequest $request)
     {
 
-        $request->validated();
+        $data =  $request->validated();
         $data_okupasi = null;
         $data_tag_kelas = null;
         $renameImage = null;
@@ -83,10 +96,13 @@ class KelasController extends Controller
             return redirect()->back()->withInput();
         }
 
+
+        // Verify is discount aktif?
+        $this->verifyIsDiscount($data['is_discount'], (int)$data['harga_discount']);
+
         /**
          * Insert data
          */
-        $data =  $request->validated();
         if ($request->image != null) {
             // Store image
             $file_image = $request->file('image');
@@ -130,7 +146,10 @@ class KelasController extends Controller
 
     public function informasiUpdate(StoreKelasRequest $request, $id)
     {
-
+        /**
+         * Update data
+         */
+        $data =  $request->validated();
         $data_okupasi = null;
         $data_tag_kelas = null;
         $renameImage = $request->old_image;
@@ -167,10 +186,10 @@ class KelasController extends Controller
 
 
 
-        /**
-         * Update data
-         */
-        $data =  $request->validated();
+
+        // Verify is discount aktif?
+        $this->verifyIsDiscount($data['is_discount'], (int)$data['harga_discount']);
+
 
         $data['slug'] = $slug;
         $jenjang_pendidikan = implode(',', $data['jenjang_pendidikan']);

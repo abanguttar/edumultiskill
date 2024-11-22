@@ -1,6 +1,7 @@
 @extends('admin/main')
 @section('body')
-    <div class="container-fluid d-flex justify-content-center align-items-center p-0" style="height: 100vh">
+    <div class="container-fluid d-flex justify-content-center align-items-center p-0" id="container-login"
+        style="height: 100vh">
 
         <div class="border border-3 rounded-4 d-flex justify-content-center align-items-center p-4">
             <form action="" method="POST">
@@ -38,9 +39,10 @@
                 </div>
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-danger w-100">Login</button>
+                        <button type="submit" id="btn-login" class="btn btn-danger w-100">Login</button>
                     </div>
-                    <div class="col-12 text-center mt-4"><span class="fw-light" style="font-size: 13px">Copyright © EduMultiSkill
+                    <div class="col-12 text-center mt-4"><span class="fw-light" style="font-size: 13px">Copyright ©
+                            EduMultiSkill
                             2024</span></div>
 
                 </div>

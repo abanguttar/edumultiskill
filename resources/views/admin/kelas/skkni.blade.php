@@ -3,11 +3,13 @@
 @push('link')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 @endpush
 
 @section('body')
     <div class="container border p-4 mt-3 w-75 mb-5">
         <form action="" method="POST" enctype="multipart/form-data" id="kelasForm">
+
             @csrf
             @method('PUT')
             @if ($errors->any())
@@ -39,6 +41,7 @@
                         <input type="text" name="sertifikat_judul_skkni"
                             value="{{ old('sertifikat_judul_skkni', $kelas->deskripsi->sertifikat_judul_skkni) }}" 
                             class="form-control form-input" disabled>
+
                     </div>
                 </div>
 
@@ -53,12 +56,14 @@
                                     <input type="hidden" name="skkni_ids[]" value="{{ $skkni->id }}">
                                     <input type="text" class="form-control form-input" name="skkni[]" value="{{ $skkni->skkni }}" maxlength="50" disabled>
                                     <button type="button" class="btn btn-danger btn-delete-skkni" disabled>
+
                                         <i data-feather="trash-2"></i>
                                     </button>
                                 </div>
                             @endforeach
                         @endif
                         <button type="button" class="btn btn-primary btn-sm mt-2 add-btn" id="btn-tambah-skkni" disabled>
+
                             <i data-feather="plus"></i> Tambah SKKNI
                         </button>
                     </div>
@@ -72,6 +77,7 @@
                         <input type="text" name="sertifikat_judul_kode_unit"
                             value="{{ old('sertifikat_judul_kode_unit', $kelas->deskripsi->sertifikat_judul_kode_unit) }}" 
                             class="form-control form-input" disabled>
+
                     </div>
                 </div>
 
@@ -87,16 +93,19 @@
                                     <input type="text" class="form-control form-input" name="kode_unit[]" value="{{ $kodeUnit->kode_unit }}" maxlength="50" placeholder="Kode Unit" disabled>
                                     <input type="text" class="form-control form-input" name="keterangan[]" value="{{ $kodeUnit->keterangan }}" maxlength="100" placeholder="Keterangan" disabled>
                                     <button type="button" class="btn btn-danger btn-delete-kode-unit" disabled>
+
                                         <i data-feather="trash-2"></i>
                                     </button>
                                 </div>
                             @endforeach
                         @endif
                         <button type="button" class="btn btn-primary btn-sm mt-2 add-btn" id="btn-tambah-kode-unit" disabled>
+
                             <i data-feather="plus"></i> Tambah Kode Unit
                         </button>
                     </div>
                 </div>
+
 
                 <hr>
                 <div class="mt-3">
@@ -112,6 +121,7 @@
                 </div>
             </div>
         </form>
+
     </div>
 @endsection
 
@@ -120,9 +130,11 @@
 
     <script>
         $(document).ready(function() {
+
             $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass('btn-danger');
             
             feather.replace();
+
 
             // Toggle edit mode
             $('#btnEdit').click(function() {
@@ -144,6 +156,7 @@
                 const newRow = `
                     <div class="input-group mt-1">
                         <input type="text" class="form-control form-input" name="skkni[]" maxlength="50">
+
                         <button type="button" class="btn btn-danger btn-delete-skkni">
                             <i data-feather="trash-2"></i>
                         </button>
@@ -152,6 +165,7 @@
                 $(newRow).insertBefore('#btn-tambah-skkni');
                 feather.replace();
             });
+
 
             // Add Kode Unit with limit
             $(document).on('click', '#btn-tambah-kode-unit', function() {
@@ -165,6 +179,7 @@
                     <div class="input-group mt-1">
                         <input type="text" class="form-control form-input" name="kode_unit[]" maxlength="50" placeholder="Kode Unit">
                         <input type="text" class="form-control form-input" name="keterangan[]" maxlength="100" placeholder="Keterangan">
+
                         <button type="button" class="btn btn-danger btn-delete-kode-unit">
                             <i data-feather="trash-2"></i>
                         </button>
@@ -173,6 +188,7 @@
                 $(newRow).insertBefore('#btn-tambah-kode-unit');
                 feather.replace();
             });
+
 
             // Delete buttons
             $(document).on('click', '.btn-delete-skkni', function() {
@@ -185,3 +201,4 @@
         });
     </script>
 @endpush
+

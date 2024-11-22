@@ -24,12 +24,15 @@ class JadwalKelasRequest extends FormRequest
             'judul_jadwal_pelatihan' => 'required|string|max:255',
             'schedule_code' => 'required|string|max:50|unique:jadwal_pelatihans,schedule_code,' . $this->jadwal_id,
             'status' => 'in:aktif,tidak aktif',
+
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'waktu_mulai' => 'required|date_format:H:i',
             'waktu_selesai' => 'required|date_format:H:i|after:waktu_mulai',
             'waktu_pelaksanaan' => 'required|string',
             'zona_waktu' => 'required|in:WIB,WITA,WIT',
+            'kuota' => 'required|integer|min:1'
+
         ];
     }
 

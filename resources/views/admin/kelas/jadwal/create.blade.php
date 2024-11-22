@@ -38,6 +38,7 @@
 
                 <div class="mb-3 row">
                     <div class="col-md-3">
+
                         <label class="form-label fw-bold">Tanggal Mulai</label>
                     </div>
                     <div class="col-md-9">
@@ -83,6 +84,7 @@
                         <input type="hidden" name="waktu_pelaksanaan" id="waktu_pelaksanaan">
                     </div>
                 </div>
+
 
                 <hr>
                 <div class="mt-3">

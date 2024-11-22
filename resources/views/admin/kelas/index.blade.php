@@ -42,7 +42,7 @@
                             $program = ['General', 'Indonesia Skill Week', 'Program 2'];
                         @endphp
                         <td class="text-center">{{ $program[$d->program] }}</td>
-                        <td>{{ $d->nama_kategori }}</td>
+                        <td>{{ $d->kategori->nama_kategori }}</td>
                         <td>{{ $d->status_kelas > 3 ? ($d->status_kelas == 4 ? 'Aktif Belajar' : 'Tutup Pendaftaran') : ($d->status_kelas == 3 ? 'Aktif Pendaftaran' : ($d->status_kelas == 2 ? 'Kurasi' : 'Rencana')) }}
                         </td>
                         <td class="text-center">{{ number_format($d->harga_reguler) }}</td>

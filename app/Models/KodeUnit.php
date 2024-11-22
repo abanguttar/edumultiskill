@@ -15,6 +15,7 @@ class KodeUnit extends Model
         'kelas_id',
         'kode_unit',
         'keterangan',
+
         'create_by',
         'update_by'
     ];
@@ -39,4 +40,5 @@ class KodeUnit extends Model
     {
         return $this->belongsTo(User::class, 'update_by');
     }
+
 }

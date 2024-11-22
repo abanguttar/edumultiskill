@@ -33,6 +33,14 @@
                         @enderror
                     </div>
                 </div>
+                <div class="row mt-2">
+                    <div class="col-md-3 col-sm-12">
+                        <label class=" fw-bold">Slug</label>
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                        <input type="text" name="slug" class="form-control" value="{{ $kelas->slug }}" disabled>
+                    </div>
+                </div>
 
                 <div class="row mt-2 bg-danger p-4">
                     <div class="col-md-3 col-sm-12"><label class=" text-white fw-bold">File Image <br>
@@ -144,9 +152,10 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <select name="program" class="form-select" id="program">
-                            <option value="0">-- Pilih Nama Program --</option>
-                            <option value="1">Indonesia Skill Week</option>
-                            <option value="2">Program 2</option>
+                            <option value="0">-- Pilih Program --</option>
+                            @foreach ($programs as $program)
+                                <option value="{{ $program->id }}">{{ $program->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -183,9 +192,10 @@
                     <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Level</label></div>
                     <div class="col-md-9 col-sm-12">
                         <select class="form-select" name="level" id="level">
-                            <option value="pemula">Pemula</option>
-                            <option value="menengah">Menengah</option>
-                            <option value="profesional">Profesional</option>
+                            <option value="Pemula">Pemula</option>
+                            <option value="Menengah">Menengah</option>
+                            <option value="Lanjutan">Lanjutan</option>
+                            <option value="Ahli">Ahli</option>
                         </select>
                     </div>
                 </div>
@@ -224,15 +234,6 @@
 
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Unggulan</label></div>
-                    <div class="col-md-9 col-sm-12">
-                        <select class="form-select" name="unggulan" id="unggulan">
-                            <option value="0">Tidak</option>
-                            <option value="1">Ya</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Best Seller</label></div>
                     <div class="col-md-9 col-sm-12">

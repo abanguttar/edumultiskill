@@ -34,14 +34,14 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Keterangan Judul Kelas</label>
+                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Gambaran Umum Pelatihan</label>
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <textarea class="summernotes" name="judul_keterangan" id="judul_keterangan">{{ old('judul_keterangan', $kelas->deskripsi->judul_keterangan) }}</textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Deskripsi Kelas</label>
+                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Detail Kelas</label>
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <textarea class="summernotes" name="deskripsi" id="deskripsi">{{ old('deskripsi', $kelas->deskripsi->deskripsi) }}</textarea>
@@ -68,18 +68,28 @@
                         <p class="text-white" style="font-weight: lighter; font-size: 14px">Maks. 30 karakter</p>
                     </div>
                     <div class="col-md-9 col-sm-12">
-                        <input type="text" class="form-control mt-1" name="sertifikat_judul"
-                            value="{{ old('sertifikat_judul', $kelas->deskripsi->sertifikat_judul) }}">
+                        {{-- <input type="text" class="form-control mt-1" name="sertifikat_judul"
+                            value="{{ old('sertifikat_judul', $kelas->deskripsi->sertifikat_judul) }}"> --}}
+                        <select name="sertifikat_judul" class="form-select" id="sertifikat_judul">
+                            <option value="Penyelesaian">Penyelesaian</option>
+                            <option value="Kehadiran">Kehadiran</option>
+                        </select>
+
                         @if ($kelas->deskripsi->sertifikat_judul != null)
-                            <a class="text-white d-inline-flex mt-2" style="text-decoration: none"
-                                href="/admin/certificate/view/header/{{ $kelas_id }}" target="__blank"><i class="me-1"
-                                    data-feather="file"></i> Lihat Preview Sertifikat</a>
+                            <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
+                                style="text-decoration: none" href="/admin/certificate/view/header/{{ $kelas_id }}"
+                                target="__blank"><i class="me-1" data-feather="file"></i> Preview Tanpa
+                                Predikat Sangat Baik</a>
+                            <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
+                                style="text-decoration: none" href="/admin/certificate/view/header/{{ $kelas_id }}"
+                                target="__blank"><i class="me-1" data-feather="file-plus"></i> Preview Dengan
+                                Predikat Sangat Baik</a>
                         @endif
                     </div>
                 </div>
 
 
-                <div class="row mt-3">
+                {{-- <div class="row mt-3">
                     <div class="col-md-3 col-sm-12"><label class="fw-bold">Metode Baris 1</label>
                     </div>
                     <div class="col-md-9 col-sm-12">
@@ -94,7 +104,7 @@
                         <input type="text" class="form-control" name="sertifikat_metode_dua"
                             value="{{ old('sertifikat_metode_dua', $kelas->deskripsi->sertifikat_metode_dua) }}">
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12"><label class="fw-bold mt-1">Tenaga Pelatih (Sertifikat)</label>
@@ -121,8 +131,7 @@
                             @if ($sisa > 0)
                                 @for ($i = 7 - $sisa; $i < 7; $i++)
                                     <input maxlength="30" type="text" class="form-control mt-1"
-                                        name="sertifikat_tenaga_pelatih[]"
-                                        value="{{ old('sertifikat_tenaga_pelatih[]') }}"
+                                        name="sertifikat_tenaga_pelatih[]" value="{{ old('sertifikat_tenaga_pelatih[]') }}"
                                         placeholder='Tenaga Pelatih {{ $i }}'
                                         id="sertifikat_tenaga_pelatih_{{ $i }}">
                                 @endfor

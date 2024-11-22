@@ -17,10 +17,10 @@ class MetodePelatihanSeeder extends Seeder
 
         DB::table('metode_pelatihans')->truncate();
         $data = [
+            ['name' => 'Daring Webinar', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Daring Video Learning', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Luring', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Webinar', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Self Paced Learning', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Video Learning', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Hybrid', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
 
         // $insertData = ['name' => 'Luring', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()];

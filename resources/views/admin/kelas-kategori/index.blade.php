@@ -34,6 +34,7 @@
                     <tr class="table-row text-center" data-id="{{ $k->id }}">
                         <td>{{ ++$key }}</td>
                         <td>{{ $k->nama_kategori }}</td>
+
                         <td><i class="{{ $k->icon_kategori }}"></i></td>
                         <td>{{ $k->updatedBy->name }}</td>
                         <td>{{ $k->updated_date }}</td>
@@ -64,26 +65,6 @@
     <script>
         $(document).ready(function() {
             // DataTable initialization
-            var table = $('#myTable').DataTable({
-                "pageLength": 10,
-                "ordering": true,
-                "info": true,
-                "responsive": true,
-                "language": {
-                    "search": "Pencarian:",
-                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
-                    "zeroRecords": "Data tidak ditemukan",
-                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-                    "infoEmpty": "Tidak ada data tersedia",
-                    "infoFiltered": "(difilter dari _MAX_ total data)",
-                    "paginate": {
-                        "first": "Pertama",
-                        "last": "Terakhir",
-                        "next": "Selanjutnya",
-                        "previous": "Sebelumnya"
-                    }
-                }
-            });
 
             // Row selection
             $('#myTable tbody').on('click', 'tr', function() {

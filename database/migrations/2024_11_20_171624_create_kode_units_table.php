@@ -16,6 +16,9 @@ return new class extends Migration
             $table->bigInteger('kelas_id');
             $table->string('kode_unit');
             $table->string('keterangan');
+
+            $table->BigInteger('update_by')->nullable();
+            $table->BigInteger('create_by')->nullable();
             $table->timestamps();
         });
     }

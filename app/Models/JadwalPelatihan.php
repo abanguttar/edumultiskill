@@ -30,7 +30,9 @@ class JadwalPelatihan extends Model
         'tanggal_selesai',
         'waktu_pelaksanaan',
         'kuota',
-        'diarsipkan'
+        'diarsipkan',
+        'create_by',
+        'update_by'
     ];
 
     /**
@@ -42,6 +44,32 @@ class JadwalPelatihan extends Model
         'tanggal_mulai' => 'date',
         'tanggal_selesai' => 'date',
     ];
+
+    public $timestamps = true;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->create_by = auth()->id();
+        });
+        
+        static::updating(function ($model) {
+            $model->update_by = auth()->id();
+            return true; // Pastikan return true agar update berjalan
+        });
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'create_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'update_by');
+    }
 
     /**
     * Get the kelas that owns the jadwal pelatihan.

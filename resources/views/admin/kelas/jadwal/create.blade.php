@@ -38,18 +38,7 @@
 
                 <div class="mb-3 row">
                     <div class="col-md-3">
-                        <label class="form-label fw-bold">Status</label>
-                    </div>
-                    <div class="col-md-9">
-                        <select class="form-select" name="status" required>
-                            <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="tidak aktif" {{ old('status') == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="mb-3 row">
-                    <div class="col-md-3">
                         <label class="form-label fw-bold">Tanggal Mulai</label>
                     </div>
                     <div class="col-md-9">
@@ -96,14 +85,6 @@
                     </div>
                 </div>
 
-                <div class="mb-3 row">
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Kuota</label>
-                    </div>
-                    <div class="col-md-9">
-                        <input type="number" class="form-control" name="kuota" value="{{ old('kuota') }}" required>
-                    </div>
-                </div>
 
                 <hr>
                 <div class="mt-3">

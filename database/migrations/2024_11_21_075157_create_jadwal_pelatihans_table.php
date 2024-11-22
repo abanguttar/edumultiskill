@@ -16,12 +16,16 @@ return new class extends Migration
             $table->bigInteger('kelas_id');
             $table->string('judul_jadwal_pelatihan');
             $table->string('schedule_code')->unique();
-            $table->enum('status', ['aktif', 'tidak aktif'])->default('aktif');
+
+            $table->enum('status', ['aktif', 'tidak aktif'])->default('tidak aktif');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai'); 
             $table->string('waktu_pelaksanaan');
-            $table->integer('kuota');
+            $table->integer('kuota')->default('0');
             $table->enum('diarsipkan', ['1', '0'])->default('0');
+            $table->BigInteger('update_by')->nullable();
+            $table->BigInteger('create_by')->nullable();
+
             $table->timestamps();
         });
     }

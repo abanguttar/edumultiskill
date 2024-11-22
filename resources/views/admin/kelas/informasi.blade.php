@@ -95,19 +95,19 @@
                                 <option value="5">Tutup Pendaftaran</option>
                                 <option value="0">Arsip</option>
                             @else
-                                @if ($data->status_kelas == 1)
+                                @if ($kelas->status_kelas == 1)
                                     <option value="1"> Dalam Rencana</option>
                                     <option value="2">Kurasi</option>
-                                @elseif($data->status_kelas == 2)
+                                @elseif($kelas->status_kelas == 2)
                                     <option value="2">Kurasi</option>
                                     <option value="3">Aktif Pendaftaran</option>
-                                @elseif($data->status_kelas == 3)
+                                @elseif($kelas->status_kelas == 3)
                                     <option value="3">Aktif Pendaftaran</option>
                                     <option value="4">Aktif Belajar</option>
-                                @elseif($data->status_kelas == 4)
+                                @elseif($kelas->status_kelas == 4)
                                     <option value="4">Aktif Belajar</option>
                                     <option value="5">Tutup Pendaftaran</option>
-                                @elseif($data->status_kelas == 5)
+                                @elseif($kelas->status_kelas == 5)
                                     <option value="5">Aktif Belajar</option>
                                     <option value="0">Arsip</option>
                                 @endif
@@ -302,7 +302,7 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <select name="tutor_id" id="tutor_id" class="form-control" disabled>
-                            {{-- @foreach ($data_tutor as $tutor)
+                            {{-- @foreach ($kelas_tutor as $tutor)
                                 <option value="{{ $tutor->id }}">{{ $tutor->nama }}</option>
                             @endforeach --}}
                         </select>
@@ -322,7 +322,7 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <select name="tutor_penilai_satu" id="tutor_penilai_satu" class="form-control" disabled>
-                            {{-- @foreach ($data_tutor as $tutor)
+                            {{-- @foreach ($kelas_tutor as $tutor)
                                 <option value="{{ $tutor->id }}">{{ $tutor->nama }}</option>
                             @endforeach --}}
                         </select>
@@ -333,7 +333,7 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <select name="tutor_penilai_dua" id="tutor_penilai_dua" class="form-control" disabled>
-                            {{-- @foreach ($data_tutor as $tutor)
+                            {{-- @foreach ($kelas_tutor as $tutor)
                                 <option value="{{ $tutor->id }}">{{ $tutor->nama }}</option>
                             @endforeach --}}
                         </select>
@@ -486,14 +486,14 @@
                         }
                         if (tutor_penilai_satu !== null) {
                             $('#tutor_penilai_satu').val(tutor_penilai_satu).trigger('change')
-                        }else
+                        } else
                         if (VALUE_TP1_INF_SELECT !== null) {
                             $('#tutor_penilai_satu').val(VALUE_TP1_INF_SELECT).trigger('change')
                         }
 
                         if (tutor_penilai_dua !== null) {
                             $('#tutor_penilai_dua').val(tutor_penilai_dua).trigger('change')
-                        }else
+                        } else
                         if (VALUE_TP2_INF_SELECT !== null) {
                             $('#tutor_penilai_dua').val(VALUE_TP2_INF_SELECT).trigger('change')
                         }

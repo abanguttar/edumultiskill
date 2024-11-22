@@ -33,7 +33,6 @@ class StoreKelasRequest extends FormRequest
             'kelas_kategori_id' => 'required',
             'metode_pelatihan' => 'required',
             'level' => 'required',
-            'unggulan' => 'required',
             'best_seller' => 'required',
             'is_discount' => 'required',
             'harga_reguler' => 'required|numeric',

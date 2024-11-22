@@ -15,11 +15,14 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
 
+        DB::table('permissions')->truncate();
+        DB::table('user_permissions')->truncate();
+
         $permissions = [
             new Permission("data_master", "list_admin"),
             new Permission("data_master", "list_admin", ['access']),
             new Permission("lms", "kelas_kategori"),
-            new Permission("lms", "kelas", ['view', 'create', 'delete', 'up status', 'down status', 'informasi', 'deskripsi', 'skkni', 'rating']),
+            new Permission("lms", "kelas", ['view', 'create', 'delete', 'up status', 'down status', 'informasi', 'deskripsi']),
             new Permission("lms", "skkni"),
             new Permission("lms", "kode unit"),
             new Permission("lms", "rating"),

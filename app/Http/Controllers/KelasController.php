@@ -230,6 +230,7 @@ class KelasController extends Controller
     {
         DB::beginTransaction();
         try {
+            $userId = auth()->id(); 
             KelasDetail::where('kelas_id', $id)->update([
                 'sertifikat_judul_skkni' => $request->sertifikat_judul_skkni,
                 'sertifikat_judul_kode_unit' => $request->sertifikat_judul_kode_unit,
@@ -250,8 +251,12 @@ class KelasController extends Controller
                 foreach ($request->skkni as $index => $skkniValue) {
                     if (!empty($skkniValue)) {
                         if (isset($request->skkni_ids[$index])) {
+
                             Skkni::where('id', $request->skkni_ids[$index])
-                                ->update(['skkni' => $skkniValue]);
+                                ->update([
+                                    'skkni' => $skkniValue,
+                                    'update_by' => $userId
+                                ]);
                         } else {
                             Skkni::create([
                                 'kelas_id' => $id,
@@ -281,6 +286,7 @@ class KelasController extends Controller
                         if (isset($request->kode_unit_ids[$index])) {
                             KodeUnit::where('id', $request->kode_unit_ids[$index])
                                 ->update([
+                                    'update_by' => $userId,
                                     'kode_unit' => $kodeUnitValue,
                                     'keterangan' => $keteranganValue
                                 ]);

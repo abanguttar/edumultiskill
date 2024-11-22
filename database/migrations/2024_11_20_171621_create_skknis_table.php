@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('kelas_id');
             $table->string('skkni');
+            $table->BigInteger('update_by')->nullable();
+            $table->BigInteger('create_by')->nullable();
             $table->timestamps();
         });
     }

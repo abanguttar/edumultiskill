@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('waktu_pelaksanaan');
             $table->integer('kuota');
             $table->enum('diarsipkan', ['1', '0'])->default('0');
+            $table->BigInteger('update_by')->nullable();
+            $table->BigInteger('create_by')->nullable();
             $table->timestamps();
         });
     }

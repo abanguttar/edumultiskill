@@ -1,5 +1,7 @@
 @extends('admin/main')
-
+@push('link')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+@endpush
 @section('body')
     <div class="mt-3">
         <a href="/admin/kelas/kategori/create" class="btn btn-success btn-sm" id="btn-create">
@@ -32,7 +34,7 @@
                     <tr class="table-row text-center" data-id="{{ $k->id }}">
                         <td>{{ ++$key }}</td>
                         <td>{{ $k->nama_kategori }}</td>
-                        <td>{{ $k->icon_kategori }}</td>
+                        <td><i class="{{ $k->icon_kategori }}"></i></td>
                         <td>{{ $k->updatedBy->name }}</td>
                         <td>{{ $k->updated_date }}</td>
                     </tr>
@@ -41,15 +43,17 @@
         </table>
     </div>
 
-    
+
 
     <style>
         .table-row {
             cursor: pointer;
         }
+
         .selected {
             background-color: #e2e6ea !important;
         }
+
         .img-thumbnail {
             cursor: zoom-in;
         }
@@ -111,7 +115,7 @@
                 var selectedRow = table.row('.selected');
                 if (selectedRow.any()) {
                     var id = $(selectedRow.node()).data('id');
-                    
+
                     Swal.fire({
                         title: 'Konfirmasi Hapus',
                         text: "Apakah Anda yakin ingin menghapus kategori ini?",

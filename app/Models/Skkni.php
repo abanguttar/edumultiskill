@@ -27,11 +27,6 @@ class Skkni extends Model
         static::creating(function ($model) {
             $model->create_by = auth()->id();
         });
-
-        static::updating(function ($model) {
-            $model->update_by = auth()->id();
-            return true; // Pastikan return true agar update berjalan
-        });
     }
 
     public function creator()

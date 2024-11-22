@@ -23,14 +23,13 @@ class JadwalKelasRequest extends FormRequest
             'kelas_id' => 'required|exists:kelas,id',
             'judul_jadwal_pelatihan' => 'required|string|max:255',
             'schedule_code' => 'required|string|max:50|unique:jadwal_pelatihans,schedule_code,' . $this->jadwal_id,
-            'status' => 'required|in:aktif,tidak aktif',
+            'status' => 'in:aktif,tidak aktif',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'waktu_mulai' => 'required|date_format:H:i',
             'waktu_selesai' => 'required|date_format:H:i|after:waktu_mulai',
             'waktu_pelaksanaan' => 'required|string',
             'zona_waktu' => 'required|in:WIB,WITA,WIT',
-            'kuota' => 'required|integer|min:1'
         ];
     }
 
@@ -44,7 +43,6 @@ class JadwalKelasRequest extends FormRequest
             'judul_jadwal_pelatihan.max' => 'Judul jadwal pelatihan maksimal 255 karakter',
             'schedule_code.required' => 'Kode jadwal harus diisi',
             'schedule_code.unique' => 'Kode jadwal sudah digunakan',
-            'status.required' => 'Status harus diisi',
             'status.in' => 'Status harus aktif atau tidak aktif',
             'tanggal_mulai.required' => 'Tanggal mulai harus diisi',
             'tanggal_mulai.date' => 'Format tanggal mulai tidak valid',
@@ -59,9 +57,7 @@ class JadwalKelasRequest extends FormRequest
             'waktu_pelaksanaan.required' => 'Waktu pelaksanaan harus diisi',
             'zona_waktu.required' => 'Zona waktu harus diisi',
             'zona_waktu.in' => 'Zona waktu harus WIB, WITA, atau WIT',
-            'kuota.required' => 'Kuota harus diisi',
-            'kuota.integer' => 'Kuota harus berupa angka',
-            'kuota.min' => 'Kuota minimal 1 peserta'
+            'kuota.integer' => 'Kuota harus berupa angka'
         ];
     }
 

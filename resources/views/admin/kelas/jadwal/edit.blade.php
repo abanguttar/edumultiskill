@@ -112,7 +112,7 @@
                         <label class="form-label fw-bold">Kuota</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="number" class="form-control" name="kuota" value="{{ old('kuota', $jadwal->kuota) }}" required>
+                        <input type="number" class="form-control" name="kuota" value="{{ old('kuota', $jadwal->kuota) }}" disabled>
                     </div>
                 </div>
 

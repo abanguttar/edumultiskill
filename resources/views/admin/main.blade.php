@@ -15,12 +15,37 @@
 </head>
 @stack('style')
 <style>
+    :root {
+        --primary1: #F58634;
+        --subprimary1: #e27c33;
+        --primary2: #414393;
+        --primary3: #007DD1;
+    }
+
+    #container-login {
+        --bs-border-color: #414393 !important;
+    }
+
     body {
         min-height: 100vh;
     }
 
+    #btn-login.btn-danger,
+    #sidebarToggleBtn.btn-danger {
+        --bs-btn-active-bg: #da6c1e !important;
+        --bs-btn-bg: #F58634 !important;
+        --bs-btn-hover-bg: #e27c33 !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: white !important;
+        background-color: var(--primary1) !important;
+        box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--subprimary1) !important;
+    }
+
+
     .nav-link.active {
-        background-color: aqua !important;
+        background-color: var(--primary3) !important;
     }
 
     @media only screen and (max-width: 576px) {
@@ -118,7 +143,7 @@
             $('#' + sectionSideBar).closest('.accordion-item').find('.accordion-button').attr('aria-expanded',
                 'true').toggleClass('collapsed')
             $('#' + sectionSideBar + ' [data-nav="' + elementSideBar + '"]').toggleClass(
-                'active')
+                'active text-white')
         </script>
     @endif
 

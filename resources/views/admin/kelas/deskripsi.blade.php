@@ -79,7 +79,7 @@
                             <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
                                 style="text-decoration: none" href="/admin/certificate/view/header/{{ $kelas_id }}"
                                 target="__blank"><i class="me-1" data-feather="file"></i> Preview Tanpa
-                                Predikat Sangat Baik</a>
+                                Predikat</a>
                             <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
                                 style="text-decoration: none" href="/admin/certificate/view/header/{{ $kelas_id }}"
                                 target="__blank"><i class="me-1" data-feather="file-plus"></i> Preview Dengan

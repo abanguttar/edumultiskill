@@ -26,6 +26,8 @@ class UpdateDeskripsiRequest extends FormRequest
             'deskripsi' => 'nullable',
             'metode_pembelajaran' => 'nullable',
             'fasilitator' => 'nullable',
+            'jam' => 'nullable',
+            'menit' => 'nullable',
             'sertifikat_judul' => 'nullable',
             'sertifikat_tenaga_pelatih' => 'nullable',
             'sertifikat_metode_satu' => 'nullable',

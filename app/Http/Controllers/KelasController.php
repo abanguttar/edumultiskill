@@ -233,6 +233,13 @@ class KelasController extends Controller
             $data['sertifikat_tenaga_pelatih'] = null;
         }
 
+        if(!empty($data['jam'])){
+            $durasi_pelatihan = implode(',', [$data['jam'], $data['menit'] ?? '00']);
+        }
+
+        $data['durasi_pelatihan'] =$durasi_pelatihan ?? null;
+        unset($data['jam'], $data['menit']);
+
         KelasDetail::where('kelas_id', $id)->update($data);
         $this->flashSuccessUpdate($request);
 

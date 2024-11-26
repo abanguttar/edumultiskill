@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('judul_keterangan')->nullable();
             $table->longText('deskripsi')->nullable();
             $table->longText('metode_pembelajaran')->nullable();
+            $table->string('durasi_pelatihan')->nullable();
             $table->string('fasilitator')->nullable();
             $table->string('sertifikat_judul')->nullable();
             $table->string('sertifikat_judul_skkni')->default('Berdasarkan');

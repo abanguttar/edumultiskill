@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
@@ -102,6 +103,28 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::prefix('certificate')->controller(CertificateController::class)->group(function () {
         Route::get('/preview/{id}/header/{nilai}', 'previewHeader');
+    });
+
+
+
+    Route::prefix('beranda')->controller(BerandaController::class)->group(function () {
+        Route::get('', 'index')->name('list-beranda');
+        Route::get('/banner/create', 'createBanner');
+        Route::post('/banner/create', 'storeBanner');
+        Route::get('/banner/{id}/edit', 'editBanner')->name('edit-banner');
+        Route::put('/banner/{id}/edit', 'updateBanner');
+
+        Route::get('/logo/create', 'createLogo');
+        Route::post('/logo/create', 'storeLogo');
+        Route::get('/logo/{id}/edit', 'editLogo')->name('edit-logo');
+        Route::put('/logo/{id}/edit', 'updateLogo');
+
+        Route::get('/testimoni/create', 'createTestimoni');
+        Route::post('/testimoni/create', 'storeTestimoni');
+        Route::get('/testimoni/{id}/edit', 'editTestimoni')->name('edit-testimoni');
+        Route::put('/testimoni/{id}/edit', 'updateTestimoni');
+
+        Route::put('/link/edit', 'updateLink');
     });
 });
 

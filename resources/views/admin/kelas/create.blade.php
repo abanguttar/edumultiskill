@@ -293,7 +293,7 @@
 
 
                 <hr>
-                @include('components/submit-button');
+                @include('components/submit-button')
             </div>
 
         </form>

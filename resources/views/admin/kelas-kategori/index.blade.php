@@ -7,7 +7,7 @@
         <a href="/admin/kelas/kategori/create" class="btn btn-success btn-sm" id="btn-create">
             <i data-feather="plus"></i> Tambah
         </a>
-        <button type="button" class="btn btn-primary btn-sm" id="btn-editk">
+        <button type="button" class="btn btn-primary btn-sm" id="btn-edit">
             <i data-feather="edit"></i> Edit
         </button>
         <button type="button" class="btn btn-danger btn-sm" id="btn-delete">
@@ -31,7 +31,7 @@
             </thead>
             <tbody id="table-body">
                 @foreach ($kategori as $key => $k)
-                    <tr class="table-row text-center" data-id="{{ $k->id }}">
+                    <tr class="table-row text-center" data-id="/admin/kelas/kategori/{{ $k->id }}">
                         <td>{{ ++$key }}</td>
                         <td>{{ $k->nama_kategori }}</td>
 
@@ -67,29 +67,29 @@
             // DataTable initialization
 
             // Row selection
-            $('#myTable tbody').on('click', 'tr', function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                } else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+            // $('#myTable tbody').on('click', 'tr', function() {
+            //     if ($(this).hasClass('selected')) {
+            //         $(this).removeClass('selected');
+            //     } else {
+            //         table.$('tr.selected').removeClass('selected');
+            //         $(this).addClass('selected');
+            //     }
+            // });
 
-            // Edit button functionality
-            $('#btn-editk').click(function() {
-                var selectedRow = table.row('.selected');
-                if (selectedRow.any()) {
-                    var id = $(selectedRow.node()).data('id');
-                    window.location.href = `/admin/kelas/kategori/${id}/edit`;
-                } else {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Peringatan',
-                        text: 'Silakan pilih kategori yang akan diedit'
-                    });
-                }
-            });
+            // // Edit button functionality
+            // $('#btn-editk').click(function() {
+            //     var selectedRow = table.row('.selected');
+            //     if (selectedRow.any()) {
+            //         var id = $(selectedRow.node()).data('id');
+            //         window.location.href = `/admin/kelas/kategori/${id}/edit`;
+            //     } else {
+            //         Swal.fire({
+            //             icon: 'warning',
+            //             title: 'Peringatan',
+            //             text: 'Silakan pilih kategori yang akan diedit'
+            //         });
+            //     }
+            // });
 
             // Delete button functionality
             $('#btn-delete').click(function() {

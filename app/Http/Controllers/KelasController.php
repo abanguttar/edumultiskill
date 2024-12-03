@@ -179,6 +179,8 @@ class KelasController extends Controller
             // Store image
             $file_image = $request->file('image');
             $renameImage = $this->moveFile('kelas-image', 'Image', $file_image);
+
+            $this->removeFile('kelas-image/', $request->old_image);
         }
 
         if (!empty($request->video_file)) {
@@ -189,6 +191,7 @@ class KelasController extends Controller
             // Store video
             $file_video = $request->file('video_file');
             $rename_video =   $this->moveFile('kelas-video', 'Video', $file_video);
+            $this->removeFile('kelas-video/', $request->old_video);
         }
 
 
@@ -233,11 +236,11 @@ class KelasController extends Controller
             $data['sertifikat_tenaga_pelatih'] = null;
         }
 
-        if(!empty($data['jam'])){
+        if (!empty($data['jam'])) {
             $durasi_pelatihan = implode(',', [$data['jam'], $data['menit'] ?? '00']);
         }
 
-        $data['durasi_pelatihan'] =$durasi_pelatihan ?? null;
+        $data['durasi_pelatihan'] = $durasi_pelatihan ?? null;
         unset($data['jam'], $data['menit']);
 
         KelasDetail::where('kelas_id', $id)->update($data);

@@ -139,4 +139,5 @@ Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
 
 Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index');
+    Route::get('/faq/{slug}', 'faq');
 });

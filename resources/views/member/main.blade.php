@@ -34,6 +34,10 @@
         /* Each "cal" unit equals 0.25rem */
     }
 
+    .text-primer {
+        color: var(--primary1);
+    }
+
     .hind-light {
         font-family: "Hind", sans-serif;
         font-weight: 300;
@@ -89,7 +93,7 @@
     }
 
     body {
-        min-height: 100vh;
+        min-height: 100vh !important;
         font-family: "Hind", sans-serif;
         font-weight: 400;
         font-style: normal;
@@ -148,6 +152,18 @@
         background-repeat: no-repeat;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+    }
+
     .mt-10 {
         margin-top: 10rem !important;
     }
@@ -189,7 +205,7 @@
 
 <body>
 
-    <main class="container-fluid m-0 p-0">
+    <main class="container-fluid m-0 p-0" style="min-height: 100vh">
         <aside>
             @include('member/navbar')
         </aside>
@@ -222,5 +238,13 @@
     </script>
 
 </body>
+@php
+    $slug = $slug ?? null;
+@endphp
+@if (!empty($slug))
+    <script>
+        $(`.${@json($slug)}`).addClass('text-primer')
+    </script>
+@endif
 
 </html>

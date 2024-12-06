@@ -73,4 +73,12 @@ class MainController extends Controller
         ];
         return view('/member/beranda', compact('title', 'banners', 'dol', 'accordions', 'testimonies'));
     }
+
+
+    public function faq($slug)
+    {
+        $title = str_replace('-', ' ', $slug);
+
+        return view("member.faq.$slug", compact('title', 'slug'));
+    }
 }

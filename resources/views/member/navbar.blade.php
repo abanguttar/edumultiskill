@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center gap-4 gap-lg-0" href="#"><img src="/main-assets/logos.webp"
+        <a class="navbar-brand d-flex align-items-center gap-4 gap-lg-0" href="/"><img src="/main-assets/logos.webp"
                 alt="logo edu" width="80px">
             <h6 class="montserrat-600 d-lg-none">Edu Multi Skill</h6>
         </a>
@@ -82,7 +82,7 @@
                     @endphp
                     <ul class="dropdown-menu">
                         @foreach ($faqs as $key => $faq)
-                            <li><a class="dropdown-item  {{ $key < 8 ? 'pb-2 border-bottom border-2' : '' }} montserrat-600"
+                            <li><a class="dropdown-item  {{ $key < 8 ? 'pb-2 border-bottom border-2' : '' }} montserrat-600 {{ Str::slug(strtolower($faq)) }}"
                                     style="font-size: 14px"
                                     href="/faq/{{ Str::slug(strtolower($faq)) }}">{{ $faq }}</a></li>
                         @endforeach

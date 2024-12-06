@@ -115,6 +115,7 @@ class BerandaController extends Controller
             $data['mobile'] = $this->moveFile('assets', 'mobile', $file_mobile);
             $this->removeFile('assets/', $data['old_mobile']);
         } else {
+
             $data['mobile'] = $data['old_mobile'];
         }
 

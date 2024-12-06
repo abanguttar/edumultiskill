@@ -7,6 +7,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelasKategoriController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
@@ -133,4 +134,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
     Route::get('tutor', 'fetchTutor');
+});
+
+
+Route::controller(MainController::class)->group(function () {
+    Route::get('/', 'index');
 });

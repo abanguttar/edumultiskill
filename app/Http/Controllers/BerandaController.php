@@ -104,7 +104,7 @@ class BerandaController extends Controller
         if (!empty($data['dekstop'])) {
             $file_dekstop = $request->file('dekstop');
             $data['dekstop'] = $this->moveFile('assets', 'dekstop', $file_dekstop);
-            $this->removeFile('assets/', $data['old_mobile']);
+            $this->removeFile('assets/', $data['old_dekstop']);
         } else {
             $data['dekstop'] = $data['old_dekstop'];
         }

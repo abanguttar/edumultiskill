@@ -26,8 +26,14 @@
         --bs-border-color: #414393 !important;
     }
 
+
     body {
         min-height: 100vh;
+    }
+
+
+    #footer-logo {
+        margin-left: -2rem;
     }
 
     #btn-login.btn-danger,
@@ -51,6 +57,10 @@
     @media only screen and (max-width: 576px) {
         .container.w-75 {
             width: 100% !important;
+        }
+
+        #footer-logo {
+            margin-left: 0;
         }
     }
 </style>

@@ -131,6 +131,7 @@
                 </thead>
                 <tbody id="table-body">
                     @foreach ($sarana_prasaranas as $key => $sarana_prasarana)
+
                         <tr class="table-row"
                             data-id="/admin/company-profile/sarana-prasarana/{{ $sarana_prasarana->id }}">
                             <td>{{ ++$key }}</td>

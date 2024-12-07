@@ -15,9 +15,7 @@
         }
 
 
-        /* .table>thead>tr {
-                                                                                                                                                                                                                                                                                                                                                                                                    background-color: var(--primary2) !important;
-                                                                                                                                                                                                                                                                                                                                                                                                } */
+       
         .table-primer-2 {
             --bs-table-color: #fff;
             --bs-table-bg: var(--primary2);
@@ -212,6 +210,7 @@
             </div>
 
             <div class="container-xl overflow-y-scroll scroller mt-3" style="max-height: 600px">
+
                 <div class="">
                     <table class="table table-hover table-borderless">
                         <thead class="fs-5 table-primer-2">

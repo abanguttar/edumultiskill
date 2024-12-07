@@ -98,4 +98,5 @@ class MainController extends Controller
         return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
 
     }
+
 }

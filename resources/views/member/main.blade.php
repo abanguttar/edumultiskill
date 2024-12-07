@@ -55,6 +55,13 @@
         font-style: normal;
     }
 
+    .no-scrollbar {
+        scrollbar-width: none;
+
+        scroll-snap-type: x mandatory;
+
+    }
+
     .hind-medium {
         font-family: "Hind", sans-serif;
         font-weight: 500;

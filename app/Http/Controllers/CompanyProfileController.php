@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreGalleryRequest;
+use App\Http\Requests\StoreImageSaranaRequest;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\StoreSaranaPrasaranaRequest;
 
@@ -16,12 +17,14 @@ class CompanyProfileController extends Controller
     protected $path = 'admin/company-profile';
     protected $gallery;
     protected $sarana_prasarana;
+    protected $image_sarana;
 
     public function __construct()
     {
         parent::__construct();
         $this->gallery = DB::table('gallery');
         $this->sarana_prasarana = DB::table('sarana_prasaranas');
+        $this->image_sarana = DB::table('image_saranas');
     }
 
     private function moveFile($path, $tipe, $file)
@@ -43,7 +46,8 @@ class CompanyProfileController extends Controller
         $data_nav  = ['cms', 'company-profile'];
         $gallery = $this->gallery->join('users as u', 'gallery.user_update', '=', 'u.id')->select('gallery.*', 'u.name')->get();
         $sarana_prasaranas = $this->sarana_prasarana->join('users as u', 'sarana_prasaranas.user_update', '=', 'u.id')->select('sarana_prasaranas.*', 'u.name as update_name')->get();
-        return view("$this->path/index", compact('title', 'sarana_prasaranas', 'gallery', 'data_nav'));
+        $image_saranas = $this->image_sarana->join('users as u', 'image_saranas.user_update', '=', 'u.id')->select('image_saranas.*', 'u.name')->get();
+        return view("$this->path/index", compact('title', 'sarana_prasaranas', 'gallery', 'data_nav', 'image_saranas'));
     }
 
 
@@ -151,5 +155,61 @@ class CompanyProfileController extends Controller
         DB::table('sarana_prasaranas')->where('id', $id)->update($datas);
         $this->flashSuccessUpdate($request);
         return redirect()->route('edit-sarana-prasarana', ['id' => $id]);
+    }
+
+    public function createimagesarana()
+    {
+        $title = 'Create New Sarana Gallery';
+        $data_nav  = ['cms', 'company-profile'];
+        return view("$this->path/image-sarana-create", compact('title', 'data_nav'));
+    }
+
+
+    public function storeimagesarana(StoreImageSaranaRequest $request)
+    {
+        $data = $request->validated();
+
+        if (!empty($data['image'])) {
+            $file = $request->file('image');
+            $data['image'] = $this->moveFile('image-sarana', 'image', $file);
+        } else {
+            $data['image'] = '';
+        }
+
+        $datas = array_merge($this->userCreateUpdate, $data);
+
+        $datas['created_at'] = Carbon::now();
+        $datas['updated_at'] = Carbon::now();
+        $this->image_sarana->insert($datas);
+        $this->flashSuccessCreate($request);
+        return redirect()->route('list-company-profile');
+    }
+
+    public function editimagesarana($id)
+    {
+        $title = 'Edit Sarana Gallery';
+        $data_nav  = ['cms', 'company-profile'];
+        $image_sarana = $this->image_sarana->where('id', $id)->first();
+        return view("$this->path/image-sarana-edit", compact('title', 'data_nav', 'image_sarana'));
+    }
+
+    public function updateimagesarana(StoreImageSaranaRequest $request, $id)
+    {
+        $data = $request->validated();
+
+        if (!empty($data['image'])) {
+            $file = $request->file('image');
+            $data['image'] = $this->moveFile('image-sarana', 'image', $file);
+            $this->removeFile('image-sarana/', $data['old_image']);
+        } else {
+            $data['image'] = $data['old_image'];
+        }
+
+        $datas = array_merge($this->userUpdate, $data);
+        $datas['updated_at'] = Carbon::now();
+        unset($datas['old_image']);
+        DB::table('image_saranas')->where('id', $id)->update($datas);
+        $this->flashSuccessUpdate($request);
+        return redirect()->route('edit-image-sarana', ['id' => $id]);
     }
 }

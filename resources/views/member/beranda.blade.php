@@ -350,6 +350,8 @@
     </section>
 @endsection
 
+
+
 @push('script')
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {

@@ -93,7 +93,9 @@ class MainController extends Controller
         $title = "Company Profile";
         $sarana_prasaranas = DB::table('sarana_prasaranas')->get();
         $gallery = DB::table('gallery')->get();
+        $image_saranas = DB::table('image_saranas')->get();
 
-        return view("member.company-profile", compact('title', 'gallery', 'sarana_prasaranas'));
+        return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
+
     }
 }

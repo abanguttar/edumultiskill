@@ -15,9 +15,7 @@
         }
 
 
-        /* .table>thead>tr {
-                                                                                                                                                background-color: var(--primary2) !important;
-                                                                                                                                            } */
+       
         .table-primer-2 {
             --bs-table-color: #fff;
             --bs-table-bg: var(--primary2);
@@ -182,7 +180,7 @@
     </section>
     <section id="instruktur" class="mt-10">
         <div class="container-fluid d-flex flex-column">
-            <h3 class="text-center fw-bold ">Para Instruktur <span class="text-kelas-terbaik">Berbakat</span>
+            <h3 class="text-center fw-bold mb-5">Para Instruktur <span class="text-kelas-terbaik">Berbakat</span>
             </h3>
             @include('components/scrollable-box-instruktur')
         </div>
@@ -191,7 +189,28 @@
         <div class="container-fluid d-flex flex-column">
             <h3 class="text-center fw-bold ">Sarana & <span class="text-kelas-terbaik">Prasarana</span>
             </h3>
-            <div class="container overflow-y-scroll scroller mt-3" style="max-height: 600px">
+
+            <div class="container mt-5 overflow-x-scroll d-flex flex-nowrap no-scrollbar scroller mt-3"
+                style="height: 300px">
+                @for ($i = 0; $i < 20; $i++)
+                    @foreach ($image_saranas as $image_sarana)
+                        <div class="col-10 col-md-7 col-lg-4">
+                            <div class="d-flex flex-column align-items-center position-relative p-3 h-100">
+                                <img src="/image-sarana/{{ $image_sarana->image }}" class="rounded-top-4" alt="sample"
+                                    width="100%">
+                                <div
+                                    class="mt-2 d-flex flex-column align-items-center rounded-bottom-4 border-bottom border-3 w-100">
+                                    <h6 class="mb-2 p-0 text-primer2">{{ $image_sarana->title }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endfor
+
+            </div>
+
+            <div class="container-xl overflow-y-scroll scroller mt-3" style="max-height: 600px">
+
                 <div class="">
                     <table class="table table-hover table-borderless">
                         <thead class="fs-5 table-primer-2">
@@ -219,11 +238,11 @@
 
             </div>
     </section>
-    <section id="gallery-kami" class="mt-10">
+    <section id="galeri" class="mt-10">
         <div class="container-fluid d-flex flex-column">
             <h3 class="text-center fw-bold ">Gallery <span class="text-kelas-terbaik">Kami</span>
             </h3>
-            <div class="container gap-2">
+            <div class="container gap-2 mt-5">
                 <div class="row justify-content-center mt-5">
                     @foreach ($gallery as $g)
                         <figure class="col-6 col-lg-4 justify-content-center d-flex">

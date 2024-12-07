@@ -14,9 +14,7 @@
             color: var(--primary1)
         }
 
-        .text-kelas-terbaik {
-            color: var(--primary1)
-        }
+
 
         .container-text-hero {
             position: absolute;
@@ -117,7 +115,9 @@
             transform: rotate(180deg);
         }
 
-
+        .accordion {
+            scroll-snap-align: center;
+        }
 
         @media only screen and (max-width: 912px) {
 
@@ -167,7 +167,7 @@
                 <p class="fs-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                     sed diam 3000+ classes nonummy nibh euismod.</p>
                 <a href="" class="btn btn-primary-2 rounded-5">
-                    <h4 class="m-0 p-0 mt-1">Mulai Dari Sini</h4>
+                    <h5 class="m-0 p-0 mt-1">Mulai Dari Sini</h5>
                 </a>
             </div>
 
@@ -186,7 +186,7 @@
                 <p class="fs-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                     sed diam 3000+ classes nonummy nibh euismod.</p>
                 <a href="" class="btn btn-primary-2 rounded-5">
-                    <h4 class="m-0 p-0 mt-1">Mulai Dari Sini</h4>
+                    <h5 class="m-0 p-0 mt-1">Mulai Dari Sini</h5>
                 </a>
             </div>
         </div>
@@ -194,7 +194,7 @@
 
     <section id="section-program-kelas" class="mt-5 pt-5">
         <h3 class="montserrat-600 fw-bold mb-0 text-center mt-5">Program Kelas</h3>
-        <div class="container-fluid d-flex flex-nowrap overflow-x-scroll mt-4">
+        <div class="container-fluid d-flex flex-nowrap overflow-x-scroll mt-4 no-scrollbar">
             <div class="accordion" id="accordion-prakerja">
                 <div class="accordion-item border-0">
                     <h2 class="accordion-header">

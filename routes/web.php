@@ -140,12 +140,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/sarana-prasarana/{id}/edit', 'editsaranaprasarana')->name('edit-sarana-prasarana');
         Route::put('/sarana-prasarana/{id}/edit', 'updatesaranaprasarana');
 
-        Route::get('/testimoni/create', 'createTestimoni');
-        Route::post('/testimoni/create', 'storeTestimoni');
-        Route::get('/testimoni/{id}/edit', 'editTestimoni')->name('edit-testimoni');
-        Route::put('/testimoni/{id}/edit', 'updateTestimoni');
-
-        Route::put('/link/edit', 'updateLink');
+        Route::get('/image-sarana/create', 'createimagesarana');
+        Route::post('/image-sarana/create', 'storeimagesarana');
+        Route::get('/image-sarana/{id}/edit', 'editimagesarana')->name('edit-image-sarana');
+        Route::put('/image-sarana/{id}/edit', 'updateimagesarana');
     });
 });
 

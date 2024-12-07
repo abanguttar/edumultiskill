@@ -23,6 +23,8 @@
                             <div id="cms" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <a class="nav-link text-dark" data-nav='beranda' href="/admin/beranda">Beranda</a>
+                                    <a class="nav-link text-dark" data-nav='company-profile'
+                                        href="/admin/company-profile">Profile Perusahaan</a>
                                 </div>
                             </div>
                         </div>

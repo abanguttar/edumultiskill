@@ -81,4 +81,22 @@ class MainController extends Controller
 
         return view("member.faq.$slug", compact('title', 'slug'));
     }
+
+    public function program($tipe)
+    {
+        $title = $tipe;
+
+        return view("member.program", compact('title'));
+    }
+    public function companyProfile()
+    {
+        $title = "Company Profile";
+        $sarana_prasaranas = DB::table('sarana_prasaranas')->get();
+        $gallery = DB::table('gallery')->get();
+        $image_saranas = DB::table('image_saranas')->get();
+
+        return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
+
+    }
+
 }

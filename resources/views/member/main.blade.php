@@ -29,6 +29,7 @@
         --primary2: #414393;
         --primary2Hover: #5253b6;
         --primary3: #007DD1;
+        --primary3Hover: #1c7dbe;
         --footerColor: #f3f7ff;
         --cal: 0.25rem;
         /* Each "cal" unit equals 0.25rem */
@@ -36,6 +37,10 @@
 
     .text-primer {
         color: var(--primary1);
+    }
+
+    .text-primer2 {
+        color: var(--primary2);
     }
 
     .hind-light {
@@ -48,6 +53,13 @@
         font-family: "Hind", sans-serif;
         font-weight: 400;
         font-style: normal;
+    }
+
+    .no-scrollbar {
+        scrollbar-width: none;
+
+        scroll-snap-type: x mandatory;
+
     }
 
     .hind-medium {
@@ -137,6 +149,23 @@
         --bs-btn-disabled-border-color: var(--primary2);
     }
 
+    .btn-primary-3 {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--primary3);
+        --bs-btn-border-color: var(--primary3);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--primary3Hover);
+        --bs-btn-hover-border-color: var(--primary3);
+        --bs-btn-focus-shadow-rgb: 49, 132, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--primary3);
+        --bs-btn-active-border-color: #0a53be;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: var(--primary3);
+        --bs-btn-disabled-border-color: var(--primary3);
+    }
+
     .py-6 {
         padding-top: 4em;
         padding-bottom: 4em;
@@ -172,6 +201,18 @@
         margin-bottom: 10rem !important;
     }
 
+    .pt-10 {
+        padding-top: 10rem !important;
+    }
+
+    .pb-10 {
+        padding-bottom: 10rem !important;
+    }
+
+    .text-kelas-terbaik {
+        color: var(--primary1)
+    }
+
     .border-block-mini-1 {
         width: 6px;
         min-height: 50px;
@@ -188,6 +229,10 @@
         width: 6px;
         min-height: 50px;
         background-color: var(--primary1)
+    }
+
+    .scroller {
+        scrollbar-color: var(--primary2) var(--primary1);
     }
 
     @media only screen and (max-width: 992px) {

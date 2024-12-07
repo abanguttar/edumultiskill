@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\TutorController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\CertificateController;
-use App\Http\Controllers\KelasController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelasKategoriController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\TutorController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +128,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
         Route::put('/link/edit', 'updateLink');
     });
+    Route::prefix('company-profile')->controller(CompanyProfileController::class)->group(function () {
+        Route::get('', 'index')->name('list-company-profile');
+        Route::get('/gallery/create', 'creategallery');
+        Route::post('/gallery/create', 'storegallery');
+        Route::get('/gallery/{id}/edit', 'editgallery')->name('edit-gallery');
+        Route::put('/gallery/{id}/edit', 'updategallery');
+
+        Route::get('/sarana-prasarana/create', 'createsaranaprasarana');
+        Route::post('/sarana-prasarana/create', 'storesaranaprasarana');
+        Route::get('/sarana-prasarana/{id}/edit', 'editsaranaprasarana')->name('edit-sarana-prasarana');
+        Route::put('/sarana-prasarana/{id}/edit', 'updatesaranaprasarana');
+
+        Route::get('/image-sarana/create', 'createimagesarana');
+        Route::post('/image-sarana/create', 'storeimagesarana');
+        Route::get('/image-sarana/{id}/edit', 'editimagesarana')->name('edit-image-sarana');
+        Route::put('/image-sarana/{id}/edit', 'updateimagesarana');
+    });
 });
 
 
@@ -140,4 +158,6 @@ Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
 Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/faq/{slug}', 'faq');
+    Route::get('/company-profile', 'companyProfile');
+    Route::get('/program/{tipe}', 'program');
 });

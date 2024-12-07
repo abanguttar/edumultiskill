@@ -1,12 +1,5 @@
 @extends('admin/main')
 
-@push('link')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    {{-- Tag input library --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> --}}
-@endpush
 @section('body')
     <div class="container border p-4 mt-3 w-100 w-md-75 mb-5">
         <form action="" method="POST" enctype="multipart/form-data">

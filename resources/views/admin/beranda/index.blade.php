@@ -114,7 +114,7 @@
 
         </div>
     </section>
-    <section id="section-logo-mitra" class="mt-5 mb-5">
+    <section id="section-testimoni" class="mt-5 mb-5">
         <h4 class="text-center">Testimoni</h4>
         <a href="/admin/beranda/testimoni/create" class="btn btn-success btn-sm" id="btn-create"><i data-feather="plus"></i>
             Tambah</a>

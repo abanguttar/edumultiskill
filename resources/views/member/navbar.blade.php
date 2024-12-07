@@ -17,7 +17,7 @@
                         Program Kelas
                     </a>
                     <ul class="dropdown-menu" style="min-width: 300px!important">
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="/program/prakerja">
                                 <div class="d-flex gap-2 border-bottom border-2 pb-2 pt-1">
                                     <div class="border-block-mini-1"></div>
                                     <div>
@@ -33,7 +33,7 @@
                                 </div>
                             </a></li>
 
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="/program/prakerja">
                                 <div class="d-flex gap-2 border-bottom border-2 pb-2 pt-1">
                                     <div class="border-block-mini-2"></div>
                                     <div>
@@ -47,7 +47,7 @@
                                 </div>
                             </a></li>
 
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="/program/prakerja">
                                 <div class="d-flex gap-2">
                                     <div class="border-block-mini-3 pt-1"></div>
                                     <div>
@@ -95,11 +95,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item pb-2 border-bottom border-2 montserrat-600"
-                                href="#">Profile</a></li>
-                        <li><a class="dropdown-item pb-2 border-bottom border-2 montserrat-600" href="#">Sarana &
+                                href="/company-profile">Profile</a></li>
+                        <li><a class="dropdown-item pb-2 border-bottom border-2 montserrat-600"
+                                href="/company-profile#sarana-prasarana">Sarana &
                                 Prasarana</a>
                         </li>
-                        <li><a class="dropdown-item montserrat-600" href="#">Galeri</a></li>
+                        <li><a class="dropdown-item montserrat-600" href="/company-profile#galeri">Galeri</a></li>
                     </ul>
                 </li>
 

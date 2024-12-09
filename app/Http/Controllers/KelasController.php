@@ -222,94 +222,83 @@ class KelasController extends Controller
         $data_nav  = ['lms', 'kelas'];
         $kelas_id = $id;
         $btn_group = 'kelas-skkni';
-        $kelas = $this->kelas->with('deskripsi')->findOrFail($id);
-        return view("$this->path/skkni", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas'));
+        $kelas = $this->kelas->with(['deskripsi', 'skknis', 'kodeUnits'])->findOrFail($id);
+        return view("$this->path/skkni", compact('title', 'btn_group', 'kelas_id', 'data_nav', 'kelas'));
     }
 
-    public function skkniUpdate(UpdateSKKNIRequest $request, $id)
+    public function updateField(Request $request, $id)
     {
         DB::beginTransaction();
         try {
-            $userId = auth()->id(); 
-            KelasDetail::where('kelas_id', $id)->update([
-                'sertifikat_judul_skkni' => $request->sertifikat_judul_skkni,
-                'sertifikat_judul_kode_unit' => $request->sertifikat_judul_kode_unit,
-            ]);
-
-            // Handle SKKNI
-            if (!$request->has('skkni')) {
-                Skkni::where('kelas_id', $id)->delete();
-            } else {
-                if ($request->has('skkni_ids')) {
-                    Skkni::where('kelas_id', $id)
-                        ->whereNotIn('id', $request->skkni_ids)
-                        ->delete();
-                } else {
-                    Skkni::where('kelas_id', $id)->delete();
+            $userId = auth()->id();
+            $field = $request->field;
+            $action = $request->action ?? 'update';
+    
+            if ($action === 'delete') {
+                switch ($field) {
+                    case 'skkni':
+                        Skkni::where('id', $request->id)->delete();
+                        break;
+                    case 'kode_unit':
+                        KodeUnit::where('id', $request->id)->delete();
+                        break;
                 }
-
-                foreach ($request->skkni as $index => $skkniValue) {
-                    if (!empty($skkniValue)) {
-                        if (isset($request->skkni_ids[$index])) {
-
-                            Skkni::where('id', $request->skkni_ids[$index])
-                                ->update([
-                                    'skkni' => $skkniValue,
-                                    'update_by' => $userId
-                                ]);
-                        } else {
-                            Skkni::create([
-                                'kelas_id' => $id,
-                                'skkni' => $skkniValue
+            } else if ($action === 'create') {
+                switch ($field) {
+                    case 'skkni':
+                        Skkni::create([
+                            'kelas_id' => $id,
+                            'skkni' => $request->value,
+                            'create_by' => $userId
+                        ]);
+                        break;
+                    case 'kode_unit':
+                        KodeUnit::create([
+                            'kelas_id' => $id,
+                            'kode_unit' => $request->value,
+                            'keterangan' => $request->keterangan,
+                            'create_by' => $userId
+                        ]);
+                        break;
+                }
+            } else {
+                switch ($field) {
+                    case 'sertifikat_judul_skkni':
+                        KelasDetail::where('kelas_id', $id)->update([
+                            'sertifikat_judul_skkni' => $request->value
+                        ]);
+                        break;
+                    case 'sertifikat_judul_kode_unit':
+                        KelasDetail::where('kelas_id', $id)->update([
+                            'sertifikat_judul_kode_unit' => $request->value
+                        ]);
+                        break;
+                    case 'skkni':
+                        if ($request->id) {
+                            Skkni::where('id', $request->id)->update([
+                                'skkni' => $request->value,
+                                'update_by' => $userId
                             ]);
                         }
-                    }
-                }
-            }
-
-            // Handle Kode Unit
-            if (!$request->has('kode_unit')) {
-                KodeUnit::where('kelas_id', $id)->delete();
-            } else {
-                if ($request->has('kode_unit_ids')) {
-                    KodeUnit::where('kelas_id', $id)
-                        ->whereNotIn('id', $request->kode_unit_ids)
-                        ->delete();
-                } else {
-                    KodeUnit::where('kelas_id', $id)->delete();
-                }
-
-                foreach ($request->kode_unit as $index => $kodeUnitValue) {
-                    if (!empty($kodeUnitValue)) {
-                        $keteranganValue = $request->keterangan[$index] ?? null;
-                        
-                        if (isset($request->kode_unit_ids[$index])) {
-                            KodeUnit::where('id', $request->kode_unit_ids[$index])
-                                ->update([
-                                    'update_by' => $userId,
-                                    'kode_unit' => $kodeUnitValue,
-                                    'keterangan' => $keteranganValue
-                                ]);
-                        } else {
-                            KodeUnit::create([
-                                'kelas_id' => $id,
-                                'kode_unit' => $kodeUnitValue,
-                                'keterangan' => $keteranganValue
+                        break;
+                    case 'kode_unit':
+                        if ($request->id) {
+                            KodeUnit::where('id', $request->id)->update([
+                                'kode_unit' => $request->value,
+                                'keterangan' => $request->keterangan,
+                                'update_by' => $userId
                             ]);
                         }
-                    }
+                        break;
                 }
             }
-
+    
             DB::commit();
-            return redirect()->route('view-skkni', ['id' => $id])
-                ->with('success', 'Data berhasil diperbarui');
-
+            return response()->json(['success' => true]);
+    
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Terjadi kesalahan saat menyimpan data');
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 

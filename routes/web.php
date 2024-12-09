@@ -74,7 +74,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi')->middleware('permission:16');
             Route::put('/{id}/deskripsi', 'deskripsiUpdate')->middleware('permission:16');
             Route::get('/{id}/skkni', 'skkniView')->name('view-skkni')->middleware('permission:16');
-            Route::put('/{id}/skkni', 'skkniUpdate')->middleware('permission:16');
+            Route::post('/{id}/update-field', 'updateField')->name('update-field')->middleware('permission:16');
             Route::get('/{id}/jadwal', 'jadwalView')->name('view-jadwal')->middleware('permission:16');
             Route::get('/{id}/jadwal/create', 'jadwalCreate')->name('create-jadwal')->middleware('permission:16');
             Route::post('/{id}/jadwal/create', 'jadwalStore')->middleware('permission:16');

@@ -17,12 +17,6 @@ return new class extends Migration
             $table->string('icon_kategori');
             $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamp('updated_date')->nullable();
-            
-            // Add foreign key for update_by if you have users table
-            $table->foreign('update_by')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('set null');
         });
     }
 

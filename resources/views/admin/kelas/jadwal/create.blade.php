@@ -84,6 +84,15 @@
                     </div>
                 </div>
 
+                <div class="mb-3 row">
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Kuota Maksimal</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="kuota_max" value="{{ old('kuota_max') }}" required>
+                    </div>
+                </div>
+
                 <hr>
                 <div class="mt-3">
                     <a type="button" class="btn btn-secondary" href="{{ route('view-jadwal', $kelas_id) }}"> 

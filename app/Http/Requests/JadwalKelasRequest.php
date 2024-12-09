@@ -29,6 +29,7 @@ class JadwalKelasRequest extends FormRequest
             'waktu_mulai' => 'required|date_format:H:i',
             'waktu_selesai' => 'required|date_format:H:i|after:waktu_mulai',
             'waktu_pelaksanaan' => 'required|string',
+            'kuota_max' => 'required|numeric',
             'zona_waktu' => 'required|in:WIB,WITA,WIT',
         ];
     }
@@ -55,6 +56,8 @@ class JadwalKelasRequest extends FormRequest
             'waktu_selesai.date_format' => 'Format waktu selesai tidak valid',
             'waktu_selesai.after' => 'Waktu selesai harus setelah waktu mulai',
             'waktu_pelaksanaan.required' => 'Waktu pelaksanaan harus diisi',
+            'kuota_max.required' => 'Kuota Maksimal harus diisi',
+            'kuota_max.numeric' => 'Kuota harus menggunakan angka',
             'zona_waktu.required' => 'Zona waktu harus diisi',
             'zona_waktu.in' => 'Zona waktu harus WIB, WITA, atau WIT',
             'kuota.integer' => 'Kuota harus berupa angka'

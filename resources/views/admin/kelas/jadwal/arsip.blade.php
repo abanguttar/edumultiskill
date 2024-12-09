@@ -12,6 +12,7 @@
         <div>
             <div class="row mb-4">
                 <div class="col-md-3 col-sm-12"> <label class="fw-bold">Judul Kelas</label></div>
+
                 <div class="col-md-9 col-sm-12">
                     <div class="input-group">
                         <input type="text" name="judul_kelas" class="form-control"
@@ -20,10 +21,12 @@
                         <span class="input-group-text" id="basic-addon2">
                             <span id="limit-judul-kelas"></span>
                             {{ 110 - (int) strlen($kelas->judul_kelas) }}/110
+
                         </span>
                     </div>
                 </div>
             </div>
+
 
             <!-- Button Group -->
             <div class="mt-3">
@@ -79,6 +82,7 @@
             </div>
 
             <!-- Bottom Buttons -->
+
             <div class="mt-3">
                 <a type="button" class="btn btn-secondary" href="{{ route('view-jadwal', $kelas_id) }}"> 
                     <i class="feather-16" data-feather='x-square'></i> Kembali
@@ -100,6 +104,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
+
             // DataTable initialization
             var table = $('#myTable').DataTable({
                 "pageLength": 10,
@@ -255,5 +260,6 @@
 
             $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass('btn-danger');
         });
+
     </script>
 @endpush

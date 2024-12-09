@@ -9,6 +9,7 @@
 @section('body')
     <div class="container border p-4 mt-3 w-75 mb-5">
         <form action="" method="POST" enctype="multipart/form-data" id="kelasForm">
+
             @csrf
             @method('PUT')
             @if ($errors->any())
@@ -164,6 +165,7 @@
                 </a>
             </div>
         </form>
+
     </div>
 @endsection
 
@@ -327,6 +329,7 @@
                 updateAddButtons();
             });
 
+
             // Add Kode Unit
            $('#btn-add-kode-unit').click(function() {
                const container = $('#kode-unit-container');
@@ -368,3 +371,4 @@
        });
    </script>
 @endpush
+

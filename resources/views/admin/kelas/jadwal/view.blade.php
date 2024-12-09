@@ -6,24 +6,29 @@
 @endpush
 
 @section('body')
+
     <div class="container-fluid p-4 mt-3 mb-5">
         @include('components/button-group-create-kelas')
 
         <div>
             <div class="row mb-4">
                 <div class="col-md-3 col-sm-12"> <label class="fw-bold">Judul Kelas</label></div>
+
                 <div class="col-md-9 col-sm-12">
                     <div class="input-group">
                         <input type="text" name="judul_kelas" class="form-control"
                             value="{{ old('judul_kelas', $kelas->judul_kelas) }}" id="judul_kelas"
                             aria-describedby="basic-addon2" disabled>
+
                         <span class="input-group-text" id="basic-addon2">
                             <span id="limit-judul-kelas"></span>
                             {{ 110 - (int) strlen($kelas->judul_kelas) }}/110
+
                         </span>
                     </div>
                 </div>
             </div>
+
 
             <!-- Button Group -->
             <div class="mt-3">
@@ -87,11 +92,13 @@
                     <i class="feather-16" data-feather="x-square"></i> Kembali
                 </a>
                 <a href="{{ route('view-arsip-jadwal', ['id' => $kelas->id]) }}" class="btn btn-info text-white">
+
                     <i class="feather-16" data-feather="folder"></i> Lihat Arsip
                 </a>
             </div>
         </div>
     </div>
+
 
     <style>
         .table-row {
@@ -106,6 +113,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
+
             // DataTable initialization
             var table = $('#myTable').DataTable({
                 "pageLength": 10,
@@ -261,5 +269,6 @@
 
             $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass('btn-danger');
         });
+
     </script>
 @endpush

@@ -8,7 +8,7 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 border border-2 border-top-0 border-start-0 border-end-0">
-                        {{-- <img width="180px" src="{{ route('logo-sidebar') }}" class="mb-3" alt="kitakompeten-logo"> --}}
+                        <img width="180px" src="/logo.png" class="mb-3" alt="kitakompeten-logo">
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                     <div class="col-12">
                         <button type="submit" class="btn btn-danger w-100">Login</button>
                     </div>
-                    <div class="col-12 text-center mt-4"><span class="fw-light ">Copyright © KitaKompeten
+                    <div class="col-12 text-center mt-4"><span class="fw-light" style="font-size: 13px">Copyright © EduMultiSkill
                             2024</span></div>
 
                 </div>

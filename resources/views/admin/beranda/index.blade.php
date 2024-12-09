@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover table-striped table-sm mt-2">
+        <table class="table table-bordered table-hover table-striped table-sm mt-2">
             <thead class="text-center table-dark">
                 <tr>
                     <th>No</th>

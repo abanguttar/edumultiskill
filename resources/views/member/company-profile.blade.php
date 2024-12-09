@@ -1,5 +1,9 @@
 @extends('member/main')
 
+@push('link')
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+@endpush
 @push('style')
     <style>
         #text-kelas-terbaik {
@@ -14,8 +18,11 @@
             top: 20%;
         }
 
+        element.style {
+            margin-right: 0px !important;
+            padding: 0 !important;
+        }
 
-       
         .table-primer-2 {
             --bs-table-color: #fff;
             --bs-table-bg: var(--primary2);
@@ -34,6 +41,9 @@
             background-color: var(--primary2);
         }
 
+        .splide__pagination {
+            display: none !important;
+        }
 
 
         @media only screen and (max-width: 912px) {
@@ -186,29 +196,15 @@
         </div>
     </section>
     <section id="sarana-prasarana" class="mt-10">
-        <div class="container-fluid d-flex flex-column">
+        <div class="container d-flex flex-column">
             <h3 class="text-center fw-bold ">Sarana & <span class="text-kelas-terbaik">Prasarana</span>
             </h3>
 
-            <div class="container mt-5 overflow-x-scroll d-flex flex-nowrap no-scrollbar scroller mt-3"
-                style="height: 300px">
-                @for ($i = 0; $i < 20; $i++)
-                    @foreach ($image_saranas as $image_sarana)
-                        <div class="col-10 col-md-7 col-lg-4">
-                            <div class="d-flex flex-column align-items-center position-relative p-3 h-100">
-                                <img src="/image-sarana/{{ $image_sarana->image }}" class="rounded-top-4" alt="sample"
-                                    width="100%">
-                                <div
-                                    class="mt-2 d-flex flex-column align-items-center rounded-bottom-4 border-bottom border-3 w-100">
-                                    <h6 class="mb-2 p-0 text-primer2">{{ $image_sarana->title }}</h6>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endfor
+            {{-- <div class="container mt-5 overflow-x-scroll d-flex flex-nowrap scroller   mt-3" style="height: 300px">
 
-            </div>
 
+            </div> --}}
+            @include('components/carousel-image-sarana', ['image_saranas' => $image_saranas])
             <div class="container-xl overflow-y-scroll scroller mt-3" style="max-height: 600px">
 
                 <div class="">
@@ -255,3 +251,71 @@
         </div>
     </section>
 @endsection
+@push('script')
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            const splideConfigs = [{
+                selector: '#carousel-image-sarana',
+                config: {
+                    type: 'loop',
+                    lazyLoad: 'nearby',
+                    focus: 'center',
+                    padding: {
+                        left: '7rem',
+                        right: '7rem'
+                    },
+                    gap: '10px',
+                    perMove: 1,
+                    perPage: 3,
+                    autoScroll: {
+                        speed: 0.3
+                    },
+                    breakpoints: {
+                        1200: {
+                            perPage: 3,
+                            gap: '90px',
+
+
+                        },
+                        1100: {
+                            perPage: 2,
+                            gap: '0px',
+
+
+                        },
+                        768: {
+                            perPage: 1,
+                            gap: '0px',
+
+                        },
+                        576: {
+                            perPage: 1,
+                            gap: '0px',
+                            padding: {
+                                left: '6rem',
+                                right: '6rem'
+                            }
+                        },
+                        480: {
+                            perPage: 1,
+                            gap: '0px',
+                            padding: {
+                                left: '0rem',
+                                right: '0rem'
+                            }
+                        }
+                    },
+                    pagination: true,
+                },
+                scroll: false
+            }, ];
+
+            splideConfigs.forEach(config => {
+                const splide = new Splide(config.selector, config.config);
+                splide.mount(config.scroll);
+            });
+
+
+        });
+    </script>
+@endpush

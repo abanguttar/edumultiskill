@@ -166,7 +166,7 @@
                 </h2>
                 <p class="fs-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                     sed diam 3000+ classes nonummy nibh euismod.</p>
-                <a href="" class="btn btn-primary-2 rounded-5">
+                <a href="{{ $link->url }}" class="btn btn-primary-2 rounded-5">
                     <h5 class="m-0 p-0 mt-1">Mulai Dari Sini</h5>
                 </a>
             </div>
@@ -185,7 +185,7 @@
                 </h2>
                 <p class="fs-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                     sed diam 3000+ classes nonummy nibh euismod.</p>
-                <a href="" class="btn btn-primary-2 rounded-5">
+                <a href="{{ $link->url }}" class="btn btn-primary-2 rounded-5">
                     <h5 class="m-0 p-0 mt-1">Mulai Dari Sini</h5>
                 </a>
             </div>
@@ -326,7 +326,8 @@
                     <span id="text-kelas-terbaik">Telah Berkembang</span>
                     <span>
                         <span class="position-relative">Bersama Kami<img src="/main-assets/circle.webp"
-                                class="position-absolute" style="top: -30%; left: -5%;" width="210px" alt="circle">
+                                class="position-absolute" style="top: -40%; left: -5%;" width="270px" height="auto"
+                                alt="circle">
                         </span>
                     </span>
                 </h2>

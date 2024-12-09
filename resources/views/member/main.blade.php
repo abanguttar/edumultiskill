@@ -55,12 +55,21 @@
         font-style: normal;
     }
 
+
     .no-scrollbar {
-        scrollbar-width: none;
-
         scroll-snap-type: x mandatory;
-
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
     }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, and Opera */
+    }
+
+
 
     .hind-medium {
         font-family: "Hind", sans-serif;
@@ -233,11 +242,27 @@
 
     .scroller {
         scrollbar-color: var(--primary2) var(--primary1);
+        scrollbar-width: 6px !important;
+        -ms-overflow-style: 6px !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scroller::-webkit-scrollbar {
+        width: 6px;
     }
 
     @media only screen and (max-width: 992px) {
         #input-navbar {
             width: 70dvw;
+        }
+
+        .no-scrollbar {
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+
         }
     }
 
@@ -245,6 +270,8 @@
         #input-navbar {
             max-width: 40dvw;
         }
+
+
     }
 </style>
 

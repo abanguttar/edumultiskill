@@ -27,7 +27,8 @@ class MainController extends Controller
         $title = 'Beranda';
         $banners = $this->banner->orderBy('urutan')->get();
         $logo_mitra_1 = $this->logo_mitra->orderBy('urutan')->get();
-        $logo_mitra_2 = $this->logo_mitra->orderByDesc('urutan')->get();
+        $logo_mitra_2 = array_reverse(json_decode($logo_mitra_1));
+        $link = $this->link->first();
         $dol = (object)[
             'logo_1' => $logo_mitra_1,
             'logo_2' => $logo_mitra_2,
@@ -71,7 +72,7 @@ class MainController extends Controller
                 'image' => 'Assets-25'
             ],
         ];
-        return view('/member/beranda', compact('title', 'banners', 'dol', 'accordions', 'testimonies'));
+        return view('/member/beranda', compact('title', 'link', 'banners', 'dol', 'accordions', 'testimonies'));
     }
 
 
@@ -96,7 +97,5 @@ class MainController extends Controller
         $image_saranas = DB::table('image_saranas')->get();
 
         return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
-
     }
-
 }

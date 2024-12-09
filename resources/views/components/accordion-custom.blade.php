@@ -1,4 +1,4 @@
-<div class="custom-accor" id="custom-accor-{{ $accordion->id }}">
+<div class="custom-accor mb-3 mb-md-0" id="custom-accor-{{ $accordion->id }}">
     <div class="custom-accor-item">
         <div class="custom-accor-content d-flex align-items-center {{ $key < 2 ? 'show' : 'd-none' }}"
             id="content-{{ $accordion->id }}">

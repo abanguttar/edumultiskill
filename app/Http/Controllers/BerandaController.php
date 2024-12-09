@@ -235,7 +235,7 @@ class BerandaController extends Controller
 
     public function editTestimoni($id)
     {
-        $title = 'Edit Banner';
+        $title = 'Edit Testimoni';
         $data_nav  = ['cms', 'beranda'];
         $testimoni = $this->testimoni->where('id', $id)->first();
         return view("$this->path/testimoni-edit", compact('title', 'data_nav', 'testimoni'));
@@ -244,7 +244,14 @@ class BerandaController extends Controller
     public function updateTestimoni(StoreTestimoniRequest $request, $id)
     {
         $data = $request->validated();
-
+        // dd($data['urutan']);
+        $is_urutan_exist =  $this->testimoni
+            ->whereNot('id', $id)
+            ->where('urutan', (int) $data['urutan'])->count();
+        if ($is_urutan_exist !== 0) {
+            throw  ValidationException::withMessages(['urutan' => 'Urutan sudah ada!']);
+            return redirect()->back()->withInput();
+        }
         if (!empty($data['image'])) {
             $file_image = $request->file('image');
             $data['image'] = $this->moveFile('assets', 'testimoni', $file_image);
@@ -255,11 +262,7 @@ class BerandaController extends Controller
 
 
         $datas = array_merge($this->userUpdate, $data);
-        $is_urutan_exist =  $this->logo_mitra->where('urutan', $data['urutan'])->whereNot('id', $id)->count();
-        if ($is_urutan_exist !== 0) {
-            throw  ValidationException::withMessages(['urutan' => 'Urutan sudah ada!']);
-            return redirect()->back()->withInput();
-        }
+
 
         $datas['updated_at'] = Carbon::now();
         unset($datas['old_image']);

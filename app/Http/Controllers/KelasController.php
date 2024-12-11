@@ -266,7 +266,7 @@ class KelasController extends Controller
             $userId = auth()->id();
             $field = $request->field;
             $action = $request->action ?? 'update';
-    
+
             if ($action === 'delete') {
                 switch ($field) {
                     case 'skkni':
@@ -293,7 +293,6 @@ class KelasController extends Controller
                             'create_by' => $userId
                         ]);
                         break;
-
                 }
             } else {
 
@@ -328,7 +327,7 @@ class KelasController extends Controller
                         break;
                 }
             }
-    
+
             DB::commit();
 
             return response()->json(['success' => true]);

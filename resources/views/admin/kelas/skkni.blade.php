@@ -36,13 +36,9 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="input-group">
-                        <input type="text" 
-                            class="form-control skkni-title-input"
-                            name="sertifikat_judul_skkni"
-                            value="{{ $kelas->deskripsi->sertifikat_judul_skkni }}"
-                            data-field="sertifikat_judul_skkni"
-                            data-original="{{ $kelas->deskripsi->sertifikat_judul_skkni }}"
-                            maxlength="50">
+                        <input type="text" class="form-control skkni-title-input" name="sertifikat_judul_skkni"
+                            value="{{ $kelas->deskripsi->sertifikat_judul_skkni }}" data-field="sertifikat_judul_skkni"
+                            data-original="{{ $kelas->deskripsi->sertifikat_judul_skkni }}" maxlength="50">
                         <button type="button" class="btn btn-warning btn-edit" disabled>
                             <i data-feather="edit-2"></i> Edit
                         </button>
@@ -61,29 +57,24 @@
                     <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maksimal 2 SKKNI</p>
                 </div>
                 <div class="col-md-9 col-sm-12" id="skkni-container">
-                    @foreach($kelas->skknis as $skkni)
-                    <div class="input-group mt-2">
-                        <input type="text" 
-                            class="form-control skkni-input"
-                            name="skkni"
-                            value="{{ $skkni->skkni }}"
-                            data-field="skkni"
-                            data-id="{{ $skkni->id }}"
-                            data-original="{{ $skkni->skkni }}"
-                            maxlength="50">
-                        <button type="button" class="btn btn-warning btn-edit" disabled>
-                            <i data-feather="edit-2"></i> Edit
-                        </button>
-                        <button type="button" class="btn btn-success btn-save" style="display: none;">
-                            <i data-feather="check"></i> Simpan
-                        </button>
-                        <button type="button" class="btn btn-danger btn-delete">
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </div>
+                    @foreach ($kelas->skknis as $skkni)
+                        <div class="input-group mt-2">
+                            <input type="text" class="form-control skkni-input" name="skkni"
+                                value="{{ $skkni->skkni }}" data-field="skkni" data-id="{{ $skkni->id }}"
+                                data-original="{{ $skkni->skkni }}" maxlength="50">
+                            <button type="button" class="btn btn-warning btn-edit" disabled>
+                                <i data-feather="edit-2"></i> Edit
+                            </button>
+                            <button type="button" class="btn btn-success btn-save" style="display: none;">
+                                <i data-feather="check"></i> Simpan
+                            </button>
+                            <button type="button" class="btn btn-danger btn-delete">
+                                <i data-feather="trash-2"></i>
+                            </button>
+                        </div>
                     @endforeach
-                    <button type="button" class="btn btn-primary btn-sm mt-2" id="btn-add-skkni" 
-                            {{ count($kelas->skknis) >= 2 ? 'style=display:none' : '' }}>
+                    <button type="button" class="btn btn-primary btn-sm mt-2" id="btn-add-skkni"
+                        {{ count($kelas->skknis) >= 2 ? 'style=display:none' : '' }}>
                         <i data-feather="plus"></i> Tambah SKKNI
                     </button>
                 </div>
@@ -97,13 +88,10 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="input-group">
-                        <input type="text" 
-                            class="form-control kode-unit-title-input"
-                            name="sertifikat_judul_kode_unit"
+                        <input type="text" class="form-control kode-unit-title-input" name="sertifikat_judul_kode_unit"
                             value="{{ $kelas->deskripsi->sertifikat_judul_kode_unit }}"
                             data-field="sertifikat_judul_kode_unit"
-                            data-original="{{ $kelas->deskripsi->sertifikat_judul_kode_unit }}"
-                            maxlength="50">
+                            data-original="{{ $kelas->deskripsi->sertifikat_judul_kode_unit }}" maxlength="50">
                         <button type="button" class="btn btn-warning btn-edit" disabled>
                             <i data-feather="edit-2"></i> Edit
                         </button>
@@ -121,39 +109,28 @@
                     <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maksimal 5 Kode Unit</p>
                 </div>
                 <div class="col-md-9 col-sm-12" id="kode-unit-container">
-                    @foreach($kelas->kodeUnits as $kodeUnit)
-                    <div class="input-group mt-2">
-                        <input type="text" 
-                            class="form-control kode-unit-input"
-                            name="kode_unit"
-                            value="{{ $kodeUnit->kode_unit }}"
-                            data-field="kode_unit"
-                            data-id="{{ $kodeUnit->id }}"
-                            data-original="{{ $kodeUnit->kode_unit }}"
-                            placeholder="Kode Unit"
-                            maxlength="50">
-                        <input type="text" 
-                            class="form-control keterangan-input"
-                            name="keterangan"
-                            value="{{ $kodeUnit->keterangan }}"
-                            data-field="keterangan"
-                            data-id="{{ $kodeUnit->id }}"
-                            data-original="{{ $kodeUnit->keterangan }}"
-                            placeholder="Keterangan"
-                            maxlength="100">
-                        <button type="button" class="btn btn-warning btn-edit" disabled>
-                            <i data-feather="edit-2"></i> Edit
-                        </button>
-                        <button type="button" class="btn btn-success btn-save" style="display: none;">
-                            <i data-feather="check"></i> Simpan
-                        </button>
-                        <button type="button" class="btn btn-danger btn-delete">
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </div>
+                    @foreach ($kelas->kodeUnits as $kodeUnit)
+                        <div class="input-group mt-2">
+                            <input type="text" class="form-control kode-unit-input" name="kode_unit"
+                                value="{{ $kodeUnit->kode_unit }}" data-field="kode_unit" data-id="{{ $kodeUnit->id }}"
+                                data-original="{{ $kodeUnit->kode_unit }}" placeholder="Kode Unit" maxlength="50">
+                            <input type="text" class="form-control keterangan-input" name="keterangan"
+                                value="{{ $kodeUnit->keterangan }}" data-field="keterangan"
+                                data-id="{{ $kodeUnit->id }}" data-original="{{ $kodeUnit->keterangan }}"
+                                placeholder="Keterangan" maxlength="100">
+                            <button type="button" class="btn btn-warning btn-edit" disabled>
+                                <i data-feather="edit-2"></i> Edit
+                            </button>
+                            <button type="button" class="btn btn-success btn-save" style="display: none;">
+                                <i data-feather="check"></i> Simpan
+                            </button>
+                            <button type="button" class="btn btn-danger btn-delete">
+                                <i data-feather="trash-2"></i>
+                            </button>
+                        </div>
                     @endforeach
                     <button type="button" class="btn btn-primary btn-sm mt-2" id="btn-add-kode-unit"
-                            {{ count($kelas->kodeUnits) >= 5 ? 'style=display:none' : '' }}>
+                        {{ count($kelas->kodeUnits) >= 5 ? 'style=display:none' : '' }}>
                         <i data-feather="plus"></i> Tambah Kode Unit
                     </button>
                 </div>
@@ -164,6 +141,9 @@
                 <a href="{{ route('list-kelas') }}" class="btn btn-secondary">
                     <i data-feather="arrow-left"></i> Kembali
                 </a>
+                <a href="/admin/certificate/preview/{{ $kelas->id }}/content" class="btn btn-danger"><i
+                        class="me-1" data-feather="file"></i>Lihat Preview
+                    Sertifikat</a>
             </div>
 
         </form>
@@ -178,30 +158,33 @@
     <script>
         $(document).ready(function() {
             feather.replace();
-
+            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass(
+                'btn-danger');
 
             // Monitor input changes
-            $(document).on('input', '.skkni-input, .kode-unit-input, .keterangan-input, .skkni-title-input, .kode-unit-title-input', function() {
-                const group = $(this).closest('.input-group');
-                const originalValue = $(this).data('original');
-                const currentValue = $(this).val();
-                
-                if (currentValue !== originalValue) {
-                    // Langsung sembunyikan tombol edit dan tampilkan tombol save
-                    group.find('.btn-edit').hide();
-                    group.find('.btn-save').show();
-                } else {
-                    group.find('.btn-save').hide();
-                    group.find('.btn-edit').show().prop('disabled', true);
-                }
-            });
+            $(document).on('input',
+                '.skkni-input, .kode-unit-input, .keterangan-input, .skkni-title-input, .kode-unit-title-input',
+                function() {
+                    const group = $(this).closest('.input-group');
+                    const originalValue = $(this).data('original');
+                    const currentValue = $(this).val();
+
+                    if (currentValue !== originalValue) {
+                        // Langsung sembunyikan tombol edit dan tampilkan tombol save
+                        group.find('.btn-edit').hide();
+                        group.find('.btn-save').show();
+                    } else {
+                        group.find('.btn-save').hide();
+                        group.find('.btn-edit').show().prop('disabled', true);
+                    }
+                });
 
             // Handle Save button
             $(document).on('click', '.btn-save', function() {
                 const group = $(this).closest('.input-group');
                 const input = group.find('input:first');
                 const saveBtn = $(this);
-                
+
                 saveBtn.prop('disabled', true);
 
                 const data = {
@@ -218,7 +201,8 @@
                 }
 
                 // Tambahkan action jika record baru
-                if (!input.data('id') && !input.hasClass('skkni-title-input') && !input.hasClass('kode-unit-title-input')) {
+                if (!input.data('id') && !input.hasClass('skkni-title-input') && !input.hasClass(
+                        'kode-unit-title-input')) {
                     data.action = 'create';
                 }
 
@@ -233,7 +217,7 @@
                             if (keteranganInput.length) {
                                 keteranganInput.data('original', keteranganInput.val());
                             }
-                            
+
                             // Update ID jika ini record baru
                             if (response.id) {
                                 input.data('id', response.id);
@@ -241,14 +225,15 @@
                                     keteranganInput.data('id', response.id);
                                 }
                             }
-                            
+
                             // Hide save button, show edit button
                             group.find('.btn-save').hide();
                             group.find('.btn-edit').show().prop('disabled', true);
-                            
+
                             toastr.success('Data berhasil disimpan');
                         } else {
-                            toastr.error(response.message || 'Terjadi kesalahan saat menyimpan data');
+                            toastr.error(response.message ||
+                                'Terjadi kesalahan saat menyimpan data');
                         }
                     },
                     error: function(xhr) {
@@ -268,7 +253,7 @@
                 const group = $(this).closest('.input-group');
                 const input = group.find('input:first');
                 const container = group.closest('.col-md-9');
-                
+
                 // Only proceed with delete if we have an ID
                 if (!input.data('id')) {
                     group.remove();
@@ -328,7 +313,7 @@
                         </button>
                     </div>
                 `;
-                
+
                 $(newRow).insertBefore('#btn-add-skkni');
                 feather.replace();
                 updateAddButtons();
@@ -337,11 +322,11 @@
 
 
             // Add Kode Unit
-           $('#btn-add-kode-unit').click(function() {
-               const container = $('#kode-unit-container');
-               if (container.find('.input-group').length >= 5) return;
+            $('#btn-add-kode-unit').click(function() {
+                const container = $('#kode-unit-container');
+                if (container.find('.input-group').length >= 5) return;
 
-               const newRow = `
+                const newRow = `
                    <div class="input-group mt-2">
                        <input type="text" class="form-control kode-unit-input" name="kode_unit" maxlength="50"
                            data-field="kode_unit" data-original="" placeholder="Kode Unit">
@@ -358,23 +343,22 @@
                        </button>
                    </div>
                `;
-               
-               $(newRow).insertBefore('#btn-add-kode-unit');
-               feather.replace();
-               updateAddButtons();
-           });
 
-           // Initialize feather icons
-           feather.replace();
+                $(newRow).insertBefore('#btn-add-kode-unit');
+                feather.replace();
+                updateAddButtons();
+            });
 
-           // Initialize toastr options
-           toastr.options = {
-               "closeButton": true,
-               "progressBar": true,
-               "positionClass": "toast-top-right",
-               "timeOut": "3000"
-           };
-       });
-   </script>
+            // Initialize feather icons
+            feather.replace();
+
+            // Initialize toastr options
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "timeOut": "3000"
+            };
+        });
+    </script>
 @endpush
-

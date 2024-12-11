@@ -46,7 +46,6 @@ class KelasController extends Controller
         if ($is_dicount === '1' && $harga_discount === 0) {
             throw ValidationException::withMessages(['harga_discount' => "Jika diskon diaktifkan harga diskon tidak boleh 0!"]);
         }
-
     }
 
 
@@ -78,9 +77,10 @@ class KelasController extends Controller
         $data_nav  = ['lms', 'kelas'];
         $kelas_kategories = $this->kelas_kategori;
         $metode_pelatihans = $this->metode_pelatihan;
+        $programs = DB::table('programs')->get();
         $kelas_id = null;
         $btn_group = 'kelas';
-        return view("$this->path/create", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas_kategories', 'metode_pelatihans'));
+        return view("$this->path/create", compact('title', 'programs', 'btn_group', 'kelas_id', 'data_nav', 'kelas_kategories', 'metode_pelatihans'));
     }
 
 
@@ -145,8 +145,9 @@ class KelasController extends Controller
         $metode_pelatihans = $this->metode_pelatihan;
         $kelas_id = $id;
         $btn_group = 'kelas';
+        $programs = DB::table('programs')->get();
         $kelas = $this->kelas->findOrFail($id);
-        return view("$this->path/informasi", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'kelas', 'kelas_kategories', 'metode_pelatihans'));
+        return view("$this->path/informasi", compact('title',  'programs', 'btn_group', 'kelas_id', 'data_nav', 'kelas', 'kelas_kategories', 'metode_pelatihans'));
     }
 
 
@@ -178,6 +179,8 @@ class KelasController extends Controller
             // Store image
             $file_image = $request->file('image');
             $renameImage = $this->moveFile('kelas-image', 'Image', $file_image);
+
+            $this->removeFile('kelas-image/', $request->old_image);
         }
 
         if (!empty($request->video_file)) {
@@ -188,6 +191,7 @@ class KelasController extends Controller
             // Store video
             $file_video = $request->file('video_file');
             $rename_video =   $this->moveFile('kelas-video', 'Video', $file_video);
+            $this->removeFile('kelas-video/', $request->old_video);
         }
 
 
@@ -211,7 +215,7 @@ class KelasController extends Controller
 
     public function deskripsiView($id)
     {
-        $title = 'Kelas Informasi';
+        $title = 'Kelas Deskripsi';
         $data_nav  = ['lms', 'kelas'];
         $kelas_id = $id;
         $btn_group = 'kelas-deskripsi';
@@ -223,11 +227,21 @@ class KelasController extends Controller
     {
         $data = $request->validated();
         if (!empty($data['sertifikat_tenaga_pelatih'][0])) {
-            $tenaga_pelatih = implode(',', $data['sertifikat_tenaga_pelatih']);
+            $array = array_filter($data['sertifikat_tenaga_pelatih'], function ($x) {
+                return $x;
+            });
+            $tenaga_pelatih = implode(',', $array);
             $data['sertifikat_tenaga_pelatih'] = $tenaga_pelatih;
         } else {
             $data['sertifikat_tenaga_pelatih'] = null;
         }
+
+        if (!empty($data['jam'])) {
+            $durasi_pelatihan = implode(',', [$data['jam'], $data['menit'] ?? '00']);
+        }
+
+        $data['durasi_pelatihan'] = $durasi_pelatihan ?? null;
+        unset($data['jam'], $data['menit']);
 
         KelasDetail::where('kelas_id', $id)->update($data);
         $this->flashSuccessUpdate($request);
@@ -279,8 +293,10 @@ class KelasController extends Controller
                             'create_by' => $userId
                         ]);
                         break;
+
                 }
             } else {
+
                 switch ($field) {
                     case 'sertifikat_judul_skkni':
                         KelasDetail::where('kelas_id', $id)->update([
@@ -306,6 +322,7 @@ class KelasController extends Controller
                                 'kode_unit' => $request->value,
                                 'keterangan' => $request->keterangan,
                                 'update_by' => $userId
+
                             ]);
                         }
                         break;
@@ -313,8 +330,8 @@ class KelasController extends Controller
             }
     
             DB::commit();
+
             return response()->json(['success' => true]);
-    
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
@@ -353,7 +370,7 @@ class KelasController extends Controller
     public function jadwalStore(JadwalKelasRequest $request, $id)
     {
         JadwalPelatihan::create($request->validated());
-        
+
         return redirect()
             ->route('view-jadwal', $id)
             ->with('success', 'Jadwal berhasil ditambahkan');
@@ -367,11 +384,12 @@ class KelasController extends Controller
         $btn_group = 'jadwal';
         $jadwal = $this->jadwal->findOrFail($jadwal_id);
         if ($jadwal->waktu_pelaksanaan) {
-            preg_match('/(\d{2}\.\d{2})\s*(WIB|WITA|WIT)\s*s\/d\s*(\d{2}\.\d{2})\s*(WIB|WITA|WIT)/', 
-                $jadwal->waktu_pelaksanaan, 
+            preg_match(
+                '/(\d{2}\.\d{2})\s*(WIB|WITA|WIT)\s*s\/d\s*(\d{2}\.\d{2})\s*(WIB|WITA|WIT)/',
+                $jadwal->waktu_pelaksanaan,
                 $matches
             );
-            
+
             if (count($matches) === 5) {
                 $jadwal->waktu_mulai = str_replace('.', ':', $matches[1]);
                 $jadwal->waktu_selesai = str_replace('.', ':', $matches[3]);
@@ -385,7 +403,7 @@ class KelasController extends Controller
     {
         $jadwal = $this->jadwal->findOrFail($jadwal_id);
         $jadwal->update($request->validated());
-        
+
         return redirect()
             ->route('view-jadwal', $id)
             ->with('success', 'Jadwal berhasil diperbarui');
@@ -395,7 +413,7 @@ class KelasController extends Controller
     {
         $jadwal = $this->jadwal->findOrFail($jadwal_id);
         $jadwal->delete();
-        
+
         return redirect()
             ->route('view-jadwal', $id)
             ->with('success', 'Jadwal berhasil dihapus');
@@ -404,12 +422,12 @@ class KelasController extends Controller
     public function jadwalArsip($id, $jadwal_id)
     {
         $jadwal = JadwalPelatihan::findOrFail($jadwal_id);
-        if($jadwal->diarsipkan == 0) {
+        if ($jadwal->diarsipkan == 0) {
             $jadwal->update(['diarsipkan' => '1']);
         } else {
             $jadwal->update(['diarsipkan' => '0']);
         }
-        
+
         return redirect()
             ->route('view-jadwal', $id)
             ->with('success', 'Jadwal berhasil diarsipkan');

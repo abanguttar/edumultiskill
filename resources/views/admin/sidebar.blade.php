@@ -23,6 +23,9 @@
                             <div id="cms" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <a class="nav-link text-dark" data-nav='beranda' href="/admin/beranda">Beranda</a>
+                                    <a class="nav-link text-dark" data-nav='company-profile'
+                                        href="/admin/company-profile">Profile Perusahaan</a>
+                                    <a class="nav-link text-dark" data-nav='faq' href="/admin/faq">FAQ</a>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +42,7 @@
                                     <a class="nav-link text-dark" data-nav='kelas-kategori'
                                         href="/admin/kelas/kategori">Kategori
                                         Kelas</a>
-                                    <a class="nav-link text-dark mt-2" data-nav='kelas' href="/admin/kelas">List
+                                    <a class="nav-link text-dark" data-nav='kelas' href="/admin/kelas">List
                                         Kelas</a>
 
                                 </div>
@@ -57,14 +60,12 @@
                             <div id="data-master" class="accordion-collapse collapse" {{-- class show digunakan untuk menampilkan accordion item --}}>
                                 <div class="accordion-body">
 
-                                    <a class="nav-link text-dark mt-2" data-nav='user-member'
-                                        href="/admin/user-member">User
+                                    <a class="nav-link text-dark" data-nav='user-member' href="/admin/user-member">User
                                         Member</a>
-                                    <a class="nav-link text-dark mt-2" data-nav='list-tutor' href="/admin/tutor">List
+                                    <a class="nav-link text-dark" data-nav='list-tutor' href="/admin/tutor">List
                                         Tutor</a>
                                     @if (Auth::user()->tipe_user === 99)
-                                        <a class="nav-link text-dark mt-2" data-nav='list-admin'
-                                            href="/admin/index">List
+                                        <a class="nav-link text-dark" data-nav='list-admin' href="/admin/index">List
                                             Admin</a>
                                     @endif
                                 </div>

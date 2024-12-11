@@ -5,6 +5,7 @@
 /public/kelas-video
 /public/icons
 /public/hot
+/public/assets
 /public/storage
 /storage/*.key
 /vendor

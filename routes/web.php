@@ -1,12 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KelasKategoriController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\TutorController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\KelasKategoriController;
+use App\Http\Controllers\CompanyProfileController;
+use App\Http\Controllers\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,11 +102,74 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             });
         });
     });
+
+
+    Route::prefix('certificate')->controller(CertificateController::class)->group(function () {
+        Route::get('/preview/{id}/header/{nilai}', 'previewHeader');
+    });
+
+
+
+    Route::prefix('beranda')->controller(BerandaController::class)->group(function () {
+        Route::get('', 'index')->name('list-beranda');
+        Route::get('/banner/create', 'createBanner');
+        Route::post('/banner/create', 'storeBanner');
+        Route::get('/banner/{id}/edit', 'editBanner')->name('edit-banner');
+        Route::put('/banner/{id}/edit', 'updateBanner');
+
+        Route::get('/logo/create', 'createLogo');
+        Route::post('/logo/create', 'storeLogo');
+        Route::get('/logo/{id}/edit', 'editLogo')->name('edit-logo');
+        Route::put('/logo/{id}/edit', 'updateLogo');
+
+        Route::get('/testimoni/create', 'createTestimoni');
+        Route::post('/testimoni/create', 'storeTestimoni');
+        Route::get('/testimoni/{id}/edit', 'editTestimoni')->name('edit-testimoni');
+        Route::put('/testimoni/{id}/edit', 'updateTestimoni');
+
+        Route::put('/link/edit', 'updateLink');
+    });
+    Route::prefix('company-profile')->controller(CompanyProfileController::class)->group(function () {
+        Route::get('', 'index')->name('list-company-profile');
+        Route::get('/gallery/create', 'creategallery');
+        Route::post('/gallery/create', 'storegallery');
+        Route::get('/gallery/{id}/edit', 'editgallery')->name('edit-gallery');
+        Route::put('/gallery/{id}/edit', 'updategallery');
+
+        Route::get('/sarana-prasarana/create', 'createsaranaprasarana');
+        Route::post('/sarana-prasarana/create', 'storesaranaprasarana');
+        Route::get('/sarana-prasarana/{id}/edit', 'editsaranaprasarana')->name('edit-sarana-prasarana');
+        Route::put('/sarana-prasarana/{id}/edit', 'updatesaranaprasarana');
+
+        Route::get('/image-sarana/create', 'createimagesarana');
+        Route::post('/image-sarana/create', 'storeimagesarana');
+        Route::get('/image-sarana/{id}/edit', 'editimagesarana')->name('edit-image-sarana');
+        Route::put('/image-sarana/{id}/edit', 'updateimagesarana');
+    });
+
+    Route::prefix('faq')->controller(FAQController::class)->group(function () {
+        Route::get('', 'index')->name('list-faq');
+        Route::get('/create', 'create');
+        Route::post('/create', 'store');
+        Route::get('/{id}/edit', 'edit')->name('edit-faq');
+        Route::put('/{id}/edit', 'update');
+        Route::post('/content/create', 'storeContent');
+        Route::put('/content/{id}/edit', 'updateContent');
+        Route::delete('/content/{id}/delete', 'destroyContent');
+    });
 });
 
 
 
 
-Route::prefix('ajax')->controller(AjaxController::class)->group(function(){
-Route::get('tutor', 'fetchTutor');
+Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
+    Route::get('tutor', 'fetchTutor');
+});
+
+
+Route::controller(MainController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/faq/{slug}', 'faq');
+    Route::get('/company-profile', 'companyProfile');
+    Route::get('/program/{tipe}', 'program');
 });

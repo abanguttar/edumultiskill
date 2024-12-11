@@ -48,6 +48,7 @@
                         </button>
                         <button type="button" class="btn btn-success btn-save" style="display: none;">
                             <i data-feather="check"></i> Simpan
+
                         </button>
                     </div>
                 </div>
@@ -164,6 +165,7 @@
                     <i data-feather="arrow-left"></i> Kembali
                 </a>
             </div>
+
         </form>
 
     </div>
@@ -172,9 +174,11 @@
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             feather.replace();
+
 
             // Monitor input changes
             $(document).on('input', '.skkni-input, .kode-unit-input, .keterangan-input, .skkni-title-input, .kode-unit-title-input', function() {
@@ -319,6 +323,7 @@
                             <i data-feather="check"></i> Simpan
                         </button>
                         <button type="button" class="btn btn-danger btn-delete">
+
                             <i data-feather="trash-2"></i>
                         </button>
                     </div>
@@ -328,6 +333,7 @@
                 feather.replace();
                 updateAddButtons();
             });
+
 
 
             // Add Kode Unit

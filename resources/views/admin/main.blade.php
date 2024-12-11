@@ -15,17 +15,54 @@
 </head>
 @stack('style')
 <style>
+    :root {
+        --primary1: #F58634;
+        --subprimary1: #e27c33;
+        --primary2: #414393;
+        --primary3: #007DD1;
+    }
+
+    #container-login {
+        --bs-border-color: #414393 !important;
+    }
+
+
+
     body {
         min-height: 100vh;
     }
 
+
+    #footer-logo {
+        margin-left: -2rem;
+    }
+
+    #btn-login.btn-danger,
+    #sidebarToggleBtn.btn-danger {
+        --bs-btn-active-bg: #da6c1e !important;
+        --bs-btn-bg: #F58634 !important;
+        --bs-btn-hover-bg: #e27c33 !important;
+        --bs-btn-border-color: #944710 !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: white !important;
+        background-color: var(--primary1) !important;
+        box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--subprimary1) !important;
+    }
+
+
     .nav-link.active {
-        background-color: aqua !important;
+        background-color: var(--primary3) !important;
     }
 
     @media only screen and (max-width: 576px) {
         .container.w-75 {
             width: 100% !important;
+        }
+
+        #footer-logo {
+            margin-left: 0;
         }
     }
 </style>
@@ -75,6 +112,18 @@
             });
         }
 
+
+        const showAlertConfirm = () => {
+            return Swal.fire({
+                title: "Apakah anda yakin?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!"
+            })
+        }
+
         let id = '';
         // Handle click table
         $(document).on('click', '.table-row', function() {
@@ -118,7 +167,7 @@
             $('#' + sectionSideBar).closest('.accordion-item').find('.accordion-button').attr('aria-expanded',
                 'true').toggleClass('collapsed')
             $('#' + sectionSideBar + ' [data-nav="' + elementSideBar + '"]').toggleClass(
-                'active')
+                'active text-white')
         </script>
     @endif
 

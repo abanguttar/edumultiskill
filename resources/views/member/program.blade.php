@@ -107,41 +107,19 @@
         }
 
 
-
-        @media only screen and (max-width: 912px) {
-
-            #section-hero {
-                background-image: url('/main-assets/hero-background.webp');
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-
-            .container-text-hero {
-                display: none;
-            }
-
-            .d-show-912 {
-                display: block !important;
-            }
-
-            .d-none-912 {
-                display: none;
-            }
+        #section-hero {
+            background-image: url('/main-assets/bg-prakerja.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
     </style>
 @endpush
 @section('body')
-    <section id="section-hero" class="m-0 p-0">
-        <div class="container-fluid p-0 m-0 position-relative d-flex flex-column justify-content-center  align-items-center">
-            <figure>
-                <img src="/main-assets/image-1.webp" class="d-none d-show-912" height="300px" width="auto" alt="hero-single">
-            </figure>
-            <figure>
-                <img src="/main-assets/hero-image.webp" class="d-none-912" id="hero-bg" width="100%" height="100%"
-                    alt="">
-            </figure>
-            <div class="container-text-hero col-6">
+    <section id="section-hero" class="m-0 p-0 d-flex justify-content-center">
+        <div class="container p-0 m-0 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center">
+
+            <div class="p-4">
                 <h2 class="montserrat-600 fw-bold d-flex gap-0 flex-column">Kelas <br>
                     <img src="/main-assets/prakerja-logo.webp" width="200px" height="auto" alt="prakerja logo">
                 </h2>
@@ -151,17 +129,9 @@
                     <h6 class="m-0 p-0 mt-1">Cari Kelasmu!</h6>
                 </a>
             </div>
-
-            <div class="d-flex flex-column align-items-center  container-md mb-5 d-show-912 d-none">
-                <h2 class="montserrat-600 fw-bold d-flex flex-column gap-0">Kelas <br>
-                    <img src="/main-assets/prakerja-logo.webp" width="200px" height="auto" alt="prakerja logo">
-                </h2>
-                <p class="fs-5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam 3000+ classes nonummy nibh euismod.</p>
-                <a href="" class="btn btn-primary-3 rounded-5">
-                    <h6 class="m-0 p-0 mt-1">Cari Kelasmu!</h6>
-                </a>
-            </div>
+            <figure class="d-flex align-items-end p-0 m-0">
+                <img src="/main-assets/hero-prakerja.webp" class="" height="500px" width="auto" alt="hero-single">
+            </figure>
         </div>
     </section>
     <section class="kelas-prakerja mt-10">

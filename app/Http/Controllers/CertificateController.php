@@ -21,7 +21,7 @@ class CertificateController extends Controller
 
 
         if ($data->jenis !== 'umum') {
-            $view = 'header-prakerja-mitra';
+            $view = 'header';
         }
 
         // dd($view);
@@ -32,10 +32,10 @@ class CertificateController extends Controller
         // $year = date('Y', $time);
         // dd($data_lembaga_pelatihan->master_partner_id);
         if ($data->jenis == 'umum') {
-            $no_certificate = 'No. Umum/'  . $data->id . '.' . 'Jadwal/' . $date_cert ;
+            $no_certificate = 'No. Umum/'  . $data->id . '.' . 'Jadwal/' . $date_cert;
         } else {
 
-            $no_certificate = 'No. Prakerja/'  . $data->id . '.' . 'Jadwal/' . $date_cert ;
+            $no_certificate = 'No. Prakerja/'  . $data->id . '.' . 'Jadwal/' . $date_cert;
         }
         $url = $this->url . 'dummy';
 
@@ -62,6 +62,7 @@ class CertificateController extends Controller
                 'menit' => $menit,
                 'jenis' => $data->jenis,
                 'myQrCode' => $myQrCode,
+                'dudika' => null,
                 'no_certificate' => $no_certificate,
 
             ]

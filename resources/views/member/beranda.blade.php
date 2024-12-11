@@ -179,7 +179,7 @@
                         </span>
                         <i>untuk</i>
                         <span class="position-relative">Masa Depan! <img src="/main-assets/circle.webp"
-                                class="position-absolute" style="top: -30%; left: -5%;" width="210px" alt="circle">
+                                class="position-absolute" style="top: -30%; left: -5%;" width="190px" alt="circle">
                         </span>
                     </span>
                 </h2>

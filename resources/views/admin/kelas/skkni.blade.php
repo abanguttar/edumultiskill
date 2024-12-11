@@ -3,7 +3,7 @@
 @push('link')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 @endpush
 
 @section('body')
@@ -18,108 +18,154 @@
 
             @include('components/button-group-create-kelas')
 
-            <div>
-                <div class="row">
-                    <div class="col-md-3 col-sm-12"> <label class=" fw-bold">Judul Kelas</label></div>
-                    <div class="col-md-9 col-sm-12">
-                        <div class="input-group">
-                            <input type="text" name="judul_kelas" class="form-control"
-                                value="{{ old('judul_kelas', $kelas->judul_kelas) }}" id="judul_kelas"
-                                aria-describedby="basic-addon2" disabled>
-                            <span class="input-group-text" id="basic-addon2"><span id="limit-judul-kelas"></span>
-                                {{ 110 - (int) strlen($kelas->judul_kelas) }}/110</p>
-                            </span>
-                        </div>
-                    </div>
+            <!-- Judul Kelas (Disabled) -->
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12">
+                    <label class="fw-bold">Judul Kelas</label>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Judul SKKNI</label>
-                        <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maks. 50 karakter</p>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                        <input type="text" name="sertifikat_judul_skkni"
-                            value="{{ old('sertifikat_judul_skkni', $kelas->deskripsi->sertifikat_judul_skkni) }}" 
-                            class="form-control form-input" disabled>
-
-                    </div>
+                <div class="col-md-9 col-sm-12">
+                    <input type="text" class="form-control" value="{{ $kelas->judul_kelas }}" disabled>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <label class="fw-bold mt-1">SKKNI</label>
-                    </div>
-                    <div class="col-md-9 col-sm-12" id="skkni-container">
-                        @if(isset($kelas->skknis) && !empty($kelas->skknis))
-                            @foreach($kelas->skknis as $skkni)
-                                <div class="input-group mt-1">
-                                    <input type="hidden" name="skkni_ids[]" value="{{ $skkni->id }}">
-                                    <input type="text" class="form-control form-input" name="skkni[]" value="{{ $skkni->skkni }}" maxlength="50" disabled>
-                                    <button type="button" class="btn btn-danger btn-delete-skkni" disabled>
+            <!-- Judul SKKNI -->
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12">
+                    <label class="fw-bold">Judul SKKNI</label>
+                    <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maks. 50 karakter</p>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" 
+                            class="form-control skkni-title-input"
+                            name="sertifikat_judul_skkni"
+                            value="{{ $kelas->deskripsi->sertifikat_judul_skkni }}"
+                            data-field="sertifikat_judul_skkni"
+                            data-original="{{ $kelas->deskripsi->sertifikat_judul_skkni }}"
+                            maxlength="50">
+                        <button type="button" class="btn btn-warning btn-edit" disabled>
+                            <i data-feather="edit-2"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-success btn-save" style="display: none;">
+                            <i data-feather="check"></i> Simpan
 
-                                        <i data-feather="trash-2"></i>
-                                    </button>
-                                </div>
-                            @endforeach
-                        @endif
-                        <button type="button" class="btn btn-primary btn-sm mt-2 add-btn" id="btn-tambah-skkni" disabled>
-
-                            <i data-feather="plus"></i> Tambah SKKNI
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <div class="row mt-4">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Judul Kode Unit</label>
-                        <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maks. 50 karakter</p>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                        <input type="text" name="sertifikat_judul_kode_unit"
-                            value="{{ old('sertifikat_judul_kode_unit', $kelas->deskripsi->sertifikat_judul_kode_unit) }}" 
-                            class="form-control form-input" disabled>
-
-                    </div>
+            <!-- SKKNI List -->
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12">
+                    <label class="fw-bold">SKKNI</label>
+                    <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maksimal 2 SKKNI</p>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <label class="fw-bold mt-1">Kode Unit</label>
-                    </div>
-                    <div class="col-md-9 col-sm-12" id="kode-unit-container">
-                        @if(isset($kelas->kodeUnits) && !empty($kelas->kodeUnits))
-                            @foreach($kelas->kodeUnits as $kodeUnit)
-                                <div class="input-group mt-1">
-                                    <input type="hidden" name="kode_unit_ids[]" value="{{ $kodeUnit->id }}">
-                                    <input type="text" class="form-control form-input" name="kode_unit[]" value="{{ $kodeUnit->kode_unit }}" maxlength="50" placeholder="Kode Unit" disabled>
-                                    <input type="text" class="form-control form-input" name="keterangan[]" value="{{ $kodeUnit->keterangan }}" maxlength="100" placeholder="Keterangan" disabled>
-                                    <button type="button" class="btn btn-danger btn-delete-kode-unit" disabled>
-
-                                        <i data-feather="trash-2"></i>
-                                    </button>
-                                </div>
-                            @endforeach
-                        @endif
-                        <button type="button" class="btn btn-primary btn-sm mt-2 add-btn" id="btn-tambah-kode-unit" disabled>
-
-                            <i data-feather="plus"></i> Tambah Kode Unit
+                <div class="col-md-9 col-sm-12" id="skkni-container">
+                    @foreach($kelas->skknis as $skkni)
+                    <div class="input-group mt-2">
+                        <input type="text" 
+                            class="form-control skkni-input"
+                            name="skkni"
+                            value="{{ $skkni->skkni }}"
+                            data-field="skkni"
+                            data-id="{{ $skkni->id }}"
+                            data-original="{{ $skkni->skkni }}"
+                            maxlength="50">
+                        <button type="button" class="btn btn-warning btn-edit" disabled>
+                            <i data-feather="edit-2"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-success btn-save" style="display: none;">
+                            <i data-feather="check"></i> Simpan
+                        </button>
+                        <button type="button" class="btn btn-danger btn-delete">
+                            <i data-feather="trash-2"></i>
                         </button>
                     </div>
-                </div>
-
-
-                <hr>
-                <div class="mt-3">
-                    <a type="button" class="btn btn-secondary" href="{{ route('list-kelas') }}">
-                        <i class="feather-16" data-feather='x-square'></i> Kembali
-                    </a>
-                    <button type="button" class="btn btn-warning" id="btnEdit">
-                        <i class="feather-16" data-feather="edit"></i> Edit
-                    </button>
-                    <button type="submit" class="btn btn-danger" id="btnSave" style="display: none;">
-                        <i class="feather-16" data-feather="save"></i> Simpan
+                    @endforeach
+                    <button type="button" class="btn btn-primary btn-sm mt-2" id="btn-add-skkni" 
+                            {{ count($kelas->skknis) >= 2 ? 'style=display:none' : '' }}>
+                        <i data-feather="plus"></i> Tambah SKKNI
                     </button>
                 </div>
             </div>
+
+            <!-- Judul Kode Unit -->
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12">
+                    <label class="fw-bold">Judul Kode Unit</label>
+                    <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maks. 50 karakter</p>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" 
+                            class="form-control kode-unit-title-input"
+                            name="sertifikat_judul_kode_unit"
+                            value="{{ $kelas->deskripsi->sertifikat_judul_kode_unit }}"
+                            data-field="sertifikat_judul_kode_unit"
+                            data-original="{{ $kelas->deskripsi->sertifikat_judul_kode_unit }}"
+                            maxlength="50">
+                        <button type="button" class="btn btn-warning btn-edit" disabled>
+                            <i data-feather="edit-2"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-success btn-save" style="display: none;">
+                            <i data-feather="check"></i> Simpan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kode Unit List -->
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12">
+                    <label class="fw-bold">Kode Unit & Keterangan</label>
+                    <p class="text-dark" style="font-weight: lighter; font-size: 14px">Maksimal 5 Kode Unit</p>
+                </div>
+                <div class="col-md-9 col-sm-12" id="kode-unit-container">
+                    @foreach($kelas->kodeUnits as $kodeUnit)
+                    <div class="input-group mt-2">
+                        <input type="text" 
+                            class="form-control kode-unit-input"
+                            name="kode_unit"
+                            value="{{ $kodeUnit->kode_unit }}"
+                            data-field="kode_unit"
+                            data-id="{{ $kodeUnit->id }}"
+                            data-original="{{ $kodeUnit->kode_unit }}"
+                            placeholder="Kode Unit"
+                            maxlength="50">
+                        <input type="text" 
+                            class="form-control keterangan-input"
+                            name="keterangan"
+                            value="{{ $kodeUnit->keterangan }}"
+                            data-field="keterangan"
+                            data-id="{{ $kodeUnit->id }}"
+                            data-original="{{ $kodeUnit->keterangan }}"
+                            placeholder="Keterangan"
+                            maxlength="100">
+                        <button type="button" class="btn btn-warning btn-edit" disabled>
+                            <i data-feather="edit-2"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-success btn-save" style="display: none;">
+                            <i data-feather="check"></i> Simpan
+                        </button>
+                        <button type="button" class="btn btn-danger btn-delete">
+                            <i data-feather="trash-2"></i>
+                        </button>
+                    </div>
+                    @endforeach
+                    <button type="button" class="btn btn-primary btn-sm mt-2" id="btn-add-kode-unit"
+                            {{ count($kelas->kodeUnits) >= 5 ? 'style=display:none' : '' }}>
+                        <i data-feather="plus"></i> Tambah Kode Unit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tombol Kembali -->
+            <div class="mt-3">
+                <a href="{{ route('list-kelas') }}" class="btn btn-secondary">
+                    <i data-feather="arrow-left"></i> Kembali
+                </a>
+            </div>
+
         </form>
 
     </div>
@@ -127,78 +173,208 @@
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function() {
-
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass('btn-danger');
-            
             feather.replace();
 
 
-            // Toggle edit mode
-            $('#btnEdit').click(function() {
-                $('.form-input').prop('disabled', false);
-                $('.btn-delete-skkni, .btn-delete-kode-unit').prop('disabled', false);
-                $('.add-btn').prop('disabled', false);
-                $('#btnEdit').hide();
-                $('#btnSave').show();
-            });
-
-            // Add SKKNI with limit
-            $(document).on('click', '#btn-tambah-skkni', function() {
-                const skkniCount = $('#skkni-container .input-group').length;
-                if (skkniCount >= 5) {
-                    alert('Maksimal 5 SKKNI yang dapat ditambahkan');
-                    return;
-                }
+            // Monitor input changes
+            $(document).on('input', '.skkni-input, .kode-unit-input, .keterangan-input, .skkni-title-input, .kode-unit-title-input', function() {
+                const group = $(this).closest('.input-group');
+                const originalValue = $(this).data('original');
+                const currentValue = $(this).val();
                 
-                const newRow = `
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control form-input" name="skkni[]" maxlength="50">
-
-                        <button type="button" class="btn btn-danger btn-delete-skkni">
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </div>
-                `;
-                $(newRow).insertBefore('#btn-tambah-skkni');
-                feather.replace();
+                if (currentValue !== originalValue) {
+                    // Langsung sembunyikan tombol edit dan tampilkan tombol save
+                    group.find('.btn-edit').hide();
+                    group.find('.btn-save').show();
+                } else {
+                    group.find('.btn-save').hide();
+                    group.find('.btn-edit').show().prop('disabled', true);
+                }
             });
 
+            // Handle Save button
+            $(document).on('click', '.btn-save', function() {
+                const group = $(this).closest('.input-group');
+                const input = group.find('input:first');
+                const saveBtn = $(this);
+                
+                saveBtn.prop('disabled', true);
 
-            // Add Kode Unit with limit
-            $(document).on('click', '#btn-tambah-kode-unit', function() {
-                const kodeUnitCount = $('#kode-unit-container .input-group').length;
-                if (kodeUnitCount >= 10) {
-                    alert('Maksimal 10 Kode Unit yang dapat ditambahkan');
+                const data = {
+                    _token: "{{ csrf_token() }}",
+                    field: input.data('field'),
+                    id: input.data('id'),
+                    value: input.val()
+                };
+
+                // Tambahkan keterangan jika ada
+                const keteranganInput = group.find('.keterangan-input');
+                if (keteranganInput.length) {
+                    data.keterangan = keteranganInput.val();
+                }
+
+                // Tambahkan action jika record baru
+                if (!input.data('id') && !input.hasClass('skkni-title-input') && !input.hasClass('kode-unit-title-input')) {
+                    data.action = 'create';
+                }
+
+                $.ajax({
+                    url: "{{ route('update-field', ['id' => $kelas->id]) }}",
+                    method: 'PUT',
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            // Update original values
+                            input.data('original', input.val());
+                            if (keteranganInput.length) {
+                                keteranganInput.data('original', keteranganInput.val());
+                            }
+                            
+                            // Update ID jika ini record baru
+                            if (response.id) {
+                                input.data('id', response.id);
+                                if (keteranganInput.length) {
+                                    keteranganInput.data('id', response.id);
+                                }
+                            }
+                            
+                            // Hide save button, show edit button
+                            group.find('.btn-save').hide();
+                            group.find('.btn-edit').show().prop('disabled', true);
+                            
+                            toastr.success('Data berhasil disimpan');
+                        } else {
+                            toastr.error(response.message || 'Terjadi kesalahan saat menyimpan data');
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr);
+                        toastr.error('Terjadi kesalahan saat menyimpan data');
+                    },
+                    complete: function() {
+                        saveBtn.prop('disabled', false);
+                    }
+                });
+            });
+
+            // Handle Delete button
+            $(document).on('click', '.btn-delete', function() {
+                if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) return;
+
+                const group = $(this).closest('.input-group');
+                const input = group.find('input:first');
+                const container = group.closest('.col-md-9');
+                
+                // Only proceed with delete if we have an ID
+                if (!input.data('id')) {
+                    group.remove();
+                    updateAddButtons();
                     return;
                 }
 
-                const newRow = `
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control form-input" name="kode_unit[]" maxlength="50" placeholder="Kode Unit">
-                        <input type="text" class="form-control form-input" name="keterangan[]" maxlength="100" placeholder="Keterangan">
+                $.ajax({
+                    url: "{{ route('update-field', ['id' => $kelas->id]) }}",
+                    method: 'PUT',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        field: input.data('field'),
+                        id: input.data('id'),
+                        action: 'delete'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            group.remove();
+                            updateAddButtons();
+                            toastr.success('Data berhasil dihapus');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Terjadi kesalahan saat menghapus data');
+                    }
+                });
+            });
 
-                        <button type="button" class="btn btn-danger btn-delete-kode-unit">
+            // Function to update add buttons visibility
+            function updateAddButtons() {
+                const skkniCount = $('#skkni-container .input-group').length;
+                const kodeUnitCount = $('#kode-unit-container .input-group').length;
+
+                $('#btn-add-skkni').toggle(skkniCount < 2);
+                $('#btn-add-kode-unit').toggle(kodeUnitCount < 5);
+            }
+
+            // Add SKKNI
+            $('#btn-add-skkni').click(function() {
+                const container = $('#skkni-container');
+                if (container.find('.input-group').length >= 2) return;
+
+                const newRow = `
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control skkni-input" name="skkni" maxlength="50"
+                            data-field="skkni" data-original="" placeholder="SKKNI">
+                        <button type="button" class="btn btn-warning btn-edit" style="display: none;">
+                            <i data-feather="edit-2"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-success btn-save">
+                            <i data-feather="check"></i> Simpan
+                        </button>
+                        <button type="button" class="btn btn-danger btn-delete">
+
                             <i data-feather="trash-2"></i>
                         </button>
                     </div>
                 `;
-                $(newRow).insertBefore('#btn-tambah-kode-unit');
+                
+                $(newRow).insertBefore('#btn-add-skkni');
                 feather.replace();
+                updateAddButtons();
             });
 
 
-            // Delete buttons
-            $(document).on('click', '.btn-delete-skkni', function() {
-                $(this).closest('.input-group').remove();
-            });
 
-            $(document).on('click', '.btn-delete-kode-unit', function() {
-                $(this).closest('.input-group').remove();
-            });
-        });
-    </script>
+            // Add Kode Unit
+           $('#btn-add-kode-unit').click(function() {
+               const container = $('#kode-unit-container');
+               if (container.find('.input-group').length >= 5) return;
+
+               const newRow = `
+                   <div class="input-group mt-2">
+                       <input type="text" class="form-control kode-unit-input" name="kode_unit" maxlength="50"
+                           data-field="kode_unit" data-original="" placeholder="Kode Unit">
+                       <input type="text" class="form-control keterangan-input" name="keterangan" maxlength="100"
+                           data-field="keterangan" data-original="" placeholder="Keterangan">
+                       <button type="button" class="btn btn-warning btn-edit" style="display: none;">
+                           <i data-feather="edit-2"></i> Edit
+                       </button>
+                       <button type="button" class="btn btn-success btn-save">
+                           <i data-feather="check"></i> Simpan
+                       </button>
+                       <button type="button" class="btn btn-danger btn-delete">
+                           <i data-feather="trash-2"></i>
+                       </button>
+                   </div>
+               `;
+               
+               $(newRow).insertBefore('#btn-add-kode-unit');
+               feather.replace();
+               updateAddButtons();
+           });
+
+           // Initialize feather icons
+           feather.replace();
+
+           // Initialize toastr options
+           toastr.options = {
+               "closeButton": true,
+               "progressBar": true,
+               "positionClass": "toast-top-right",
+               "timeOut": "3000"
+           };
+       });
+   </script>
 @endpush
 

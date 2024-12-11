@@ -30,6 +30,7 @@ class JadwalPelatihan extends Model
         'tanggal_selesai',
         'waktu_pelaksanaan',
         'kuota',
+        'kuota_max',
         'diarsipkan',
         'create_by',
         'update_by'

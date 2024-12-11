@@ -11,9 +11,9 @@
 </head>
 <?php
 if ($jenis == 'prakerja') {
-    $imagePath = base_path('public/master-certificate/header.jpg');
+    $imagePath = base_path('public/master-certificate/header-prakerja.png');
 } else {
-    $imagePath = base_path('public/master-certificate/header.jpg');
+    $imagePath = base_path('public/master-certificate/header.png');
 }
 $imageData = base64_encode(file_get_contents($imagePath));
 ?>
@@ -63,7 +63,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
 
     .nema_pelatihan_parent {
         position: fixed;
-        left: 6%;
+        left: 4%;
         top: 56%;
         z-index: 17;
     }
@@ -111,156 +111,12 @@ $imageData = base64_encode(file_get_contents($imagePath));
     }
 </style>
 
-{{-- @if ($jenis == 'prakerja')
-
-    <style>
-        .nama_peserta {
-            position: relative;
-            text-align: right;
-            right: 24.5%;
-            top: 24%;
-            z-index: 14;
-        }
-
-        .durasi-wrapped {
-            position: fixed;
-            text-align: left;
-            /* right: 19.5%; */
-            left: 79%;
-            top: 35%;
-            z-index: 14;
-        }
-
-
-
-
-        #qr-code {
-            position: absolute;
-            left: 12%;
-            top: 82.2%;
-            z-index: 20;
-            /* box-shadow: 0 0 10px white; */
-            border: 10px solid white;
-            /* background-color: white; */
-
-        }
-
-
-
-        #jabatan {
-            position: fixed;
-            z-index: 89;
-            right: 32%;
-            bottom: 5%;
-        }
-
-        .h1_sertifikat {
-            position: relative;
-            left: 52%;
-            z-index: 13;
-            top: 19%;
-        }
-    </style>
-    @if ($dudika !== null)
-        <style>
-            #verifikasi_prakerja {
-                position: absolute;
-                left: 78.5%;
-                top: 70%;
-                z-index: 16;
-                background-color: #ffe7e7;
-                padding-top: 5px;
-                padding-left: 10px;
-                padding-right: 15px;
-            }
-
-            .wrapper-dudika {
-                background-color: #ffe7e7;
-                height: 70px;
-                width: 200px;
-                position: fixed;
-                bottom: 15px;
-                right: 36px;
-            }
-
-            .container-dudika {
-                height: 70px;
-                width: 200px;
-                position: relative;
-                margin: 0;
-                padding: 0;
-            }
-
-            #dudika-img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        </style>
-    @else
-        <style>
-            #verifikasi_prakerja {
-                position: absolute;
-                left: 79.4%;
-                top: 75%;
-                z-index: 16;
-            }
-        </style>
-    @endif
-@else
-    <style>
-        .nama_peserta {
-            position: relative;
-            text-align: right;
-            right: 24.5%;
-            top: 36%;
-            z-index: 14;
-        }
-
-        .durasi-wrapped {
-            position: fixed;
-            text-align: right;
-            /* right: 19.5%; */
-            right: 3%;
-            top: 23.5%;
-            z-index: 14;
-        }
-
-
-        #verifikasi_prakerja {
-            position: absolute;
-            left: 55%;
-            top: 68%;
-            z-index: 16;
-        }
-
-        #qr-code {
-            position: absolute;
-            left: 5%;
-            top: 82.2%;
-            z-index: 20;
-            /* box-shadow: 0 0 10px white; */
-            border: 10px solid white;
-            /* background-color: white; */
-
-        }
-
-        .h1_sertifikat {
-            position: relative;
-            left: 52%;
-            z-index: 13;
-            top: 20%;
-        }
-    </style>
-
-@endif --}}
 
 <style>
     .nama_peserta {
         position: relative;
         text-align: right;
-        right: 24.5%;
+        right: 27.5%;
         top: 36%;
         z-index: 14;
     }
@@ -295,7 +151,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
 
     .h1_sertifikat {
         position: relative;
-        left: 52%;
+        left: 48.4%;
         z-index: 13;
         top: 20%;
     }
@@ -361,13 +217,13 @@ $imageData = base64_encode(file_get_contents($imagePath));
             <div class="durasi-wrapped" style="color: #2d2fa0;!important;font-size: 14px">
 
                 {{-- Ini adalah hari dan tanggal verifikasi prakerja --}}
-                <div>
+                {{-- <div>
                     <p>{{ $day }}, {{ $date }}</p>
-                </div>
+                </div> --}}
 
                 {{-- <p class="size-p"><b>Durasi Pelatihan</b></p> --}}
                 {{-- sprintf('%02d', $value) adalah untuk membuat angka memiliki digit nol diawal jika 1 digit 7 menjadi 07 --}}
-                <p style="margin-top: 3.4rem">{{ sprintf('%02d', $jam) }} jam
+                <p>{{ sprintf('%02d', $jam) }} jam
                     {{ sprintf('%02d', $menit) }}
                     Menit</p>
 

@@ -45,80 +45,25 @@
             display: none !important;
         }
 
-
-        @media only screen and (max-width: 912px) {
-
-            #section-hero {
-                background-image: url('/main-assets/hero-background.webp');
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-
-            .container-text-hero {
-                display: none;
-            }
-
-            .d-show-912 {
-                display: block !important;
-            }
-
-            .d-none-912 {
-                display: none;
-            }
+        #section-hero {
+            background-image: url('/main-assets/bg-tentang-kami.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
     </style>
 @endpush
 @section('body')
-    <section id="section-hero" class="m-0 p-0">
-        <div class="container-fluid p-0 m-0 position-relative d-flex flex-column justify-content-center  align-items-center">
-            <figure>
-                <img src="/main-assets/image-1.webp" class="d-none d-show-912" height="300px" width="auto" alt="hero-single">
-            </figure>
-            <figure>
-                <img src="/main-assets/hero-image.webp" class="d-none-912" id="hero-bg" width="100%" height="100%"
-                    alt="">
-            </figure>
-            <div class="container-text-hero col-6">
+
+    <section id="section-hero" class="m-0 p-0 d-flex justify-content-center">
+        <div class="container-xl p-3 m-0 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center">
+            <div class="p-4 pb-lg-0">
                 <h2 class="montserrat-600 fw-bold d-flex gap-2 flex-column">
                     <span>
                         Mengenal Kami
                         <span class="position-relative" id="text-kelas-terbaik">Lebih Dalam! <img
                                 src="/main-assets/circle.webp" class="position-absolute" style="top: -35%; left: -5%;"
                                 width="250px" alt="circle">
-                        </span>
-                    </span>
-                </h2>
-                <p class="fs-5">Yayasan EMA (Edukasi Multi Anugerah) didirikan sebagai <span class="fw-bold">respons
-                        terhadap meningkatnya angka pengangguran dan kebutuhan
-                        masyarakat untuk meningkatkan keterampilan agar mampu
-                        bersaing di pasar kerja.</span> Yayasan ini lahir dari keinginan sekelompok
-                    individu peduli untuk memberikan solusi nyata melalui pelatihan
-                    relevan dan berkualitas tinggi.</p>
-                <p class="fs-5">Awalnya fokus pada tata busana dan tata boga, Yayasan EMA terus
-                    berkembang dengan menambahkan program di bidang Teknologi
-                    Informasi, Bisnis Manajemen, Keselamatan, dan Kesehatan Kerja (K3),
-                    serta Kewirausahaan. Semua program dirancang bersama para ahli
-                    industri dan akademisi untuk memastikan relevansi dan keberlanjutan
-                    menghadapi tantangan dunia kerja.</p>
-                <div class="d-flex gap-3">
-                    <button type="button" class="btn btn-primary-2 rounded-5">
-                        <h6 class="m-0 p-0 mt-1">Didirikan Tahun: 2015</h6>
-                    </button>
-                    <button type="button" class="btn btn-primary-2 rounded-5">
-                        <h6 class="m-0 p-0 mt-1">Tempat Didirikan: Bontang</h6>
-                    </button>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column align-items-center  container-md mb-5 d-show-912 d-none">
-                <h2 class="montserrat-600 fw-bold d-flex gap-2 flex-column">Maksimalkan Potensi <br>
-                    <span>dan Temukan <span id="text-kelas-terbaik">Kelas Terbaik</span> <br>
-                    </span>
-                    <span>
-                        <i>untuk</i>
-                        <span class="position-relative">Masa Depan! <img src="/main-assets/circle.webp"
-                                class="position-absolute" style="top: -30%; left: -5%;" width="210px" alt="circle">
                         </span>
                     </span>
                 </h2>
@@ -143,8 +88,13 @@
                     </button>
                 </div>
             </div>
+            <figure class="d-flex align-items-end p-0 m-0">
+                <img src="/main-assets/hero-tentang-kami.webp" class="" height="500px" width="auto"
+                    alt="hero-single">
+            </figure>
         </div>
     </section>
+
     <section id="visi-misi" class="mt-10 pt-10">
         <div class="container-xl d-flex flex-column flex-lg-row gap-4">
             <div>
@@ -182,10 +132,11 @@
         </div>
     </section>
     <section id="struktur-organisasi" class="mt-10">
-        <div class="container-fluid d-flex flex-column">
+        <div class="container-xl d-flex flex-column">
             <h3 class="text-center fw-bold ">Struktur <span class="text-kelas-terbaik">Organisasi</span>
             </h3>
-            <img src="" alt="">
+            <img style="margin-left: -30px" src="/main-assets/struktur.webp" width="100%" height="auto"
+                alt="Struktur Organisasi">
         </div>
     </section>
     <section id="instruktur" class="mt-10">
@@ -196,7 +147,7 @@
         </div>
     </section>
     <section id="sarana-prasarana" class="mt-10">
-        <div class="container d-flex flex-column">
+        <div class="container-xl d-flex flex-column">
             <h3 class="text-center fw-bold ">Sarana & <span class="text-kelas-terbaik">Prasarana</span>
             </h3>
 
@@ -242,8 +193,7 @@
                 <div class="row justify-content-center mt-5">
                     @foreach ($gallery as $g)
                         <figure class="col-6 col-lg-4 justify-content-center d-flex">
-                            <img width="100%" height="100%" src="/gallery/{{ $g->image }}"
-                                alt="{{ $g->image }}">
+                            <img width="100%" height="100%" src="/gallery/{{ $g->image }}" alt="{{ $g->image }}">
                         </figure>
                     @endforeach
                 </div>

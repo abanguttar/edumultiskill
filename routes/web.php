@@ -106,6 +106,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::prefix('certificate')->controller(CertificateController::class)->group(function () {
         Route::get('/preview/{id}/header/{nilai}', 'previewHeader');
+        Route::get('/preview/{id}/content', 'previewContent');
     });
 
 

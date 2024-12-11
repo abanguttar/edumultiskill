@@ -246,13 +246,13 @@
         -ms-overflow-style: 6px !important;
     }
 
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         width: 6px;
     }
 
     .scroller::-webkit-scrollbar {
         width: 6px;
-    }
+    } */
 
     @media only screen and (max-width: 992px) {
         #input-navbar {
@@ -310,13 +310,5 @@
     </script>
 
 </body>
-@php
-    $slug = $slug ?? null;
-@endphp
-@if (!empty($slug))
-    <script>
-        $(`.${@json($slug)}`).addClass('text-primer')
-    </script>
-@endif
 
 </html>

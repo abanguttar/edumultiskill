@@ -61,8 +61,6 @@ $imageData = base64_encode(file_get_contents($imagePath));
 
 
 
-
-
     .nema_pelatihan_parent {
         position: fixed;
         left: 6%;
@@ -113,7 +111,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
     }
 </style>
 
-@if ($jenis == 'prakerja')
+{{-- @if ($jenis == 'prakerja')
 
     <style>
         .nama_peserta {
@@ -256,7 +254,52 @@ $imageData = base64_encode(file_get_contents($imagePath));
         }
     </style>
 
-@endif
+@endif --}}
+
+<style>
+    .nama_peserta {
+        position: relative;
+        text-align: right;
+        right: 24.5%;
+        top: 36%;
+        z-index: 14;
+    }
+
+    .durasi-wrapped {
+        position: fixed;
+        text-align: right;
+        /* right: 19.5%; */
+        right: 3%;
+        top: 23.5%;
+        z-index: 14;
+    }
+
+
+    #verifikasi_prakerja {
+        position: absolute;
+        left: 55%;
+        top: 68%;
+        z-index: 16;
+    }
+
+    #qr-code {
+        position: absolute;
+        left: 5%;
+        top: 82.2%;
+        z-index: 20;
+        /* box-shadow: 0 0 10px white; */
+        border: 10px solid white;
+        /* background-color: white; */
+
+    }
+
+    .h1_sertifikat {
+        position: relative;
+        left: 52%;
+        z-index: 13;
+        top: 20%;
+    }
+</style>
 
 
 
@@ -295,7 +338,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
             <div class="nama_peserta">
                 {{-- Ini adalah nama peserta --}}
                 <h1 style="font-style: italic;  font-size: 34px; margin-bottom: -10px; ">{{ $nama }}</h1>
-              </div>
+            </div>
 
             {{-- Agar nama pelatihan tidak melebihi file sertifikat maka dibuat width 85% --}}
             <div class="nema_pelatihan_parent" style="width: 70%; text-align: right; ">
@@ -337,7 +380,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
                             @endphp
                             @if ($length > 1)
                                 @for ($i = 0; $i < $length; $i++)
-                                    <p class="tenaga-name" >{{ $tenaga_pelatih[$i] }}</p>
+                                    <p class="tenaga-name">{{ $tenaga_pelatih[$i] }}</p>
                                 @endfor
                             @else
                                 <p class="tenaga-name">{{ $data->tenaga_pelatih[0] }}</p>

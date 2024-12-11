@@ -26,12 +26,7 @@
         --bs-border-color: #414393 !important;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {}
+
 
     body {
         min-height: 100vh;
@@ -47,6 +42,7 @@
         --bs-btn-active-bg: #da6c1e !important;
         --bs-btn-bg: #F58634 !important;
         --bs-btn-hover-bg: #e27c33 !important;
+        --bs-btn-border-color: #944710 !important;
     }
 
     .accordion-button:not(.collapsed) {
@@ -114,6 +110,18 @@
                 icon: "error",
                 title: "Mohon pilih data dengan benar!",
             });
+        }
+
+
+        const showAlertConfirm = () => {
+            return Swal.fire({
+                title: "Apakah anda yakin?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!"
+            })
         }
 
         let id = '';

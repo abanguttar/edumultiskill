@@ -11,6 +11,7 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\KelasKategoriController;
 use App\Http\Controllers\CompanyProfileController;
+use App\Http\Controllers\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,6 +145,17 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/image-sarana/create', 'storeimagesarana');
         Route::get('/image-sarana/{id}/edit', 'editimagesarana')->name('edit-image-sarana');
         Route::put('/image-sarana/{id}/edit', 'updateimagesarana');
+    });
+
+    Route::prefix('faq')->controller(FAQController::class)->group(function () {
+        Route::get('', 'index')->name('list-faq');
+        Route::get('/create', 'create');
+        Route::post('/create', 'store');
+        Route::get('/{id}/edit', 'edit')->name('edit-faq');
+        Route::put('/{id}/edit', 'update');
+        Route::post('/content/create', 'storeContent');
+        Route::put('/content/{id}/edit', 'updateContent');
+        Route::delete('/content/{id}/delete', 'destroyContent');
     });
 });
 

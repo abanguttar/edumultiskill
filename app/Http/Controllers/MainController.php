@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FAQ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -78,9 +79,11 @@ class MainController extends Controller
 
     public function faq($slug)
     {
-        $title = str_replace('-', ' ', $slug);
-
-        return view("member.faq.$slug", compact('title', 'slug'));
+        $faq = FAQ::with('content')->where('slug', $slug)->first();
+        $title = $faq->title;
+        $slug = $faq->slug;
+        // dd($slug);
+        return view("member.faq.index", compact('title', 'slug', 'faq'));
     }
 
     public function program($tipe)
@@ -89,6 +92,8 @@ class MainController extends Controller
 
         return view("member.program", compact('title'));
     }
+
+
     public function companyProfile()
     {
         $title = "Company Profile";

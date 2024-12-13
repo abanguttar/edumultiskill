@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('tanggal_selesai'); 
             $table->string('waktu_pelaksanaan');
             $table->integer('kuota')->default('0');
+            $table->integer('kuota_max');
             $table->enum('diarsipkan', ['1', '0'])->default('0');
             $table->BigInteger('update_by')->nullable();
             $table->BigInteger('create_by')->nullable();

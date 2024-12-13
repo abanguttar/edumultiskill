@@ -68,23 +68,12 @@
                         FAQ
                     </a>
                     @php
-                        $faqs = [
-                            'Tentang Kartu Prakerja',
-                            'Akun Saya',
-                            'Pendaftaran',
-                            'Tes & Seleksi',
-                            'Hasil Seleksi',
-                            'Penyambungan Rekening/e-Money',
-                            'Bantuan Biaya Pelatihan',
-                            'Pelaksanaan Pelatihan',
-                            'Insentif',
-                        ];
+                        $faqs = App\Models\FAQ::get();
                     @endphp
                     <ul class="dropdown-menu">
                         @foreach ($faqs as $key => $faq)
-                            <li><a class="dropdown-item  {{ $key < 8 ? 'pb-2 border-bottom border-2' : '' }} montserrat-600 {{ Str::slug(strtolower($faq)) }}"
-                                    style="font-size: 14px"
-                                    href="/faq/{{ Str::slug(strtolower($faq)) }}">{{ $faq }}</a></li>
+                            <li><a class="dropdown-item  {{ $key < 8 ? 'pb-2 border-bottom border-2' : '' }} montserrat-600 {{ $faq->slug }}"
+                                    style="font-size: 14px" href="/faq/{{ $faq->slug }}">{{ $faq->title }}</a></li>
                         @endforeach
                     </ul>
                 </li>

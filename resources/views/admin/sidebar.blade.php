@@ -25,6 +25,7 @@
                                     <a class="nav-link text-dark" data-nav='beranda' href="/admin/beranda">Beranda</a>
                                     <a class="nav-link text-dark" data-nav='company-profile'
                                         href="/admin/company-profile">Profile Perusahaan</a>
+                                    <a class="nav-link text-dark" data-nav='faq' href="/admin/faq">FAQ</a>
                                 </div>
                             </div>
                         </div>

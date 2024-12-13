@@ -21,21 +21,24 @@ class CertificateController extends Controller
 
 
         if ($data->jenis !== 'umum') {
-            $view = 'header-prakerja-mitra';
+            $view = 'header';
         }
 
         // dd($view);
 
         $time = time();
-        $date_cert = date('m.Y', $time);
+        $month = date('m', $time);
+        $year = date('Y', $time);
         $date = strftime('%d %B %Y', $time);
+
+        $roman = [1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII', 9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'];
         // $year = date('Y', $time);
         // dd($data_lembaga_pelatihan->master_partner_id);
         if ($data->jenis == 'umum') {
-            $no_certificate = 'No. Umum/'  . $data->id . '.' . 'Jadwal/' . $date_cert ;
+            $no_certificate = 'No. 001/'  . $data->id . "/$roman[$month]/$year";
         } else {
 
-            $no_certificate = 'No. Prakerja/'  . $data->id . '.' . 'Jadwal/' . $date_cert ;
+            $no_certificate = 'No. 001/'  . $data->id . "/$roman[$month]/$year";
         }
         $url = $this->url . 'dummy';
 
@@ -62,6 +65,7 @@ class CertificateController extends Controller
                 'menit' => $menit,
                 'jenis' => $data->jenis,
                 'myQrCode' => $myQrCode,
+                'dudika' => null,
                 'no_certificate' => $no_certificate,
 
             ]
@@ -74,5 +78,31 @@ class CertificateController extends Controller
 
         $dompdf->render();
         return $dompdf->stream('Sertifikat.pdf', ['Attachment' => false]);
+    }
+
+
+    public function previewContent($id)
+    {
+        $dompdf = new Dompdf();
+        $data = Kelas::with('skknis')->with('kodeUnits')->findOrFail($id);
+
+
+        #no certificate No. P/KBK-15.1/03.2024/PERPUBLISHSERTIFIKATPERJADWAL
+        $pdf = view(
+            'certificate/content',
+            [
+                'title' => $data->judul_kelas,
+                'data' => $data,
+
+            ]
+        )->render();
+
+
+        $dompdf->loadHTML($pdf);
+
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+        return $dompdf->stream('Sertifikat-Content.pdf', ['Attachment' => false]);
     }
 }

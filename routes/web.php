@@ -11,6 +11,7 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\KelasKategoriController;
 use App\Http\Controllers\CompanyProfileController;
+use App\Http\Controllers\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::get('/{id}/deskripsi', 'deskripsiView')->name('view-deskripsi')->middleware('permission:16');
             Route::put('/{id}/deskripsi', 'deskripsiUpdate')->middleware('permission:16');
             Route::get('/{id}/skkni', 'skkniView')->name('view-skkni')->middleware('permission:16');
-            Route::put('/{id}/skkni', 'skkniUpdate')->middleware('permission:16');
+            Route::put('/{id}/update-field', 'updateField')->name('update-field')->middleware('permission:16');
             Route::get('/{id}/jadwal', 'jadwalView')->name('view-jadwal')->middleware('permission:16');
             Route::get('/{id}/jadwal/create', 'jadwalCreate')->name('create-jadwal')->middleware('permission:16');
             Route::post('/{id}/jadwal/create', 'jadwalStore')->middleware('permission:16');
@@ -105,6 +106,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::prefix('certificate')->controller(CertificateController::class)->group(function () {
         Route::get('/preview/{id}/header/{nilai}', 'previewHeader');
+        Route::get('/preview/{id}/content', 'previewContent');
     });
 
 
@@ -144,6 +146,17 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/image-sarana/create', 'storeimagesarana');
         Route::get('/image-sarana/{id}/edit', 'editimagesarana')->name('edit-image-sarana');
         Route::put('/image-sarana/{id}/edit', 'updateimagesarana');
+    });
+
+    Route::prefix('faq')->controller(FAQController::class)->group(function () {
+        Route::get('', 'index')->name('list-faq');
+        Route::get('/create', 'create');
+        Route::post('/create', 'store');
+        Route::get('/{id}/edit', 'edit')->name('edit-faq');
+        Route::put('/{id}/edit', 'update');
+        Route::post('/content/create', 'storeContent');
+        Route::put('/content/{id}/edit', 'updateContent');
+        Route::delete('/content/{id}/delete', 'destroyContent');
     });
 });
 

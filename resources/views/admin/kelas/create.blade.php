@@ -307,8 +307,8 @@
 
     <script>
         $(document).ready(function() {
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass(
-                'btn-danger');
+            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-primer').addClass(
+                'btn-primer');
         })
     </script>
     <script>

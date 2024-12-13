@@ -33,7 +33,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
 
     #container-kelas {
         position: relative;
-        top: 17.5%;
+        top: 18%;
         left: 7%;
         width: 90%;
         display: flex;
@@ -42,8 +42,8 @@ $imageData = base64_encode(file_get_contents($imagePath));
     }
 
     #container-skkni {
-        position: relative;
-        top: 19%;
+        position: absolute;
+        top: 33%;
         left: 7%;
         width: 90%;
         display: flex;
@@ -52,8 +52,8 @@ $imageData = base64_encode(file_get_contents($imagePath));
     }
 
     #container-kode-unit {
-        position: relative;
-        top: 34%;
+        position: absolute;
+        top: 59%;
         left: 5.7%;
         width: 90%;
         display: flex;
@@ -75,7 +75,7 @@ $imageData = base64_encode(file_get_contents($imagePath));
 
     .kode-unit {
         font-size: 18px;
-        letter-spacing: 4px;
+        letter-spacing: 3px;
 
     }
 </style>
@@ -88,14 +88,13 @@ $imageData = base64_encode(file_get_contents($imagePath));
     <div id="container-kelas" class="container">
         <h4 class="nama_pelatihan" style=" letter-spacing: 4px">
             <i>{{ $data->judul_kelas }} </i>
-            {{-- <i>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt, officiis? </i> --}}
         </h4>
     </div>
     <div id="container-skkni" class="container">
         <ul class="skkni" style="list-style-type: none; margin-right: 20px;">
             @foreach ($data->skknis as $skkni)
                 <li style="margin: 0; padding: 0;">
-                    <p style="margin: 0; padding: 0;"><b>{{ $skkni->skkni }}</b></p><br>
+                    <p style="margin: 0; padding: 0;"><b>{{ $skkni->skkni }}</b></p>
                 </li>
             @endforeach
         </ul>
@@ -103,8 +102,8 @@ $imageData = base64_encode(file_get_contents($imagePath));
     <div id="container-kode-unit" class="container">
         <ul class="kode-unit" style="list-style-type: none; margin-right: 20px;">
             @foreach ($data->kodeUnits as $kode_unit)
-                <li style="margin: 0; padding: 0;">
-                    <p style="margin: 0; padding: 0;">{{ $kode_unit->kode_unit }} - {{ $kode_unit->keterangan }}</p><br>
+                <li style="margin: 0; margin-top: 6px; padding: 0;">
+                    <p style="margin: 0; padding: 0;">{{ $kode_unit->kode_unit }} - {{ $kode_unit->keterangan }}</p>
                 </li>
             @endforeach
         </ul>

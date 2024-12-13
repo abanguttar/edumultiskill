@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Skkni;
+use App\Models\Topik;
+use App\Models\KodeUnit;
 use App\Models\KelasDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\KelasKategori;
-use App\Models\Skkni;
-use App\Models\KodeUnit;
 use App\Models\JadwalPelatihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreKelasRequest;
-use App\Http\Requests\UpdateDeskripsiRequest;
 use App\Http\Requests\JadwalKelasRequest;
 use App\Http\Requests\UpdateSKKNIRequest;
+use App\Http\Requests\UpdateDeskripsiRequest;
 use Illuminate\Validation\ValidationException;
 
 class KelasController extends Controller
@@ -27,6 +28,7 @@ class KelasController extends Controller
     protected $kelas_kategori;
     protected $metode_pelatihan;
     protected $path = 'admin/kelas';
+    protected $jadwal;
     public function __construct()
     {
         parent::__construct();
@@ -380,7 +382,7 @@ class KelasController extends Controller
         $title = 'Edit Jadwal Pelatihan';
         $data_nav  = ['lms', 'kelas'];
         $kelas_id = $id;
-        $btn_group = 'jadwal';
+        $btn_group = 'edit-jadwal';
         $jadwal = $this->jadwal->findOrFail($jadwal_id);
         if ($jadwal->waktu_pelaksanaan) {
             preg_match(
@@ -430,5 +432,18 @@ class KelasController extends Controller
         return redirect()
             ->route('view-jadwal', $id)
             ->with('success', 'Jadwal berhasil diarsipkan');
+    }
+
+
+    public function materi($id, $jadwal_id)
+    {
+        $data_nav  = ['lms', 'kelas'];
+        $kelas_id = $id;
+        $btn_group = 'materi';
+        $jadwal = $this->jadwal::with('kelas')->findOrFail($jadwal_id);
+        $title = "Materi " . $jadwal->kelas->judul_kelas;
+        $topiks = Topik::where('jadwal_id', $jadwal_id)->orderBy('urutan')->get();
+        $total_topik = count($topiks);
+        return view("admin/materi/index", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'jadwal', 'total_topik', 'topiks'));
     }
 }

@@ -158,8 +158,8 @@
     <script>
         $(document).ready(function() {
             feather.replace();
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass(
-                'btn-danger');
+            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-primer').addClass(
+                'btn-primer');
 
             // Monitor input changes
             $(document).on('input',

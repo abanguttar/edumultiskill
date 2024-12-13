@@ -19,6 +19,7 @@ class ProgramSeeder extends Seeder
             'Umum',
             'Prakerja',
             'Sertifikasi BNSP',
+            'Pekerja Luar Negeri',
         ];
         foreach ($programs as $key => $program) {
             $mockData = [

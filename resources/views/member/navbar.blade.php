@@ -46,10 +46,24 @@
                                     </div>
                                 </div>
                             </a></li>
+                        <li><a class="dropdown-item" href="/program/prakerja">
+                                <div class="d-flex gap-2 border-bottom border-2 pb-2 pt-1">
+                                    <div class="border-block-mini-4"></div>
+                                    <div>
+                                        <h6 class="montserrat-600 fw-bold p-0 m-0">Sertifikasi BNSP
+                                        </h6>
+                                        <p class="m-0 p-0 text-wrap text-justify" style="font-size: 10px">Lorem ipsum
+                                            dolor sit amet
+                                            consectetur adipisicing elit. Minus beatae quas magnam, ut magni at.
+                                        </p>
+                                    </div>
+                                </div>
+                            </a></li>
+
 
                         <li><a class="dropdown-item" href="/program/prakerja">
-                                <div class="d-flex gap-2">
-                                    <div class="border-block-mini-3 pt-1"></div>
+                                <div class="d-flex gap-2 pt-1 pb-2">
+                                    <div class="border-block-mini-3 "></div>
                                     <div>
                                         <h6 class="montserrat-600 fw-bold p-0 m-0">Pekerja Luar Negeri
                                         </h6>

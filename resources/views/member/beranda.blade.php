@@ -55,6 +55,13 @@
             background-color: var(--primary1)
         }
 
+        .border-block-4 {
+            width: 12px;
+            height: auto;
+            background-color: #4f941c
+        }
+
+
         .line-mengapa {
             width: 8px;
             height: auto;
@@ -240,6 +247,32 @@
                     </div>
                 </div>
             </div>
+
+            <div class="accordion" id="accordion-sertifikasi-bnsp">
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <img src="/main-assets/image-4.webp" width="auto" style="min-width: 320px" height="auto"
+                            alt="sertifikasi-bnsp" class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#program-sertifikasi-bnsp" aria-expanded="true"
+                            aria-controls="program-sertifikasi-bnsp">
+                    </h2>
+                    <div id="program-sertifikasi-bnsp" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordion-sertifikasi-bnsp">
+                        <div class="accordion-body px-4">
+                            <div class="d-flex gap-2">
+                                <div class="border-block-4"></div>
+                                <div>
+                                    <h4 class="montserrat-600 fw-bold">Sertifikasi BNSP</h4>
+                                    <p class="m-0 p-0 text-wrap">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Ut, est.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="accordion" id="accordion-pekerja-luar-negeri">
                 <div class="accordion-item border-0">
                     <h2 class="accordion-header">

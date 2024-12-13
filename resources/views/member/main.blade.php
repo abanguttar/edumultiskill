@@ -240,6 +240,12 @@
         background-color: var(--primary1)
     }
 
+    .border-block-mini-4 {
+        width: 6px;
+        min-height: 50px;
+        background-color: #4f941c
+    }
+
     .scroller {
         scrollbar-color: var(--primary2) var(--primary1);
         scrollbar-width: 6px !important;

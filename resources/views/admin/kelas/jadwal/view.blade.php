@@ -62,21 +62,24 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                        @if(isset($kelas->JadwalPelatihans) && count($kelas->JadwalPelatihans) > 0)
-                            @foreach($kelas->JadwalPelatihans as $key => $j)
-                                @if($j->diarsipkan == 0)
+                        @if (isset($kelas->JadwalPelatihans) && count($kelas->JadwalPelatihans) > 0)
+                            @foreach ($kelas->JadwalPelatihans as $key => $j)
+                                @if ($j->diarsipkan == 0)
                                     <tr class="table-row text-center" data-id="{{ $j->id }}">
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $j->judul_jadwal_pelatihan }}</td>
                                         <td>{{ $j->schedule_code }}</td>
-                                        <td>{{ $j->tanggal_mulai->format('d/m/Y') }} - {{ $j->tanggal_selesai->format('d/m/Y') }}</td>
+                                        <td>{{ $j->tanggal_mulai->format('d/m/Y') }} -
+                                            {{ $j->tanggal_selesai->format('d/m/Y') }}</td>
                                         <td>{{ $j->waktu_pelaksanaan }}</td>
                                         <td>{{ $j->status }}</td>
-                                        <td>@if($j->update_by && $j->updater)
-                                            {{ $j->updater->username }}
-                                        @elseif($j->create_by && $j->creator)
-                                            {{ $j->creator->username }}
-                                        @endif</td>
+                                        <td>
+                                            @if ($j->update_by && $j->updater)
+                                                {{ $j->updater->username }}
+                                            @elseif($j->create_by && $j->creator)
+                                                {{ $j->creator->username }}
+                                            @endif
+                                        </td>
                                         <td>{{ $j->updated_at->format('d/m/Y H:i') }}</td>
                                     </tr>
                                 @endif
@@ -104,6 +107,7 @@
         .table-row {
             cursor: pointer;
         }
+
         .selected {
             background-color: #e2e6ea !important;
         }
@@ -180,7 +184,9 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: "{{ route('arsip-jadwal', ['id' => ':kelasId', 'jadwal_id' => ':jadwalId']) }}".replace(':kelasId', kelasId).replace(':jadwalId', jadwalId),
+                                url: "{{ route('arsip-jadwal', ['id' => ':kelasId', 'jadwal_id' => ':jadwalId']) }}"
+                                    .replace(':kelasId', kelasId).replace(':jadwalId',
+                                        jadwalId),
                                 type: 'POST',
                                 data: {
                                     "_token": "{{ csrf_token() }}",
@@ -200,7 +206,8 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Error',
-                                        text: 'Terjadi kesalahan saat mengarsipkan jadwal: ' + error
+                                        text: 'Terjadi kesalahan saat mengarsipkan jadwal: ' +
+                                            error
                                     });
                                 }
                             });
@@ -232,7 +239,9 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: "{{ route('destroy-jadwal', ['id' => ':kelasId', 'jadwal_id' => ':jadwalId']) }}".replace(':kelasId', kelasId).replace(':jadwalId', jadwalId),
+                                url: "{{ route('destroy-jadwal', ['id' => ':kelasId', 'jadwal_id' => ':jadwalId']) }}"
+                                    .replace(':kelasId', kelasId).replace(':jadwalId',
+                                        jadwalId),
                                 type: 'POST',
                                 data: {
                                     "_token": "{{ csrf_token() }}",
@@ -252,7 +261,8 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Error',
-                                        text: 'Terjadi kesalahan saat menghapus jadwal: ' + error
+                                        text: 'Terjadi kesalahan saat menghapus jadwal: ' +
+                                            error
                                     });
                                 }
                             });
@@ -266,9 +276,8 @@
                     });
                 }
             });
-
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass('btn-danger');
+            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-primer').addClass(
+                'btn-primer');
         });
-
     </script>
 @endpush

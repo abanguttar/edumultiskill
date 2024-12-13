@@ -66,7 +66,7 @@
 
                 @php
 
-                    $durasi = explode(',',$kelas->deskripsi->durasi_pelatihan);
+                    $durasi = explode(',', $kelas->deskripsi->durasi_pelatihan);
                 @endphp
 
                 <div class="row mt-3">
@@ -74,17 +74,17 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <div class="input-group">
-                                <input type="text" name="jam" value="{{ old('jam', $durasi[0] ?? '') }}" placeholder="Jam"
-                            class="form-control"  aria-describedby="jam">
+                            <input type="text" name="jam" value="{{ old('jam', $durasi[0] ?? '') }}"
+                                placeholder="Jam" class="form-control" aria-describedby="jam">
                             <span class="input-group-text" id="jam">
-                               Jam
+                                Jam
                             </span>
                         </div>
                         <div class="input-group">
-                            <input type="text" name="menit" value="{{ old('menit',$durasi[1] ?? '') }}" placeholder="Menit"
-                            class="form-control " aria-describedby="menit">
+                            <input type="text" name="menit" value="{{ old('menit', $durasi[1] ?? '') }}"
+                                placeholder="Menit" class="form-control " aria-describedby="menit">
                             <span class="input-group-text" id="menit">
-                               Menit
+                                Menit
                             </span>
                         </div>
 
@@ -105,12 +105,14 @@
 
                         @if ($kelas->deskripsi->sertifikat_judul != null)
                             <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
-                                style="text-decoration: none" href="/admin/certificate/preview/{{ $kelas_id }}/header/79"
-                                target="__blank"><i class="me-1" data-feather="file"></i> Preview Tanpa
+                                style="text-decoration: none"
+                                href="/admin/certificate/preview/{{ $kelas_id }}/header/79" target="__blank"><i
+                                    class="me-1" data-feather="file"></i> Preview Tanpa
                                 Predikat</a>
                             <a class="border border-2 p-1 rounded-3 text-white d-inline-flex mt-2"
-                                style="text-decoration: none" href="/admin/certificate/preview/{{ $kelas_id }}/header/100"
-                                target="__blank"><i class="me-1" data-feather="file-plus"></i> Preview Dengan
+                                style="text-decoration: none"
+                                href="/admin/certificate/preview/{{ $kelas_id }}/header/100" target="__blank"><i
+                                    class="me-1" data-feather="file-plus"></i> Preview Dengan
                                 Predikat Sangat Baik</a>
                         @endif
                     </div>
@@ -203,12 +205,14 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-
     <script>
         $(document).ready(function() {
 
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass(
-                'btn-danger');
+            $(document).ready(function() {
+                $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-primer').addClass(
+                    'btn-primer');
+
+            })
 
             $('.summernotes').summernote({
                 height: 300

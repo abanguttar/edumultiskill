@@ -12,6 +12,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\KelasKategoriController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\TopikController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,7 +90,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             Route::get('/{id}/jadwal/arsip', 'jadwalViewArsip')->name('view-arsip-jadwal')->middleware('permission:16');
             Route::put('/{id}/jadwal/{jadwal_id}/arsip', 'jadwalArsip')->name('arsip-jadwal')->middleware('permission:16');
             Route::delete('/{id}/jadwal/{jadwal_id}/destroy', 'jadwalDelete')->name('destroy-jadwal')->middleware('permission:16');
+
+            Route::get('/{id}/jadwal/{jadwal_id}/materi', 'materi')->name('materi')->middleware('permission:16');
         });
+
+
+
 
         Route::controller(KelasKategoriController::class)->group(function () {
             Route::prefix('kategori')->group(function () {
@@ -157,6 +163,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/content/create', 'storeContent');
         Route::put('/content/{id}/edit', 'updateContent');
         Route::delete('/content/{id}/delete', 'destroyContent');
+    });
+
+
+    Route::prefix('kelas/{id}/jadwal/{jadwal_id}')->group(function () {
+        Route::controller(TopikController::class)->group(function () {
+            Route::post('/topik/create', 'store');
+            Route::post('/topik/{topik_id}/edit', 'update');
+            Route::post('/topik/{topik_id}/up', 'up');
+            Route::post('/topik/{topik_id}/down', 'down');
+        });
     });
 });
 

@@ -189,4 +189,5 @@ Route::controller(MainController::class)->group(function () {
     Route::get('/faq/{slug}', 'faq');
     Route::get('/company-profile', 'companyProfile');
     Route::get('/program/{tipe}', 'program');
+    Route::get('/program/{tipe}/{slug}', 'detail');
 });

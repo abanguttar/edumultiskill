@@ -208,6 +208,18 @@ class KelasController extends Controller
         $data['jenjang_pendidikan'] = $jenjang_pendidikan;
         $data['image'] = $renameImage;
         $data['video'] = $rename_video;
+
+        $jenis = $data['jenis'];
+        $program = $data['program'];
+
+
+        if ($jenis === 'prakerja') {
+            $data['jenis'] = 'prakerja';
+            $data['program'] = '2';
+        } elseif ($program === '0') {
+            $data['program'] = '1';
+        }
+
         $datas = array_merge($data, $this->userUpdate);
         $kelas = $this->kelas->findOrFail($id);
         $kelas->update($datas);
@@ -442,7 +454,9 @@ class KelasController extends Controller
         $btn_group = 'materi';
         $jadwal = $this->jadwal::with('kelas')->findOrFail($jadwal_id);
         $title = "Materi " . $jadwal->kelas->judul_kelas;
-        $topiks = Topik::where('jadwal_id', $jadwal_id)->orderBy('urutan')->get();
+        $topiks = Topik::with(['aktivitas' => function ($query) {
+            $query->orderBy('urutan');
+        }])->where('jadwal_id', $jadwal_id)->orderBy('urutan')->get();
         $total_topik = count($topiks);
         return view("admin/materi/index", compact('title',  'btn_group', 'kelas_id', 'data_nav', 'jadwal', 'total_topik', 'topiks'));
     }

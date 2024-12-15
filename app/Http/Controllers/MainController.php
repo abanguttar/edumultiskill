@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\FAQ;
+use App\Models\Kelas;
+use App\Models\Topik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +15,8 @@ class MainController extends Controller
     protected $banner;
     protected $logo_mitra;
     protected $testimoni;
+    protected $kelas;
+    protected $topik;
 
     public function __construct()
     {
@@ -21,6 +25,8 @@ class MainController extends Controller
         $this->banner = DB::table('banners');
         $this->logo_mitra = DB::table('logo_mitras');
         $this->testimoni = DB::table('testimonies');
+        $this->kelas = new Kelas();
+        $this->topik = new Topik();
     }
 
     public function index()
@@ -89,8 +95,12 @@ class MainController extends Controller
     public function program($tipe)
     {
         $title = $tipe;
+        $query = $this->kelas::with('tutor');
+        if ($tipe === 'prakerja') {
+            $kelas = $query->where('jenis', 'prakerja')->get();
+        }
 
-        return view("member.program", compact('title'));
+        return view("member.program", compact('title', 'kelas', 'tipe'));
     }
 
 
@@ -102,5 +112,15 @@ class MainController extends Controller
         $image_saranas = DB::table('image_saranas')->get();
 
         return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
+    }
+
+
+    public function detail($program, $slug)
+    {
+        $kelas = $this->kelas::with('deskripsi')->with('skknis')->with('kodeUnits')->where('slug', $slug)->first();
+        $materi = $this->topik->where('kelas_id', $kelas->id)->orderBy('urutan')->get();
+        $title = $kelas->judul_kelas;
+
+        return view("member.program.detail", compact('title', 'program', 'kelas', 'materi'));
     }
 }

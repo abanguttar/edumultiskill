@@ -5,7 +5,7 @@
     <div class="container-xxl border p-4 mt-3 w-100 mb-5">
         @include('components/button-group-jadwal')
         <div class="container-fluid p-0 m-0">
-            @foreach ($topiks as $topik)
+            @foreach ($topiks as $key => $topik)
                 <div class="wrapper-topik mt-3" style="cursor: pointer">
                     <div class="btn btn-light d-flex gap-2 p-2 align-items-center  justify-content-between">
                         <div class="d-flex gap-2 p-2 align-items-center topik-header topik-header-{{ $topik->id }} col-9"
@@ -42,13 +42,13 @@
                                 <a href="#" data-bs-toggle="tooltip" class="topik-up" data-id="{{ $topik->id }}"
                                     data-bs-title="Naikkan Urutan"><i data-feather="arrow-up"></i></a>
                             @endif
-                            @if ($topik->urutan !== $total_topik)
+                            @if ($topik->urutan < $total_topik)
                                 <a href="#" data-bs-toggle="tooltip" class="topik-down" data-id="{{ $topik->id }}"
                                     data-bs-title="Turunkan Urutan"><i data-feather="arrow-down"></i></a>
                             @endif
                         </div>
                     </div>
-                    <div class="topik-content d-none topik-{{ $topik->id }}">
+                    <div class="topik-content topik-{{ $topik->id }}">
                         <div
                             class="aktivitas_header mt-2 border border-2 border-bottom-0 border-start-0 border-end-0 border-dark p-2">
                             <span class="fw-semibold">Detail Aktivitas {{ $topik->nama_topik }}</span>
@@ -66,15 +66,50 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $total_aktivitas = count($topik->aktivitas);
+                                    @endphp
+                                    @foreach ($topik->aktivitas as $key => $aktivitas)
+                                        <tr>
+                                            <td class="text-center col">{{ ++$key }}</td>
+                                            <td class=" col-5">{{ $aktivitas->nama_aktivitas }}</td>
+                                            <td class=" col-2">{{ ucwords($aktivitas->jenis) }}</td>
+                                            <td class="text-center col">
+                                                {{ $aktivitas->is_locked === 1 ? 'Kunci' : 'Tidak' }}</td>
+                                            <td class="text-center col">{{ $aktivitas->bobot }}</td>
+                                            <td class="text-start col-2">
+                                                <a href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/{{ $aktivitas->id }}/edit"
+                                                    data-bs-toggle="tooltip" data-bs-title="Edit"><i data-feather="edit"
+                                                        class="ms-4"></i></a>
+                                                <a class="text-danger"
+                                                    href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/{{ $aktivitas->id }}/delete"
+                                                    data-bs-toggle="tooltip" data-bs-title="Hapus"><i
+                                                        data-feather="trash"></i></a>
+                                                @if ($aktivitas->urutan !== 1)
+                                                    <a href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/{{ $aktivitas->id }}/down"
+                                                        data-bs-toggle="tooltip" class="aktivitas-up text-success"
+                                                        data-id="{{ $aktivitas->id }}" data-bs-title="Turunkan Urutan"><i
+                                                            data-feather="arrow-up"></i></a>
+                                                @endif
+                                                @if ($aktivitas->urutan < $total_aktivitas)
+                                                    <a href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/{{ $aktivitas->id }}/upper"
+                                                        data-bs-toggle="tooltip" class="aktivitas-down text-success"
+                                                        data-id="{{ $aktivitas->id }}" data-bs-title="Turunkan Urutan"><i
+                                                            data-feather="arrow-down"></i></a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
 
 
                                 </tbody>
                             </table>
 
                             <div class="button-group mt-5">
-                                <a href="/superadmin/kelas/1/jadwal/1/topik/1/aktivitas/create"
+                                <a href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/create"
                                     class="btn btn-sm btn-outline-primer"> <i data-feather="plus"></i> Tambah Aktivitas</a>
-                                <a href="/superadmin/kelas/1/jadwal/1/topik/1/aktivitas/copy"
+                                <a href="/admin/kelas/{{ $topik->kelas_id }}/jadwal/{{ $topik->jadwal_id }}/topik/{{ $topik->id }}/aktivitas/copy"
                                     class="btn btn-sm btn-outline-secondary" target="COPY_AKTIVITAS"> <i
                                         data-feather="copy"></i>
                                     Salin Aktivitas</a>

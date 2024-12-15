@@ -83,4 +83,10 @@ class Kelas extends Model
     {
         return $this->hasOne(KelasDetail::class, 'kelas_id', 'id');
     }
+
+
+    public function tutor()
+    {
+        return $this->belongsTo(User::class, 'tutor_id', 'id');
+    }
 }

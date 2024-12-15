@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <select name="program" class="form-select" id="program">
-                            <option value="0">-- Pilih Program --</option>
+                            <option value="1">-- Pilih Program --</option>
                             @foreach ($programs as $program)
                                 <option value="{{ $program->id }}">{{ $program->name }}</option>
                             @endforeach
@@ -307,8 +307,8 @@
 
     <script>
         $(document).ready(function() {
-            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-danger').addClass(
-                'btn-danger');
+            $(`#btn-group-${@json($btn_group)}`).removeClass('btn-outline-primer').addClass(
+                'btn-primer');
         })
     </script>
     <script>

@@ -136,7 +136,7 @@
     </section>
     <section class="kelas-prakerja mt-10">
         <h2 class="fw-bold text-center mb-5">Kelas-Kelas <span class="text-kelas-terbaik">Prakerja</span></h2>
-        @include('components/scrollable-box')
+        @include('components/scrollable-box', ['kelas' => $kelas, 'tipe' => $tipe])
 
         </div>
 

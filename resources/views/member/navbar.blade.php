@@ -109,14 +109,17 @@
 
             </ul>
 
-            <div class="d-flex ms-auto gap-1 gap-md-4">
+            <div class="d-flex ms-auto justify-content-between gap-1 gap-md-4">
                 <div class="position-relative">
                     <input type="text" class="form-control rounded-4" id="input-navbar">
                     <img src="/main-assets/search.webp" class="position-absolute w-5 top-50 end-0 ms-4 translate-middle"
                         alt="search" id="search-navbar">
                 </div>
-                <a href="/authenticate" class="btn btn-light rounded-4">Masuk</a>
-                <a href="/daftar" class="btn btn-primary-2 rounded-4 "><span class="pe-2 ps-2">Daftar</span></a>
+                <div>
+                    <a href="/authenticate" class="btn btn-light border border-dark rounded-4"><span
+                            class="pe-2 ps-2">Masuk</span></a>
+                    <a href="/daftar" class="btn btn-primary-2 rounded-4 "><span class="pe-2 ps-2">Daftar</span></a>
+                </div>
             </div>
         </div>
     </div>

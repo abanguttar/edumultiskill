@@ -1,4 +1,4 @@
-<footer class="footer mt-10 ps-md-5 pe-md-5 py-6">
+<footer class="footer mt-10 ps-md-5 pe-md-5 py-6 pb-4">
     <div class="d-flex justify-content-center flex-column flex-md-row gap-md-0 gap-4">
         <div class="container">
             <figure>
@@ -8,9 +8,15 @@
                 <p>Jl. Ade Irma Suryani RT 7 No. 29 <br>
                     Sungai Pinang Dalam, Samarinda Utara, <br>
                     Kota Samarinda, Indonesia. <br>
-                    edumultiskill@gmail.com | 0852-4966-8830</p>
+                    info@edumultiskill.com | 0852-4966-8830</p>
             </div>
-            <div class="social-media-wrapper d-flex gap-2">
+            <div class="gabung-mitra d-flex flex-column">
+                <span class="fw-bold">GABUNG MENJADI MITRA <i class="fa-solid fa-link"></i></span>
+                <a href=""
+                    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Gabung
+                    Kemitraan</a>
+            </div>
+            <div class="social-media-wrapper d-flex gap-2 mt-3">
                 <a href="/instagram"><img src="/main-assets/ig.webp" width="40px" alt=""></a>
                 <a href="/instagram"><img src="/main-assets/fb.webp" width="40px" alt=""></a>
                 <a href="/instagram"><img src="/main-assets/whatsapp.webp" width="40px" alt=""></a>
@@ -25,5 +31,8 @@
                 width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+    </div>
+    <div class="container-fluid mb-0 mt-4">
+        <p class="text-center p-0 m-0"><strong>Copyright © 2024 | Edu Multi Anugerah</strong></p>
     </div>
 </footer>

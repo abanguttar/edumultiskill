@@ -99,7 +99,6 @@ class MainController extends Controller
         if ($tipe === 'prakerja') {
             $kelas = $query->where('jenis', 'prakerja')->get();
         }
-
         return view("member.program", compact('title', 'kelas', 'tipe'));
     }
 
@@ -117,10 +116,22 @@ class MainController extends Controller
 
     public function detail($program, $slug)
     {
-        $kelas = $this->kelas::with('deskripsi')->with('skknis')->with('kodeUnits')->where('slug', $slug)->first();
+        $kelas = $this->kelas::with('deskripsi')
+            ->with(['jadwalPelatihans' => function ($query) {
+                $query->where('status', 'aktif');
+            }])->with('skknis')->with('kodeUnits')
+            ->where('slug', $slug)->first();
         $materi = $this->topik->where('kelas_id', $kelas->id)->orderBy('urutan')->get();
         $title = $kelas->judul_kelas;
+        // dd($kelas);
 
         return view("member.program.detail", compact('title', 'program', 'kelas', 'materi'));
+    }
+
+
+    public function login()
+    {
+        $title = 'Autentikasi';
+        return view('member.auth', compact('title'));
     }
 }

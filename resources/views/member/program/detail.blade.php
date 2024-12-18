@@ -148,9 +148,66 @@
             <div class="jadwal mt-5 pt-5" style="max-width: 796px">
                 <h5>Jadwal Program</h5>
                 <article>
-                    <ul style="list-style-type: none" class="m-0 p-0">
-                        <li class="mt-1">Tidak ada batch yang tersedia saat ini.</li>
-                    </ul>
+
+                    @if (count($kelas->jadwalPelatihans) === 0)
+                        <ul style="list-style-type: none" class="m-0 p-0">
+                            <li class="mt-1">Tidak ada batch yang tersedia saat ini.</li>
+                        </ul>
+                    @else
+                        <ul style="list-style-type: none" class="m-0 p-0">
+                            @php
+                                $month = [
+                                    1 => 'Januari',
+                                    2 => 'Februari',
+                                    3 => 'Maret',
+                                    4 => 'April',
+                                    5 => 'Mei',
+                                    6 => 'Juni',
+                                    7 => 'Juli',
+                                    8 => 'Agustus',
+                                    9 => 'September',
+                                    10 => 'Oktober',
+                                    11 => 'November',
+                                    12 => 'Desember',
+                                ];
+
+                            @endphp
+                            @foreach ($kelas->JadwalPelatihans as $jadwal)
+                                <li class="mt-1 border p-4 rounded-4">
+                                    <h6>{{ $jadwal->judul_jadwal_pelatihan }}</h6>
+                                    <div>
+                                        <span>Tanggal Pelaksanaan: </span>
+                                        @php
+                                            $array_tm = explode(' ', $jadwal->tanggal_mulai);
+                                            $tm = explode('-', $array_tm[0]);
+                                            $tanggal_mulai = $tm[2] . ' ' . $month[$tm[1]] . ' ' . $tm[0];
+                                            $array_ts = explode(' ', $jadwal->tanggal_selesai);
+                                            $ts = explode('-', $array_ts[0]);
+                                            $tanggal_selesai = $ts[2] . ' ' . $month[$ts[1]] . ' ' . $ts[0];
+
+                                        @endphp
+                                        <span>{{ $tanggal_mulai . ' s/d ' . $tanggal_selesai }}</span>
+                                    </div>
+                                    <div>
+                                        <span>Waktu Pelaksanaan: </span>
+                                        <span>{{ $jadwal->waktu_pelaksanaan }}</span>
+                                    </div>
+                                    <div>
+                                        <span>Kuota Tersisa: </span>
+                                        <span>{{ $jadwal->kuota_max - $jadwal->kuota }}</span>
+                                    </div>
+                                    <div class="mt-1">
+                                        <a href="/add-cart/kelas/{{ $jadwal->kelas_id }}/jadwal/{{ $jadwal->id }}"
+                                            class="btn btn-sm btn-primary-2 rounded-4"><span
+                                                class="mx-3">Daftar</span></a>
+                                    </div>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    @endif
+
+
                 </article>
             </div>
 

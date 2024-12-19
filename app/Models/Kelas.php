@@ -76,7 +76,7 @@ class Kelas extends Model
 
     public function JadwalPelatihans()
     {
-        return $this->hasMany(JadwalPelatihan::class);
+        return $this->hasMany(JadwalPelatihan::class, 'id', 'kelas_id');
     }
 
     public function deskripsi()

@@ -131,7 +131,6 @@ class MainController extends Controller
             ->where('slug', $slug)->first();
         $materi = $this->topik->where('kelas_id', $kelas->id)->orderBy('urutan')->get();
         $title = $kelas->judul_kelas;
-        // dd($kelas);
 
         return view("member.program.detail", compact('title', 'program', 'kelas', 'materi'));
     }

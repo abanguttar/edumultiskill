@@ -50,7 +50,7 @@
             <div class="apa-yang-didapatkan mt-5">
                 <h4>Rp{{ $kelas->is_discount === '1' ? number_format($kelas->harga_discount) : number_format($kelas->harga_reguler) }}
                 </h4>
-                <h5>Fasilitas yang Peserta Dapatkan:</h5>
+                <h5 class="mb-3">Fasilitas yang Peserta Dapatkan:</h5>
                 <div class="d-flex flex-column gap-1" style="letter-spacing: 1px">
                     <span>
                         <i class="fa-solid fa-tablet-screen-button text-info"></i> LMS Interaktif
@@ -75,7 +75,7 @@
             {{-- Deskripsi Program --}}
 
             <div class="deskripsi-program mt-5 pt-5" style="max-width: 796px">
-                <h5>Deskripsi Program</h5>
+                <h5 class="mb-3">Deskripsi Program</h5>
                 <article>
                     {!! $kelas->deskripsi->deskripsi !!}
                 </article>
@@ -84,7 +84,7 @@
 
             {{-- Materi --}}
             <div class="materi mt-5 pt-5" style="max-width: 796px">
-                <h5>Materi Program</h5>
+                <h5 class="mb-3">Materi Program</h5>
                 <div><span>10 Topik</span>
                     | <span>70 Aktivitas</span>
                     | <span>17 Jam 20 Menit</span>
@@ -120,7 +120,7 @@
             {{-- Materi --}}
             {{-- Metode Pembelajaran --}}
             <div class="metode-pembelajaran mt-5 pt-5" style="max-width: 796px">
-                <h5>Metode Pembelajaran</h5>
+                <h5 class="mb-3">Metode Pembelajaran</h5>
                 <article>
                     {!! $kelas->deskripsi->metode_pembelajaran !!}
                 </article>
@@ -129,7 +129,7 @@
 
             {{-- SKKNI dan Kode Unit --}}
             <div class="skkni-kode-unit mt-5 pt-5" style="max-width: 796px">
-                <h5>SKKNI dan Unit Kompetensi</h5>
+                <h5 class="mb-3">SKKNI dan Unit Kompetensi</h5>
                 <article>
                     <ul style="list-style-type: none" class="m-0 p-0">
                         @foreach ($kelas->skknis as $skkni)
@@ -137,7 +137,7 @@
                             </li>
                         @endforeach
                         @foreach ($kelas->kodeUnits as $kodeunit)
-                            <li class="mt-1"><i class="fa-regular fa-circle-check text-info"></i>
+                            <li class="mt-2"><i class="fa-regular fa-circle-check text-info"></i>
                                 {{ $kodeunit->kode_unit . ' - ' . $kodeunit->keterangan }}</li>
                         @endforeach
                     </ul>
@@ -146,7 +146,7 @@
 
             {{-- Jadwal Tersedia --}}
             <div class="jadwal mt-5 pt-5" style="max-width: 796px">
-                <h5>Jadwal Program</h5>
+                <h5 class="mb-3">Jadwal Program</h5>
                 <article>
 
                     @if (count($kelas->jadwalPelatihans) === 0)
@@ -213,9 +213,9 @@
 
             {{-- Jadwal Tersedia --}}
             <div class="instruktur mt-5 pt-5" style="max-width: 796px">
-                <h5>Tutor / Instruktur</h5>
+                <h5 class="mb-3">Tenaga Pelatih</h5>
                 <article>
-                    <div class="tutor-and-profesi d-flex justify-content-start gap-2">
+                    <div class="tutor-and-profesi d-flex flex-column  justify-content-start gap-2">
                         <div>
                             <img src="/assets/assets17337277434testimoni.jpg" class="rounded-circle" width="56px"
                                 height="56px" alt="">
@@ -230,9 +230,20 @@
             </div>
 
             <div class="instruktur mt-5 pt-5" style="max-width: 796px">
-                <h5>Fasilitator</h5>
+                <h5 class="mb-3">Fasilitator</h5>
                 <article>
-                    <p>{{ $kelas->deskripsi->fasilitator ?? 'Edu Multi Skill' }}</p>
+                    <div class="tutor-and-profesi d-flex  flex-column  justify-content-start gap-2">
+                        <div>
+                            <img src="{{ $kelas->deskripsi->img_fasilitator === null ? '/main-assets/mock-image.webp' : '/fasilitator-image/' . $kelas->deskripsi->img_fasilitator }}"
+                                class="rounded-circle" width="56px" height="56px" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            {{-- Max 71 char --}}
+                            <span class="fw-semibold">{{ Str::limit($kelas->deskripsi->fasilitator, 71, '...') }}</span>
+                            <span class="fw-bold mt-3">Tentang Fasilitator</span>
+                            {!! $kelas->deskripsi->deskripsi_fasilitator !!}
+                        </div>
+                    </div>
                 </article>
             </div>
 

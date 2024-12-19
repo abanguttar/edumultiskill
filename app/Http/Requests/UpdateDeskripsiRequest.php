@@ -26,6 +26,8 @@ class UpdateDeskripsiRequest extends FormRequest
             'deskripsi' => 'nullable',
             'metode_pembelajaran' => 'nullable',
             'fasilitator' => 'nullable',
+            'img_fasilitator' => 'nullable|image',
+            'deskripsi_fasilitator' => 'nullable',
             'jam' => 'nullable',
             'menit' => 'nullable',
             'sertifikat_judul' => 'nullable',

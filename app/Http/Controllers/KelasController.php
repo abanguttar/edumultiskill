@@ -174,10 +174,7 @@ class KelasController extends Controller
 
 
         if (!empty($request->image)) {
-            $image_path = public_path('kelas-image/', $request->old_image);
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
+
             // Store image
             $file_image = $request->file('image');
             $renameImage = $this->moveFile('kelas-image', 'Image', $file_image);
@@ -186,10 +183,7 @@ class KelasController extends Controller
         }
 
         if (!empty($request->video_file)) {
-            $video_path = public_path('kelas-video/', $request->old_video);
-            if (File::exists($video_path)) {
-                File::delete($video_path);
-            }
+
             // Store video
             $file_video = $request->file('video_file');
             $rename_video =   $this->moveFile('kelas-video', 'Video', $file_video);
@@ -253,9 +247,19 @@ class KelasController extends Controller
         if (!empty($data['jam'])) {
             $durasi_pelatihan = implode(',', [$data['jam'], $data['menit'] ?? '00']);
         }
+        $renameImage = $request->old_img_fasilitator;
+
+        if (!empty($request->img_fasilitator)) {
+            // Store image
+            $file_image = $request->file('img_fasilitator');
+            $renameImage = $this->moveFile('fasilitator-image', 'Image', $file_image);
+
+            $this->removeFile('fasilitator-image/', $request->old_img_fasilitator);
+        }
 
         $data['durasi_pelatihan'] = $durasi_pelatihan ?? null;
         unset($data['jam'], $data['menit']);
+        $data['img_fasilitator'] = $renameImage;
 
         KelasDetail::where('kelas_id', $id)->update($data);
         $this->flashSuccessUpdate($request);

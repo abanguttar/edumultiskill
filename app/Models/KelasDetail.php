@@ -17,6 +17,8 @@ class KelasDetail extends Model
         'deskripsi',
         'metode_pembelajaran',
         'fasilitator',
+        'img_fasilitator',
+        'deskripsi_fasilitator',
         'durasi_pelatihan',
         'sertifikat_judul',
         'sertifikat_judul_skkni',

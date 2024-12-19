@@ -64,6 +64,32 @@
                     </div>
                 </div>
 
+                <div class="row mt-2 bg-danger p-4">
+                    <div class="col-md-3 col-sm-12"><label class=" text-white fw-bold">File Image Fasilitator <br>
+                            <span class="fw-light" style="font-size: 12px">File hanya berekstensi jpg,png max:
+                                2MB</span></label>
+                    </div>
+                    <div class="col-md-9 col-sm-12"><input type="file" class="form-control" name="img_fasilitator">
+                        @error('img_fasilitator')
+                            <p class="text-white">{{ $message }}</p>
+                        @enderror
+                        @if ($kelas->deskripsi->img_fasilitator !== null)
+                            <a class="text-white d-inline-flex mt-1" style="text-decoration: none"
+                                href="/fasilitator-image/{{ $kelas->deskripsi->img_fasilitator }}" target="__blank"><i
+                                    class="me-1" data-feather="image"></i> Lihat
+                                file</a>
+                        @endif
+                    </div>
+                    <input type="hidden" name="old_img_fasilitator" value="{{ $kelas->deskripsi->img_fasilitator }}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Deskripsi Fasilitator</label>
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                        <textarea class="summernotes" name="deskripsi_fasilitator" id="deskripsi_fasilitator">{{ old('deskripsi_fasilitator', $kelas->deskripsi->deskripsi_fasilitator) }}</textarea>
+                    </div>
+                </div>
+
                 @php
 
                     $durasi = explode(',', $kelas->deskripsi->durasi_pelatihan);
@@ -119,22 +145,7 @@
                 </div>
 
 
-                {{-- <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Metode Baris 1</label>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                        <input type="text" class="form-control" name="sertifikat_metode_satu"
-                            value="{{ old('sertifikat_metode_satu', $kelas->deskripsi->sertifikat_metode_satu) }}">
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-3 col-sm-12"><label class="fw-bold">Metode Baris 2</label>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                        <input type="text" class="form-control" name="sertifikat_metode_dua"
-                            value="{{ old('sertifikat_metode_dua', $kelas->deskripsi->sertifikat_metode_dua) }}">
-                    </div>
-                </div> --}}
+
 
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12"><label class="fw-bold mt-1">Tenaga Pelatih (Sertifikat)</label>

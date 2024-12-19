@@ -92,6 +92,14 @@ class MainController extends Controller
         return view("member.faq.index", compact('title', 'slug', 'faq'));
     }
 
+    public function faqAll()
+    {
+        $faqs = FAQ::with('content')->get();
+        $title = 'Hal hal yang sering jadi pertanyaan';
+        // dd($slug);
+        return view("member.faq.all", compact('title', 'faqs'));
+    }
+
     public function program($tipe)
     {
         $title = $tipe;

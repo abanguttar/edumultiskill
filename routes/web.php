@@ -187,6 +187,7 @@ Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
 Route::controller(MainController::class)->group(function () {
     Route::get('/authenticate', 'login');
     Route::get('/', 'index');
+    Route::get('/faq', 'faqAll');
     Route::get('/faq/{slug}', 'faq');
     Route::get('/company-profile', 'companyProfile');
     Route::get('/program/{tipe}', 'program');

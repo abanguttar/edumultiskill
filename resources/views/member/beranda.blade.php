@@ -372,7 +372,7 @@
         </div>
     </section>
     <section id="section-butuh-info" class="mt-10 pt-5">
-        <figure><a href=""> <img src="/main-assets/banner-1.webp" width="100%" height="auto"
+        <figure><a href="/faq"> <img src="/main-assets/banner-1.webp" width="100%" height="auto"
                     alt="banner-1"></a>
         </figure>
     </section>

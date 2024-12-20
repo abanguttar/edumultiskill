@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FAQ;
+use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Topik;
 use Illuminate\Http\Request;
@@ -117,8 +118,8 @@ class MainController extends Controller
         $sarana_prasaranas = DB::table('sarana_prasaranas')->get();
         $gallery = DB::table('gallery')->get();
         $image_saranas = DB::table('image_saranas')->get();
-
-        return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas'));
+        $tutors = User::where('tipe_user', 3)->get();
+        return view("member.company-profile", compact('title', 'image_saranas', 'gallery', 'sarana_prasaranas', 'tutors'));
     }
 
 

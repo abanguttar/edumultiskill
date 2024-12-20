@@ -152,12 +152,13 @@
             <h3 class="text-center fw-bold ">Sarana & <span class="text-kelas-terbaik">Prasarana</span>
             </h3>
 
-            {{-- <div class="container mt-5 overflow-x-scroll d-flex flex-nowrap scroller   mt-3" style="height: 300px">
+            @include('components/scrollable-box-custom', [
+                'data' => $image_saranas,
+                'component' => 'card-sarana',
+                'id' => 'sarana-class',
+            ])
 
-
-            </div> --}}
-            @include('components/carousel-image-sarana', ['image_saranas' => $image_saranas])
-            <div class="container-xl overflow-y-scroll scroller mt-3" style="max-height: 600px">
+            <div class="container-xl overflow-y-scroll scroller mt-3 pt-5" style="max-height: 600px">
 
                 <div class="">
                     <table class="table table-hover table-borderless">
@@ -203,70 +204,4 @@
     </section>
 @endsection
 @push('script')
-    <script defer>
-        document.addEventListener('DOMContentLoaded', function() {
-            const splideConfigs = [{
-                selector: '#carousel-image-sarana',
-                config: {
-                    type: 'loop',
-                    lazyLoad: 'nearby',
-                    focus: 'center',
-                    padding: {
-                        left: '7rem',
-                        right: '7rem'
-                    },
-                    gap: '10px',
-                    perMove: 1,
-                    perPage: 3,
-                    autoScroll: {
-                        speed: 0.3
-                    },
-                    breakpoints: {
-                        1200: {
-                            perPage: 3,
-                            gap: '90px',
-
-
-                        },
-                        1100: {
-                            perPage: 2,
-                            gap: '0px',
-
-
-                        },
-                        768: {
-                            perPage: 1,
-                            gap: '0px',
-
-                        },
-                        576: {
-                            perPage: 1,
-                            gap: '0px',
-                            padding: {
-                                left: '6rem',
-                                right: '6rem'
-                            }
-                        },
-                        480: {
-                            perPage: 1,
-                            gap: '0px',
-                            padding: {
-                                left: '0rem',
-                                right: '0rem'
-                            }
-                        }
-                    },
-                    pagination: true,
-                },
-                scroll: false
-            }, ];
-
-            splideConfigs.forEach(config => {
-                const splide = new Splide(config.selector, config.config);
-                splide.mount(config.scroll);
-            });
-
-
-        });
-    </script>
 @endpush

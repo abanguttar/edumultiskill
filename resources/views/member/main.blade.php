@@ -323,8 +323,9 @@
     </script>
     <script>
         $(document).on('click', '.btn-scroll', function() {
-            const value = $(this).data('id')
-            const container = $('#recomend-class');
+            const id = $(this).data('id')
+            const value = $(this).data('value')
+            const container = $(`#${id}`);
             const amount = 200;
             console.log({
                 value

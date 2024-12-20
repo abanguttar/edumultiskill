@@ -321,6 +321,24 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
+    <script>
+        $(document).on('click', '.btn-scroll', function() {
+            const value = $(this).data('id')
+            const container = $('#recomend-class');
+            const amount = 200;
+            console.log({
+                value
+            });
+
+            if (value === 'left') {
+                container.scrollLeft(container.scrollLeft() - amount)
+            } else {
+                container.scrollLeft(container.scrollLeft() +
+                    amount)
+            }
+
+        })
+    </script>
 
 </body>
 

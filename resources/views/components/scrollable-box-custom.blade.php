@@ -1,6 +1,6 @@
 <div class="position-relative p-2" style="max-width: 796px">
 
-    <div class="d-flex  flex-nowrap overflow-x-scroll gap-4 no-scrollbar" id="recomend-class">
+    <div class="d-flex  flex-nowrap overflow-x-scroll gap-4 no-scrollbar" id="{{ $id }}">
         @for ($i = 0; $i < 4; $i++)
             @foreach ($data as $item)
                 @include("components/$component", ['item' => $item, 'tipe' => $program])

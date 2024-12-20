@@ -251,30 +251,13 @@
             <div class="rekomendation mt-5 pt-5" style="max-width: 796px">
                 <h5 class="mb-3">Rekomendasi Kelas untuk Kamu</h5>
 
-                @include('components/scrollable-box-custom', ['data' => $recomends, 'component' => 'card'])
+                @include('components/scrollable-box-custom', [
+                    'data' => $recomends,
+                    'component' => 'card',
+                    'id' => 'recomend-class',
+                ])
             </div>
 
         </div>
     </section>
 @endsection
-
-@push('script')
-    <script>
-        $(document).on('click', '.btn-scroll', function() {
-            const value = $(this).data('id')
-            const container = $('#recomend-class');
-            const amount = 200;
-            console.log({
-                value
-            });
-
-            if (value === 'left') {
-                container.scrollLeft(container.scrollLeft() - amount)
-            } else {
-                container.scrollLeft(container.scrollLeft() +
-                    amount)
-            }
-
-        })
-    </script>
-@endpush

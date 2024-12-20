@@ -16,7 +16,7 @@
 
 @section('body')
     <section id="section-hero" class="m-0 p-0 d-flex  mt-4">
-        <div class="container">
+        <div class="container-lg">
             <div class="mini-navigate" style="font-size: 14px">
                 <a class="text-decoration-none text-primer-2 fw-semibold" href="/">Beranda</a>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -217,8 +217,9 @@
                 <article>
                     <div class="tutor-and-profesi d-flex flex-column  justify-content-start gap-2">
                         <div>
-                            <img src="/assets/assets17337277434testimoni.jpg" class="rounded-circle" width="56px"
-                                height="56px" alt="">
+                            <img src="{{ $kelas->tutor->foto === null ? '/main-assets/mock-image.webp' : '/user-image/' . $kelas->tutor->foto }}"
+                                style="object-fit: contain" class="rounded-circle" width="56px" height="56px"
+                                alt="">
                         </div>
                         <div class="d-flex flex-column">
                             {{-- Max 71 char --}}
@@ -247,6 +248,33 @@
                 </article>
             </div>
 
+            <div class="rekomendation mt-5 pt-5" style="max-width: 796px">
+                <h5 class="mb-3">Rekomendasi Kelas untuk Kamu</h5>
+
+                @include('components/scrollable-box-custom', ['data' => $recomends, 'component' => 'card'])
+            </div>
+
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        $(document).on('click', '.btn-scroll', function() {
+            const value = $(this).data('id')
+            const container = $('#recomend-class');
+            const amount = 200;
+            console.log({
+                value
+            });
+
+            if (value === 'left') {
+                container.scrollLeft(container.scrollLeft() - amount)
+            } else {
+                container.scrollLeft(container.scrollLeft() +
+                    amount)
+            }
+
+        })
+    </script>
+@endpush

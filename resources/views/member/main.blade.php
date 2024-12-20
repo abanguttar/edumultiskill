@@ -69,6 +69,7 @@
         -ms-overflow-style: none;
         /* IE and Edge */
         scrollbar-width: none;
+        scroll-behavior: smooth;
         /* Firefox */
     }
 
@@ -319,7 +320,6 @@
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        feather.replace();
     </script>
 
 </body>

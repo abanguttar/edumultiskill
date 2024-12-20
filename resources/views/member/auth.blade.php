@@ -248,7 +248,7 @@
             </div>
         </aside>
         <div class="container d-flex justify-content-center mt-5 pt-5">
-            <div class="col-12 col-md-6 border p-3 rounded-4" id="container-auth">
+            <div class="col-11 border p-3 rounded-4" style="max-width: 360px;" id="container-auth">
                 <form action="">
                     <div>
                         <label for="inputPassword5" class="form-label">Email</label>
@@ -275,8 +275,8 @@
                         <button class="btn btn-primary-2 w-100 p-2 rounded-2">Masuk</button>
                     </div>
                     <div class="register mt-4">
-                        <span class="fw-bold">Belum punya akun?</span>
-                        <a href="/lupa-sandi"
+                        <span class="fw-normal">Belum punya akun?</span>
+                        <a href="/daftar"
                             class="text-primer-3 fw-semibold link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Daftar
                             Akun</a>
                     </div>

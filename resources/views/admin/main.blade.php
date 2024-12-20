@@ -104,7 +104,10 @@
 <body>
 
     <main class="container-fluid ">
-        @if ($title !== 'Login' && $title !== 'Register')
+        @php
+            $a = ['Login', 'Register'];
+        @endphp
+        @if (!in_array($title, $a))
             <aside>
                 {{-- <div class="sidebar text-bg-white border-left border-3 bg-white off" id="sidebar">
                 <!-- Sidebar content here -->
@@ -114,7 +117,10 @@
             </aside>
         @endif
         <div class="container-fluid mt-5">
-            @if ($title !== 'Login' && $title !== 'Register')
+            @php
+                $a[] = 'Profile';
+            @endphp
+            @if (!in_array($title, $a))
                 <h3 class="text-center">{{ $title }}</h3>
             @endif
             @yield('body')

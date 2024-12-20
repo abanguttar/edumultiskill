@@ -1,5 +1,7 @@
 @extends('admin/main')
-
+@push('link')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+@endpush
 @section('body')
     <div class="container border p-4 mt-5 w-75">
 
@@ -38,6 +40,25 @@
                             id="togglePassword"></i>
                     </div>
                 </div>
+                <div class="row mt-2 bg-danger p-4">
+                    <div class="col-md-3 col-sm-12"><label class=" text-white fw-bold">File Foto <br>
+                            <span class="fw-light" style="font-size: 12px">File hanya berekstensi jpg,png max:
+                                2MB</span></label>
+                    </div>
+                    <div class="col-md-9 col-sm-12"><input type="file" class="form-control" name="foto">
+                        @error('foto')
+                            <p class="text-white">{{ $message }}</p>
+                        @enderror
+                        @if ($user->foto !== null)
+                            <a class="text-white d-inline-flex mt-1" style="text-decoration: none"
+                                href="/user-image/{{ $user->foto }}" target="__blank"><i class="me-1"
+                                    data-feather="image"></i>Lihat
+                                file</a>
+                        @endif
+                        <input type="hidden" class="form-control mt-2" value="{{ $user->foto }}" name="old_foto">
+
+                    </div>
+                </div>
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12">
                         <label class=" fw-bold">No Hp Aktif <span class="text-danger">*</span></label>
@@ -63,19 +84,39 @@
                             value="{{ old('linkedin', $user->linkedin) }}">
                     </div>
                 </div>
-
-
                 <div class="row mt-2">
                     <div class="col-md-3 col-sm-12">
-                        <label class=" fw-bold">Status Aktif</label>
+                        <label class=" fw-bold">Pekerjaan <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-12">
-                        <select id="is_active" name="is_active" class="form-control">
-                            <option value="1" @if ($user->is_active === '1') selected @endif>Aktif</option>
-                            <option value="0" @if ($user->is_active === '0') selected @endif>Tidak Aktif</option>
-                        </select>
+                        <input type="text" class="form-control" name="job_title"
+                            value="{{ old('job_title', $user->job_title) }}">
                     </div>
                 </div>
+                <div class="row mt-2">
+                    <div class="col-md-3 col-sm-12">
+                        <label class=" fw-bold">Deskripsi Diri</label>
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                        <textarea name="deskripsi_diri" class="summernotes">{{ old('deskripsi_diri', $user->deskripsi_diri) }}</textarea>
+                    </div>
+                </div>
+
+                @if ($title !== 'Profile')
+                    <div class="row mt-2">
+                        <div class="col-md-3 col-sm-12">
+                            <label class=" fw-bold">Status Aktif</label>
+                        </div>
+                        <div class="col-md-9 col-sm-12">
+                            <select id="is_active" name="is_active" class="form-control">
+                                <option value="1" @if ($user->is_active === '1') selected @endif>Aktif</option>
+                                <option value="0" @if ($user->is_active === '0') selected @endif>Tidak Aktif
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
                 <hr>
                 @include('components/submit-button')
             </div>
@@ -84,3 +125,19 @@
 
     </div>
 @endsection
+
+@push('script')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+
+            $('.summernotes').summernote({
+                height: 100
+            });
+
+
+        })
+    </script>
+@endpush

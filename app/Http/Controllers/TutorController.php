@@ -65,6 +65,17 @@ class TutorController extends Controller
         } else {
             unset($data['password']);
         }
+
+
+        if (!empty($request->foto)) {
+            // Store image
+            $file_foto = $request->file('foto');
+            $renameFoto = $this->moveFile('user-image', 'Image', $file_foto);
+            $this->removeFile('user-image/', $request->old_foto);
+        }
+        $data['foto'] = $renameFoto ?? $request->old_foto;
+
+
         $datas = array_merge($data, $this->userUpdate);
         $user = $this->user->findOrFail($id);
         $user->update($datas);

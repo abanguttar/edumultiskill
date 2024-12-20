@@ -38,6 +38,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/login',  'adminAttemptLogin')->withoutMiddleware(['auth']);
         Route::post('/logout',  'adminAttemptLogout');
         Route::get('/dashboard',  'dashboard');
+        Route::get('/profile',  'profile')->name('profile');
+        Route::get('/profile/edit',  'edit');
+        Route::put('/profile/edit',  'update')->name('profile-edit');
 
         /**
          * Route untuk membuat akses dan admin

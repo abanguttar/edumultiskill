@@ -24,10 +24,13 @@ class UpdateTutorRequest extends FormRequest
         return [
             'name' => 'required',
             'password' => 'nullable',
+            'image' => 'nullable|image',
             'phone' => 'required|numeric',
             'address' => 'required',
+            'job_title' => 'nullable',
+            'deskripsi_diri' => 'nullable|max:500',
             'linkedin' => 'required',
-            'is_active' => 'required',
+            'is_active' => 'nullable',
         ];
     }
 }

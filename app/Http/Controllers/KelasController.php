@@ -51,18 +51,7 @@ class KelasController extends Controller
     }
 
 
-    /**
-     * This func is provide to move file
-     */
-    private function moveFile($path, $tipe, $file)
-    {
-        Log::info("Proses Save " . $tipe . " Start!");
-        $getExtension = $file->extension();
-        $rename = $path . time() . Auth::user()->id  . '.' . $getExtension;
-        $file->move(public_path($path), $rename);
-        Log::info("Proses Save " . $tipe . " Finish!");
-        return $rename;
-    }
+
 
     public function index()
     {

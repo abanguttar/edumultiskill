@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\File;
 
 class Controller extends BaseController
 {
@@ -39,7 +40,18 @@ class Controller extends BaseController
             File::delete(public_path($path . $file));
         }
     }
-
+    /**
+     * This func is provide to move file
+     */
+    public function moveFile($path, $tipe, $file)
+    {
+        Log::info("Proses Save " . $tipe . " Start!");
+        $getExtension = $file->extension();
+        $rename = $path . time() . Auth::user()->id  . '.' . $getExtension;
+        $file->move(public_path($path), $rename);
+        Log::info("Proses Save " . $tipe . " Finish!");
+        return $rename;
+    }
 
     public function flashSuccessCreate($request, $message = 'Berhasil membuat data!')
     {

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateTutorRequest;
 use App\Http\Requests\AdminAttemptRequest;
 use Illuminate\Validation\ValidationException;
 
@@ -80,5 +83,48 @@ class AuthController extends Controller
             'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
             'Pragma' => 'no-cache',
         ]);
+    }
+
+
+
+    public function profile()
+    {
+        $title = "Profile";
+        $data_nav = ['user', 'profile'];
+        return view('admin/profile', compact('title', 'data_nav'));
+    }
+
+    public function edit()
+    {
+        $title = 'Profile';
+        $data_nav = ['user', 'profile'];
+        $user = Auth::user();
+        return view("admin/tutor/edit", compact('title', 'data_nav', 'user'));
+    }
+
+    public function update(UpdateTutorRequest $request)
+    {
+        $data = $request->validated();
+        if (!empty($data['password'])) {
+            $password =  Hash::make($data['password']);
+            $data['password'] = $password;
+        } else {
+            unset($data['password']);
+        }
+
+        if (!empty($request->foto)) {
+            // Store image
+            $file_foto = $request->file('foto');
+            $renameFoto = $this->moveFile('user-image', 'Image', $file_foto);
+            $this->removeFile('user-image/', $request->old_foto);
+        }
+        $data['foto'] = $renameFoto ?? $request->old_foto;
+
+        $datas = array_merge($data, $this->userUpdate);
+        $user =  User::find(Auth::user()->id);
+        $user->update($datas);
+        $this->flashSuccessUpdate($request);
+
+        return redirect()->route('profile',);
     }
 }
